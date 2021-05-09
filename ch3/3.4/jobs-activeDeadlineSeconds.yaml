@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jobs-activedeadlineseconds
+spec:
+  backoffLimit: 3
+  activeDeadlineSeconds: 30
+  template:
+    spec:
+      containers:
+      - name: jobs-activedeadlineseconds
+        image: sysnet4admin/net-tools
+        command: ["/bin/sh", "-c"]
+        args:
+        - sleep 60;
+          curlchk nginx;  
+      restartPolicy: Never

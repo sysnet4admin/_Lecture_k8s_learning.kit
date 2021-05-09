@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jobs-curl-succ
+spec:
+  template:
+    spec:
+      containers:
+      - name: jobs-curl-succ
+        image: sysnet4admin/net-tools
+        command: ["curlchk",  "nginx"]
+      restartPolicy: Never

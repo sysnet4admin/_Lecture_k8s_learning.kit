@@ -1,0 +1,11 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jobs-make-fail
+spec:
+  template:
+    spec:
+      containers:
+      - name: jobs-make-fail
+        image: sysnet4admin/net-tools
+        command: ["curlchk",  "nginx"]
