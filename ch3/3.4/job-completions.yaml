@@ -1,13 +1,13 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: jobs-parallelism
+  name: job-completions 
 spec:
-  parallelism: 3 
+  completions: 3
   template:
     spec:
       containers:
-      - name: jobs-parallelism
+      - name: job-completions
         image: sysnet4admin/net-tools
         command: ["curlchk",  "nginx"]
       restartPolicy: Never

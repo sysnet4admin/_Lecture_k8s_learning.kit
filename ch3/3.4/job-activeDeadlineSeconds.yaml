@@ -1,14 +1,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: jobs-ttlsecondsafterfinished
+  name: job-activedeadlineseconds
 spec:
   backoffLimit: 3
-  ttlSecondsAfterFinished: 30
+  activeDeadlineSeconds: 30
   template:
     spec:
       containers:
-      - name: jobs-ttlsecondsafterfinished
+      - name: job-activedeadlineseconds
         image: sysnet4admin/net-tools
         command: ["/bin/sh", "-c"]
         args:
