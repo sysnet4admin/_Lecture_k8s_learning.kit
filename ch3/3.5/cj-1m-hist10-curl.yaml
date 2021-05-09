@@ -14,3 +14,4 @@ spec:
             image: sysnet4admin/net-tools
             command: ["curlchk",  "nginx"]
           restartPolicy: Never
+
