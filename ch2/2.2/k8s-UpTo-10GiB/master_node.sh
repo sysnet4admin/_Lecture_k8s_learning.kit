@@ -16,7 +16,7 @@ raw_git="raw.githubusercontent.com/sysnet4admin/IaC/master/manifests"
 kubectl apply -f https://$raw_git/172.16_net_calico_v1.yaml
 
 # config metallb for LoadBalancer service
-kubectl apply -f https://$raw_git/svc/metallb-allinone-0.9.6.yaml
+kubectl apply -f https://$raw_git/svc/metallb-0.9.6.yaml
 
 # create configmap for metallb (192.168.1.11 - 13)
 kubectl apply -f https://$raw_git/svc/metallb-l2config.yaml
