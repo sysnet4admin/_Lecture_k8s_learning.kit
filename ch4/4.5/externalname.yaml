@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ex-url 
+  namespace: default
+spec:
+  type: ExternalName
+  externalName: sysnet4admin.github.io # changable as you want 
+
