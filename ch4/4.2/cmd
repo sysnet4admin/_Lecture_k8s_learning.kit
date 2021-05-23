@@ -1,0 +1,2 @@
+port-forward chk-hn-595c5b45-4bg5w 80:80
+port-forward --address 0.0.0.0 chk-hn-595c5b45-4bg5w 80:80
