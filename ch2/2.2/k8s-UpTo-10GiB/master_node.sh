@@ -32,6 +32,7 @@ kubectl completion bash >/etc/bash_completion.d/kubectl
 
 # alias kubectl to k 
 echo 'alias k=kubectl' >> ~/.bashrc
+echo 'alias ka=kubectl apply -f' >> ~/.bashrc
 echo 'complete -F __start_kubectl k' >> ~/.bashrc
 
 # git clone k8s-code
