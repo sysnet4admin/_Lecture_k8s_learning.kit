@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-ip
+  labels:
+    app: deploy-ip
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: deploy-ip
+  template:
+    metadata:
+      labels:
+        app: deploy-ip
+    spec:
+      containers:
+      - name: chk-ip
+        image: sysnet4admin/chk-ip
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ing-ip 
+spec:
+  selector:
+    app: deploy-ip  
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  type: ClusterIP
