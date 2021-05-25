@@ -1,3 +1,5 @@
+# All of sources From https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.46.0/deploy/static/provider/baremetal/deploy.yaml
+# # # clone from above to sysnet4admin 
 
 apiVersion: v1
 kind: Namespace
