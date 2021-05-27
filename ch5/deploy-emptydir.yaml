@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-emptydir
+  labels:
+    app: deploy-emptydir
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy-emptydir 
+  template:
+    metadata:
+      labels:
+        app: deploy-emptydir 
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        volumeMounts:
+        - mountPath: /emptydir 
+          name: empty-directory 
+      volumes:
+      - name: empty-directory 
+        emptyDir: {}
