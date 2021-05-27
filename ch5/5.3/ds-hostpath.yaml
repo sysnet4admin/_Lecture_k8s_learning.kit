@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ds-hostpath
+  labels:
+    app: ds-hostpath
+spec:
+  selector:
+    matchLabels:
+      app: ds-hostpath 
+  template:
+    metadata:
+      labels:
+        app: ds-hostpath 
+    spec:
+      containers:
+      - name: host-mon
+        image: sysnet4admin/sleepy
+        volumeMounts:
+        - mountPath: /host-log  
+          name: hostpath-directory 
+      volumes:
+      - name: hostpath-directory 
+        hostPath:
+          path: /var/log

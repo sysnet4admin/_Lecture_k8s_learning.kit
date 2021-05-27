@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-hostpath
+  labels:
+    app: deploy-hostpath
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: deploy-hostpath 
+  template:
+    metadata:
+      labels:
+        app: deploy-hostpath 
+    spec:
+      containers:
+      - name: host-mon
+        image: sysnet4admin/sleepy
+        volumeMounts:
+        - mountPath: /host-log  
+          name: hostpath-directory 
+      volumes:
+      - name: hostpath-directory 
+        hostPath:
+          path: /var/log
