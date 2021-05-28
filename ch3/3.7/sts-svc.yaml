@@ -1,0 +1,10 @@
+piVersion: v1
+kind: Service
+metadata:
+  name: sts
+spec:
+  selector:
+    app: sts
+  ports:
+    - port: 80
+  type: LoadBalancer
