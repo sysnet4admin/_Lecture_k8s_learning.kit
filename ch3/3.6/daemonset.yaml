@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ds
+  labels:
+    app: ds
+spec:
+  selector:
+    matchLabels:
+      app: ds 
+  template:
+    metadata:
+      labels:
+        app: ds 
+    spec:
+      containers:
+      - name: nginx 
+        image: nginx 
