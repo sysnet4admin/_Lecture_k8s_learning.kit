@@ -48,5 +48,3 @@ git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git $HOME/_L
 find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
 EOF
 chmod 700 /usr/local/bin/rerepo-k8s-learning.kit
-  
-
