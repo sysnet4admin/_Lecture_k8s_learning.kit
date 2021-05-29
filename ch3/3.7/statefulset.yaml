@@ -14,5 +14,5 @@ spec:
         app: sts
     spec:
       containers:
-      - name: nginx 
-        image: nginx 
+      - name: chk-hn
+        image: sysnet4admin/chk-hn
