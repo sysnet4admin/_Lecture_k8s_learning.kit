@@ -10,4 +10,4 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 192.168.1.10
-    path: /nfs_shared
+    path: /nfs_shared/pvc-vol

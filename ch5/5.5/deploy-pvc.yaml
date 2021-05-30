@@ -16,9 +16,9 @@ spec:
       - name: chk-log 
         image: sysnet4admin/chk-log
         volumeMounts:
-        - name: nfs-vol
+        - name: pvc-vol
           mountPath: /audit
       volumes:
-      - name: nfs-vol
+      - name: pvc-vol
         persistentVolumeClaim:
           claimName: pvc-nfs 

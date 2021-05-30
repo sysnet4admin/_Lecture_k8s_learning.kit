@@ -22,4 +22,4 @@ spec:
       - name: nfs-vol
         nfs:
           server: 192.168.1.10
-          path: /nfs_shared/log 
+          path: /nfs_shared/nfs-vol 
