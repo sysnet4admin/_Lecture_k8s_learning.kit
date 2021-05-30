@@ -24,7 +24,7 @@ spec:
       name: backup_data
     spec:
       accessModes: [ "ReadWriteMany" ]
-      storageClassName: "nfs-client"
+      storageClassName: "managed-nfs-storage"
       resources:
         requests:
           storage: 10Gi
