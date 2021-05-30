@@ -30,9 +30,9 @@ spec:
             - name: NFS_SERVER
               value: 192.168.1.10
             - name: NFS_PATH
-              value: /nfs_shared
+              value: /nfs_shared/dynamic-vol
       volumes:
         - name: nfs-client-root
           nfs:
             server: 192.168.1.10
-            path: /nfs_shared
+            path: /nfs_shared/dynamic-vol
