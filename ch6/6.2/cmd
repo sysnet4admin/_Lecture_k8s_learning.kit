@@ -1,0 +1,18 @@
+kubectl apply -f deploy-cordon.yaml
+
+kubectl cordon w3-k8s
+
+kubectl get node
+
+kubectl scale deployment echo-hname --replicas=9
+
+
+kubectl get pods -o wide  --sort-by=.spec.nodeName
+
+
+kubectl scale deployment echo-hname --replicas=3
+
+kubectl uncordon w3-k8s
+
+
+kubectl get node
