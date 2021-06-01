@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodename 
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  nodeName: w3-k8s 
