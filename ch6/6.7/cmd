@@ -1,1 +1,1 @@
-kubectl label node w2-k8s gputype=a100 
+
