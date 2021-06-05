@@ -1,0 +1,11 @@
+kubectl apply -f deploy-drain.yaml
+
+kubectl drain w3-k8s
+
+kubectl drain w3-k8s --ignore-daemonsets
+
+kubectl get node
+
+kubectl uncordon w3-k8s
+
+kubectl get node
