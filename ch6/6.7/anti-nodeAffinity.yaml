@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: anti-nodeaffinity
+  name: anti-nodeaffinity
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: anti-nodeaffinity
+  template:
+    metadata:
+      labels:
+        app: anti-nodeaffinity
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: gpupool
+                operator: In
+                values:
+                - nvidia
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: accelerator
+                operator: NotIn
+                values:
+                - tesla-a100
