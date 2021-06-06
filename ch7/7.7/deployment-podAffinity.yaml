@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deploy-podaffinity
+  name: deploy-podaffinity
+spec:
+  replicas: 8
+  selector:
+    matchLabels:
+      app: deploy-podaffinity
+  template:
+    metadata:
+      labels:
+        app: deploy-podaffinity
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: affinity
+                operator: In
+                values:
+                - leader
+            topologyKey: topology.kubernetes.io/zone
