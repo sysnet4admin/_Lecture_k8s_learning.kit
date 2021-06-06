@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemonset-w-tolerations
+  labels:
+    app: daemonset-w-tolerations
+spec:
+  selector:
+    matchLabels:
+      app: daemonset-w-tolerations
+  template:
+    metadata:
+      labels:
+        app: daemonset-w-tolerations
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Exists

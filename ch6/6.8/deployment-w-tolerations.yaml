@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deploy-w-tolerations
+  name: deploy-w-tolerations
+spec:
+  replicas: 8
+  selector:
+    matchLabels:
+      app: deploy-w-tolerations
+  template:
+    metadata:
+      labels:
+        app: deploy-w-tolerations
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+      - effect: NoSchedule
+        key: DB
+
