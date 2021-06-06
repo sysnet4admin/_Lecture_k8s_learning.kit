@@ -1,0 +1,4 @@
+k create deploy nginx --image=nginx 
+
+[root@m-k8s ~]# k get po -l run=net1
+[root@m-k8s ~]# k get po -l app=nginx
