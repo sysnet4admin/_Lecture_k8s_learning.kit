@@ -1,0 +1,3 @@
+k describe < po | deploy | others> < Name >
+k logs < Name >
+k get events 
