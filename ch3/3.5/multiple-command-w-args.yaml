@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: multiple-command-w-args
+  name: multiple-command-w-args
+spec:
+  containers:
+  - image: sysnet4admin/net-tools
+    name: net-tools
+    command: ["/bin/sh","-c"]
+    args: 
+    - |
+      echo run multiple-command-w-args
+      echo add commentary 
+      sleep 3600
+
