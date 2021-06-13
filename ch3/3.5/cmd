@@ -1,1 +1,6 @@
-add node and mornitoring 
+ka simple-command.yaml
+k exec simple-command -it -- nslookup kubernetes
+
+ka multiple-command-v1.yaml
+k logs multiple-command-v1
+
