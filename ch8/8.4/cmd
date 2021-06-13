@@ -1,0 +1,5 @@
+nfs-exporter.sh pvc-vol  
+cat /etc/exports
+
+dd if=/dev/zero of=1G_file bs=1 count=0 seek=1G
+
