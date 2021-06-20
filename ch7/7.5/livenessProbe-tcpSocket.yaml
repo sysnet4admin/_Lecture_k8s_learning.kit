@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: liveness-tcp
+  name: liveness-tcp 
+spec:
+  containers:
+  - name: healthz-nginx 
+    image: sysnet4admin/healthz-nginx 
+    livenessProbe:
+      tcpSocket:
+        port: 80
+      initialDelaySeconds: 3
+      periodSeconds: 3
