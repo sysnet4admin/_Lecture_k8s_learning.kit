@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: startup-http
+  name: startup-http
+spec:
+  containers:
+  - name: healthz-nginx 
+    image: sysnet4admin/healthz-nginx 
+    startupProbe:
+      httpGet:
+        path: /healthz
+        port: 80
+        httpHeaders:
+        - name: purpose
+          value: health-check 
+      initialDelaySeconds: 3
+      periodSeconds: 3
