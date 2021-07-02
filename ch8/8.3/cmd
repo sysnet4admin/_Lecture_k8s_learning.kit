@@ -1,0 +1,14 @@
+kubectl create secret generic mysql-cred \
+  --from-literal=username='db-user' \
+  --from-literal=password='hoon' \
+  --from-literal=root_password='root' 
+  
+
+[root@m-k8s mysql]# k get secrets mysql-cred -o yaml
+
+mysql -u root -p
+Enter password: MY_PASSWORD
+
+use mysql;
+SELECT user, host, plugin FROM user;
+show databases;
