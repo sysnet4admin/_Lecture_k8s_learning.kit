@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: limits-defaultrequest
+  namespace: dev2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: limits-defaultrequest
+  template:
+    metadata:
+      labels:
+        app: limits-defaultrequest
+    spec:
+      containers:
+      - name: chk-log 
+        image: sysnet4admin/chk-log
+        volumeMounts:
+        - name: pvc-vol
+          mountPath: /audit
+      volumes:
+      - name: pvc-vol
+        persistentVolumeClaim:
+          claimName: limits-1g-pvc  
+      nodeName: w3-k8s # only here for testing purpose

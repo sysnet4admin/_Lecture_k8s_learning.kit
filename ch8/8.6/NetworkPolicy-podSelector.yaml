@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: networkpolicy-podselector
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: internal  
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from: 
+    - podSelector:
+        matchLabels:
+          app: chk-info
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: chk-info

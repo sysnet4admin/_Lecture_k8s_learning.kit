@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    role: internal 
+    app: chk-info
+  name: role-internal 
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      role: internal 
+      app: chk-info
+  template:
+    metadata:
+      labels:
+        role: internal 
+        app: chk-info
+    spec:
+      containers:
+      - image: sysnet4admin/chk-info
+        name: chk-info
