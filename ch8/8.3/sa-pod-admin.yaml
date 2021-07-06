@@ -1,5 +1,0 @@
-# account for clusterrole
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: sa-pod-admin
