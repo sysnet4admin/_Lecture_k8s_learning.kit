@@ -1,0 +1,35 @@
+kubectl apply -f rollout-nginx.yaml --record
+kubectl rollout history deployment rollout-nginx
+kubectl get pods \
+-o=custom-columns=NAME:.metadata.name,IP:.status.podIP,STATUS:.status.phase,NODE:.
+spec.nodeName
+curl -I --silent 172.16.103.143 | grep Server
+kubectl set image deployment rollout-nginx nginx=nginx:1.21.0 --record
+ubectl get pods \
+-o=custom-columns=NAME:.metadata.name,IP:.status.podIP,STATUS:.status.phase,NODE:.
+spec.nodeName
+kubectl rollout status deployment rollout-nginx
+kubectl rollout history deployment rollout-nginx
+curl -I --silent 172.16.132.10 | grep Server
+kubectl set image deployment rollout-nginx nginx=nginx:1.21.21 --record
+kubectl get pods \
+-o=custom-columns=NAME:.metadata.name,IP:.status.podIP,STATUS:.status.phase,NODE:.
+spec.nodeName
+kubectl rollout status deployment rollout-nginx
+kubectl rollout status deployment rollout-nginx
+kubectl describe deployment rollout-nginx
+kubectl rollout history deployment rollout-nginx
+kubectl rollout undo deployment rollout-nginx
+kubectl get pods \
+-o=custom-columns=NAME:.metadata.name,IP:.status.podIP,STATUS:.status.phase,NODE:.
+spec.nodeName
+kubectl rollout history deployment rollout-nginx
+curl -I --silent 172.16.132.10 | grep Server
+kubectl rollout status deployment rollout-nginx
+kubectl describe deployment rollout-nginx
+kubectl rollout undo deployment rollout-nginx --to-revision=1
+kubectl get pods \
+-o=custom-columns=NAME:.metadata.name,IP:.status.podIP,STATUS:.status.phase,NODE:.
+spec.nodeName
+curl -I --silent 172.16.103.150 | grep Server
+
