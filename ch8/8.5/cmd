@@ -1,136 +1,63 @@
-[root@m-k8s ~]# kubectl describe pod kube-apiserver-m-k8s -n kube-system | grep -i author -F4
-    Command:
-      kube-apiserver
-      --advertise-address=192.168.1.10
-      --allow-privileged=true
-      --authorization-mode=Node,RBAC
-      --client-ca-file=/etc/kubernetes/pki/ca.crt
-      --enable-admission-plugins=NodeRestriction
-      --enable-bootstrap-token-auth=true
-      --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
-
-
-[root@m-k8s 8.3]# k create namespace dev1
-namespace/dev1 created
-[root@m-k8s 8.3]# k create namespace dev2
-namespace/dev2 created
-
-[root@m-k8s 8.3]# k create serviceaccount dev1-hoon -n dev1
-serviceaccount/dev1-hoon created
-[root@m-k8s 8.3]# k create serviceaccount dev2-moon -n dev2
-serviceaccount/dev2-moon created
-
-
-[root@m-k8s ~]# ka ns-sa-dev.yaml
-
-[root@m-k8s ~]# k get sa -n dev1
-NAME        SECRETS   AGE
-default     1         7h30m
-dev1-hoon   1         7h30m
-[root@m-k8s ~]# k get sa -n dev2
-NAME        SECRETS   AGE
-default     1         7h30m
-dev2-moon   1         7h30m
-
-[root@m-k8s ~]# ka role-get-dev1.yaml
-[root@m-k8s ~]# ka rolebidning-dev1.yaml
-
-[root@m-k8s ~]# sh set-ctx-dev1.sh
-
-[root@m-k8s ~]# k config get-contexts
-CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE
-          ctx-dev2-moon                 kubernetes   dev2-set-moon
-          ctx-pod-admin                 kubernetes   set-pod-admin
-*         kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
-
-
-[root@m-k8s ~]# k config use-context ctx-dev1-hoon
-
-k run nginx --image=nginx >>> error 
-k run nginx --image=nginx -n dev1 
-
-k get po -n dev1
-k delete po nginx -n dev1 >>> error 
-
-[root@m-k8s ~]# k config use-context kubernetes-admin@kubernetes
- 
-
-
-[root@m-k8s ~]# ka role-gcr-dev2.yaml
-[root@m-k8s ~]# ka rolebidning-dev2.yaml
-
-[root@m-k8s ~]# sh set-ctx-dev2.sh
-
-[root@m-k8s ~]# k config get-contexts
-CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE
-          ctx-dev2-moon                 kubernetes   dev2-set-moon
-          ctx-pod-admin                 kubernetes   set-pod-admin
-*         kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
-
-
-[root@m-k8s ~]# k config use-context ctx-dev2-moon
-
-k run nginx --image=nginx -n dev2 
-k get po -n dev2
-k delete po nginx -n dev2
-
-[root@m-k8s ~]# k config use-context kubernetes-admin@kubernetes
-
-
-=== clusterrole ===
-
-[root@m-k8s ~]# ka role-ka sa-pod-admin.yaml
-[root@m-k8s ~]# k get sa
-NAME                     SECRETS   AGE
-default                  1         41d
-nfs-client-provisioner   1         34d
-sa-pod-admin             1         17m
-
-[root@m-k8s ~]# ka clusterrole.yaml
-[root@m-k8s ~]# ka clusterrolebinding.yaml
-
-
-[root@m-k8s ~]# sh set-ctx-pod-admin.sh
-
-[root@m-k8s ~]# k config get-contexts
-CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE
-          ctx-dev2-moon                 kubernetes   dev2-set-moon
-          ctx-pod-admin                 kubernetes   set-pod-admin
-*         kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
-
-
-[root@m-k8s ~]# k config use-context ctx-pod-admin 
-
-k delete po nginx -n dev1
-k create deploy dpy-nginx --image=nginx 
-k scale deploy dpy-nginx --replicas=3
-k delete deploy dpy-nginx 
-
-[root@m-k8s ~]# k config use-context kubernetes-admin@kubernetes
 
 
 
-============== Reference Later========================
-[root@m-k8s ~]# k config get-clusters
-NAME
-kubernetes
-
-[root@m-k8s ~]# kubectl config set-credentials dev1-hoon -n dev1
-User "dev1-hoon" set.
+copy from 5.6 to here. 
 
 
-TOKENNAME=`kubectl -n dev1 get serviceaccount dev1-hoon -o jsonpath={.secrets[0].name}`
-kubectl -n dev1 get secret $TOKENNAME -o jsonpath={.data.token}| base64 --decode
-kubectl config set-credentials dev1-hoon --token=`kubectl -n dev1 get secret $TOKENNAME -o jsonpath={.data.token}| base64 --decode`
-kubectl config set-context ctx-dev1-hoon --cluster=kubernetes --user=dev1-hoon
+[root@m-k8s 8.7]# ka LimitRange.yaml
+
+[root@m-k8s 8.7]# k describe limitranges -n dev2
+Name:                  limits-dev2
+Namespace:             dev2
+Type                   Resource  Min  Max  Default Request  Default Limit  Max Limit/Request Ratio
+----                   --------  ---  ---  ---------------  -------------  -----------------------
+PersistentVolumeClaim  storage   1Gi  2Gi  -                -              -
+Container              memory    -    -    256Mi            512Mi          -
 
 
 
 
-[root@m-k8s ~]# k config set-context ctx-dev1-hoon --cluster=kuberntes --user=dev1-hoon
-Context "ctx-dev1-hoon" created.
-[root@m-k8s ~]# k config get-contexts
-CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE
-          ctx-dev1-hoon                 kuberntes    dev1-hoon
-*         kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
+[root@m-k8s 8.7]# ka limits-1G-pvc.yaml
+persistentvolumeclaim/limits-1g-pvc created
+[root@m-k8s 8.7]# ka limits-3G-pvc.yaml
+Error from server (Forbidden): error when creating "limits-3G-pvc.yaml": persistentvolumeclaims "limits-3g-pvc" is forbidden: maximum storage usage per PersistentVolumeClaim is 2Gi, but request is 3Gi
+[root@m-k8s 8.7]# k get pvc -n dev2
+NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS          AGE
+limits-1g-pvc   Bound    pvc-c385fedc-a0be-400f-9a9a-02e3521088b5   1Gi        RWX            managed-nfs-storage   12s
+
+
+[root@m-k8s 8.7]# ka limits-defaultRequest.yaml
+
+
+
+
+[root@m-k8s 8.7]# k -n dev2 get pod limits-defaultrequest-5fbb49db6f-fpnxb -o yaml | grep requests -F3
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        memory: 256Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+
+
+
+^C[root@m-k8s 8.7]# k get po -n dev2
+NAME                                     READY   STATUS    RESTARTS   AGE
+limits-defaultrequest-5875949984-7kwhl   1/1     Running   0          2m27s
+limits-defaultrequest-5875949984-fmfw9   1/1     Running   0          2m27s
+limits-defaultrequest-5875949984-hp4ft   1/1     Running   0          2m27s
+[root@m-k8s 8.7]# k -n dev2 scale deployment limits-defaultrequest --replicas=10
+deployment.apps/limits-defaultrequest scaled
+[root@m-k8s 8.7]# k get po -n dev2 -w
+NAME                                     READY   STATUS              RESTARTS   AGE
+limits-defaultrequest-5875949984-4ddrp   0/1     Pending             0          2s
+limits-defaultrequest-5875949984-4zmmh   0/1     Pending             0          0s
+limits-defaultrequest-5875949984-664td   0/1     OutOfmemory         0          2s
+limits-defaultrequest-5875949984-6bpvz   0/1     Pending             0          1s
+limits-defaultrequest-5875949984-79sx6   0/1     ContainerCreating   0          2s
+limits-defaultrequest-5875949984-7kwhl   1/1     Running             0          2m47s
+limits-defaultrequest-5875949984-9gxzc   0/1     ContainerCreating   0          2s
+limits-defaultrequest-5875949984-9l2bt   0/1     Pending             0          1s
+
 

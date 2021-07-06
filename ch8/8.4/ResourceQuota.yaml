@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota-dev1
+  namespace: dev1
+spec:
+  hard:
+    pods: 10
+    managed-nfs-storage.storageclass.storage.k8s.io/persistentvolumeclaims: "2"
+    managed-nfs-storage.storageclass.storage.k8s.io/requests.storage: "2Gi"
+    #persistentvolumeclaims: "2"
+    #requests.storage: "2Gi"

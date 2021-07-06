@@ -1,0 +1,23 @@
+# dev1 namespace and account 
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev1
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dev1-hoon 
+  namespace: dev1
+---
+# dev2 namespace and account 
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev2
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dev2-moon  
+  namespace: dev2
