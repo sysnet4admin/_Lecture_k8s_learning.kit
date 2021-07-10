@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hpa-pods
+  labels:
+    app: hpa-pods
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hpa-pods
+  template:
+    metadata:
+      labels:
+        app: hpa-pods
+    spec:
+      containers:
+      - name: chk-hn
+        image: sysnet4admin/chk-hn
+        resources:
+          requests:
+            cpu: "10m"
+          limits:
+            cpu: "20m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb-hpa 
+spec:
+  selector:
+    app: hpa-pods
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80 
+  type: LoadBalancer
