@@ -1,1 +1,3 @@
-test
+k autoscale deployment hpa-pods --min=1 --max=10 --cpu-percent=50
+k get hpa
+watch kubectl top pods --use-protocol-buffers 

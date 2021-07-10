@@ -1,1 +1,5 @@
-test
+[root@m-k8s 9.5]# kubectl apply -k .
+
+
+[root@m-k8s 9.5]# k delete -k .
+
