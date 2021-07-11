@@ -2,7 +2,6 @@ kubectl describe pods -n metallb-system | grep Image:
 metallb-unintaller.sh
 
 kustomize-install.sh
-kustomize create --namespace=metallb-system --resources namespace.yaml,metallb.yaml,metallb-l2config.yaml    
 kustomize create --namespace=metallb-system --resources res/namespace.yaml,res/metallb.yaml,res/metallb-l2config.yaml
 
 
