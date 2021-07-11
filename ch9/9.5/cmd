@@ -1,1 +1,14 @@
-test
+kubectl describe pods -n metallb-system | grep Image:
+metallb-unintaller.sh
+
+kustomize-install.sh
+kustomize create --namespace=metallb-system --resources namespace.yaml,metallb.yaml,metallb-l2config.yaml    
+kustomize create --namespace=metallb-system --resources res/namespace.yaml,res/metallb.yaml,res/metallb-l2config.yaml
+
+
+kustomize edit set image quay.io/metallb/speaker:v0.10.1
+kustomize edit set image quay.io/metallb/controller:v0.10.1
+
+cat kustomization.yaml
+kustomize build | kubectl apply -f -
+kubectl describe pods -n metallb-system | grep Image:
