@@ -1,1 +1,27 @@
-test
+kubectl get pods 
+kubectl get storageclasses.storage.k8s.io
+
+nfs-provisioner-uninstaller.sh
+
+helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+helm repo list 
+helm repo update 
+
+sh nfs-provisioner-installer-by-helm.sh
+
+kubectl get storageclasses.storage.k8s.io
+
+ka deploy-pvc.yaml 
+
+kubectl get pods 
+kubectl get pv,pvc 
+
+===
+
+../9.5/kustomize build | kubectl delete -f -
+
+helm repo add edu IaC-Source/edu 
+helm repo list 
+helm repo update 
+
+sh metallb-installer-by-helm.sh 

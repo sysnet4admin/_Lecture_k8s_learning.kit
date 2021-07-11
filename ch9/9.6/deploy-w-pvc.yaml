@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-dynamic
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 15Gi
+  storageClassName: managed-nfs-storage 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-w-pvc 
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: deploy-w-pvc
+  template:
+    metadata:
+      labels:
+        app: deploy-w-pvc
+    spec:
+      containers:
+      - name: chk-log 
+        image: sysnet4admin/chk-log
+        volumeMounts:
+        - name: pvc-vol
+          mountPath: /audit
+      volumes:
+      - name: pvc-vol
+        persistentVolumeClaim:
+          claimName: pvc-dynamic 
