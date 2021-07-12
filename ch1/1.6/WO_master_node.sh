@@ -14,4 +14,3 @@ raw_git="raw.githubusercontent.com/sysnet4admin/IaC/master/manifests"
 
 # config for kubernetes's network 
 kubectl apply -f https://$raw_git/172.16_net_calico_v1.yaml
-
