@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: evt-desc
+  name: evt-desc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: evt-desc
+  template:
+    metadata:
+      labels:
+        app: evt-desc
+    spec:
+      containers:
+      - image: nginx-evt-desc
+        name: nginx

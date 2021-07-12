@@ -1,0 +1,14 @@
+kubectl apply -f evt-desc.yaml 
+
+kubectl get events 
+kubectl describe < po | deploy | others> < Name >
+
+kubectl apply -f logs.yaml 
+
+kubectl logs < Name >
+
+
+kubectl delete -f evt-desc.yaml 
+kubectl delete -f logs.yaml 
+
+NOW kubectl => k 

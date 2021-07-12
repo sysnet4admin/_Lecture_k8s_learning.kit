@@ -1,3 +1,12 @@
-k describe < po | deploy | others> < Name >
-k logs < Name >
-k get events 
+kubectl run nginx --image=nginx 
+kubectl get pod
+kubectl create deployment nginx --image=nginx 
+kubectl scale deployment nginx --replicas=4 
+kubectl get pods 
+kubectl delete pod nginx 
+kubectl delete deployment nginx 
+
+kubectl apply -f apy-nginx.yaml 
+kubectl exec apy-nginx-<replica>-<HASH> -it -- /bin/bash  
+kubectl edit > replicas=1
+kubectl delete -f apy-nginx.yaml 
