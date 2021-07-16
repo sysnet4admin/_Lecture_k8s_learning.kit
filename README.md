@@ -17,7 +17,7 @@
 - ch10: Closing - 강의 마무리 및 다음 강의 소개
 - ch11: 보강수업   
 
-### Repo(레포)를 다시 내려받으신다면? ## 아래의 명령을 실행하세요 :) 
+### Repo(레포)를 다시 내려받으신다면? 아래의 명령을 실행하세요 :) 
 ```bash 
 [root@m-k8s ~]# rerepo-k8s-learning.kit
 Cloning into '/root/_Lecture_k8s_learning.kit'...
