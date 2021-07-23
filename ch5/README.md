@@ -4,4 +4,4 @@
 - 5.4: NFS 볼륨
 - 5.5: 퍼시스턴트볼륨(PV), 퍼시스턴트볼륨클레임(PVC)
 - 5.6: 스토리지클래스(StorageClass)
-- 5.7: 볼륨클레임템플릿(volumeclaimtemplates)
+- 5.7: 볼륨클레임템플릿(volumeClaimTemplates)
