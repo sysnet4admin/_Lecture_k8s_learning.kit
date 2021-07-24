@@ -8,7 +8,7 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: po-nginx
+      app: deploy-nginx
   template:
     metadata:
       labels:
