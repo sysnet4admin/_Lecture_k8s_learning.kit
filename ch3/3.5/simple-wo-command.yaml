@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: simple-wo-command
+  name: simple-wo-command 
+spec:
+  containers:
+  - image: sysnet4admin/net-tools
+    name: net-tools
