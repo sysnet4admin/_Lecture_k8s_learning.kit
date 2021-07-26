@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: ds
+  name: ds-nginx
   labels:
-    app: ds
+    app: ds-nginx 
 spec:
   selector:
     matchLabels:
-      app: ds 
+      app: po-nginx 
   template:
     metadata:
       labels:
-        app: ds 
+        app: po-nginx
     spec:
       containers:
       - name: nginx 
