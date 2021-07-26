@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: ds-nginx
   labels:
     app: ds-nginx 
+  name: ds-nginx
 spec:
   selector:
     matchLabels:
