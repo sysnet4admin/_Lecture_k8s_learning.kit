@@ -1,3 +1,0 @@
-k apply -f ~/_Lecture_k8s_learning.kit/ch4/4.2/po-chk-hn.yaml 
-port-forward po-chk-hn 80:80
-port-forward --address 0.0.0.0 po-chk-hn 80:80
