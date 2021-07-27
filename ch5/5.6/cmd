@@ -1,4 +1,4 @@
-nfs-exporter.sh pvc-vol  
+nfs-exporter.sh dynamic-vol  
 cat /etc/exports
 
 cat ~/_Lecture_k8s.starterkit/ch5/5.2/dpy-chk-log.yaml 
@@ -11,4 +11,3 @@ kubectl exec dpy-chk-log-<ReplicaSet>-<HASH> -it -- /bin/bash
 kubectl delete pod dpy-chk-log-<ReplicaSet>-<HASH>
 kubectl exec dpy-chk-log-<ReplicaSet>-<HASH> -it -- /bin/bash
 
-reclaim life cycle 설명 

@@ -7,4 +7,4 @@ spec:
   - name: nginx
     image: nginx
   nodeSelector:
-    gputype: a100
+    accelerator: nvidia-tesla-a100
