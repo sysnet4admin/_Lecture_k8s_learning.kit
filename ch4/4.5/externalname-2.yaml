@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ex-url-2 
+  namespace: default
+spec:
+  type: ExternalName
+  externalName: k8s-edu.github.io # changable as you want 
+
