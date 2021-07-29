@@ -1,0 +1,19 @@
+k run net --image=sysnet4admin/net-tools-ifn 
+
+k exec net -it -- /bin/bash
+
+k get svc 
+
+nslookup ex-url
+Server:         10.96.0.10
+Address:        10.96.0.10#53
+
+ex-url.default.svc.cluster.local        canonical name = sysnet4admin.github.io.
+Name:   sysnet4admin.github.io
+Address: 185.199.110.153
+Name:   sysnet4admin.github.io
+Address: 185.199.108.153
+Name:   sysnet4admin.github.io
+Address: 185.199.111.153
+Name:   sysnet4admin.github.io
+Address: 185.199.109.153
