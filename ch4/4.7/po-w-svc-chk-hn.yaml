@@ -12,7 +12,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: np-chk-hn 
+  name: cl-chk-hn 
 spec:
   selector:
     run: po-chk-hn  
@@ -20,6 +20,5 @@ spec:
     - name: http
       port: 80
       targetPort: 80
-      # nodePort: 30000 #option 
-  type: NodePort
+  type: ClusterIP
 
