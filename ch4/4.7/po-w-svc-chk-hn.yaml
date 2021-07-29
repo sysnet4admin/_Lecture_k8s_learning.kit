@@ -6,8 +6,8 @@ metadata:
   name: po-chk-hn
 spec:
   containers:
-  - image: chk-hn 
-    name: sysnet4admin/chk-hn
+  - image: sysnet4admin/chk-hn 
+    name: chk-hn
 ---
 apiVersion: v1
 kind: Service
