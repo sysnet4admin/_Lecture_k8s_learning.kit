@@ -4,6 +4,5 @@
 - 4.4: 로드밸런서(LoadBalancer)
 - 4.5: 외부이름(ExternalName)
 - 4.6: 클러스터주소(ClusterIP), 헤드리스(Headless)
-- 4.7: [알아두기] - 포트 포워딩(port-forward)
-- 4.8: 엔드포인트(Endpoints)
-- 4.9: 인그레스(Ingress)
+- 4.7: 엔드포인트(Endpoints)
+- 4.8: 인그레스(Ingress)
