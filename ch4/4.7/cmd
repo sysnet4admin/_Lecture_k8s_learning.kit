@@ -1,1 +1,3 @@
+k apply -f ~/_Lecture_k8s_learning.kit/ch4/4.7/loadbalancer.yaml
+
 kubectl get endpoints
