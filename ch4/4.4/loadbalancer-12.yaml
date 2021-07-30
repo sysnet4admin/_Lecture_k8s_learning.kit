@@ -15,8 +15,8 @@ spec:
         app: deploy-chk-ip 
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: chk-ip
+        image: sysnet4admin/chk-ip
 ---
 apiVersion: v1
 kind: Service
