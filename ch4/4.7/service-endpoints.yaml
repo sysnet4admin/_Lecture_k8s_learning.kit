@@ -14,7 +14,7 @@ metadata:
   name: external-data
 subsets:
   - addresses:
-      - ip: 192.168.1.12
+      - ip: 192.168.1.11
     ports:
       - name: http
         port: 80
