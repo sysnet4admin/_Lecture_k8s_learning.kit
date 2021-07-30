@@ -1,6 +1,1 @@
-k apply -f ~/_Lecture_k8s_learning.kit/ch4/4.7/po-w-svc-chk-hn.yaml 
-
-k port-forward np-chk-hn 80:80
-Forwarding from 127.0.0.1:80 -> 80
-
-k port-forward --address 0.0.0.0 np-chk-hn 80:80
+kubectl get endpoints
