@@ -1,7 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy-pvc 
+  name: deploy-pvc
+  labels:
+    app: deploy-pvc 
 spec:
   replicas: 3
   selector:
@@ -22,3 +24,4 @@ spec:
       - name: pvc-vol
         persistentVolumeClaim:
           claimName: pvc-nfs 
+
