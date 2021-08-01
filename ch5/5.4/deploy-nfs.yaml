@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deploy-nfs
+  labels:
+    app: deploy-nfs
 spec:
   replicas: 3
   selector:
