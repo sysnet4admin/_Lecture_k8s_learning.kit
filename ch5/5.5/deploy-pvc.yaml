@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: deploy-pvc 
 spec:
-  replicas: 4
+  replicas: 3
   selector:
     matchLabels:
       app: deploy-pvc
