@@ -1,1 +1,1 @@
-k expose pod pod-emptydir --type=LoadBalancer --port=80
+k expose po po-emptydir --type=LoadBalancer --port=80
