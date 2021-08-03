@@ -1,0 +1,1 @@
+kubectl label node w4-k8s diskint=nvme 

@@ -1,9 +1,13 @@
-kubectl get pods -o wide  --sort-by=.spec.nodeName
+[root@m-k8s ~]# kubectl get node m-k8s -o yaml | nl | grep  taints -F3
+    24    podCIDR: 172.16.0.0/24
+    25    podCIDRs:
+    26    - 172.16.0.0/24
+    27    taints:
+    28    - effect: NoSchedule
+    29      key: node-role.kubernetes.io/master
+    30  status:
 
-kubectl describe node w2-k8s | grep kubernetes.io
+===
+kubectl taint nodes w1-k8s DB:NoSchedule
 
-Labels:             beta.kubernetes.io/arch=amd64
-                    beta.kubernetes.io/os=linux
-                    kubernetes.io/arch=amd64
-                    kubernetes.io/hostname=w4-k8s
-                    kubernetes.io/os=linux
+
