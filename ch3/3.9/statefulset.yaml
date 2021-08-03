@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: sts-chk-hn
 spec:
-  replicas: 4
+  replicas: 3
   serviceName: sts-svc-domain #statefulset need it
   selector:
     matchLabels:
