@@ -1,4 +1,4 @@
-## kubernetes learning kit / 쉽게 배우는 쿠버네티스
+## kubernetes learning kit / 코드로 배우는 쿠버네티스
 
 <a href="https://www.inflearn.com/course/쿠버네티스-쉽게시작?inst=cf657a9d">
 <img src="추후 추가" width="400">
