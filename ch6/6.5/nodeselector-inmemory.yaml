@@ -1,10 +1,11 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nodeselector
+  name: nodeselector-inmemory
 spec:
   containers:
   - name: nginx
     image: nginx
   nodeSelector:
-    accelerator: nvidia-tesla-a100
+    inmemory: redis 
+
