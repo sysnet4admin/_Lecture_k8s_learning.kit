@@ -1,1 +1,4 @@
-kubectl label node w4-k8s diskint=nvme 
+kubectl label node w3-k8s input=test
+kubectl label node w3-k8s input=test-
+
+kubectl label node w3-k8s diskint=nvme 
