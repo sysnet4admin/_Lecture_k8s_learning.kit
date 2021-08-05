@@ -16,3 +16,11 @@ yum install kubelet-$1 kubectl-$1 kubeadm-$1 -y
 # Ready to install for k8s 
 systemctl enable --now docker
 systemctl enable --now kubelet
+
+# docker daemon config for systemd from cgroupfs & restart 
+cat <<EOF > /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"]
+}
+EOF
+systemctl daemon-reload && systemctl restart docker

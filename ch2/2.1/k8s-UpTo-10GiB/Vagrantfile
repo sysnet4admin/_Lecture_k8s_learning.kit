@@ -5,9 +5,9 @@
 # max number of worker nodes
 N = 3 
 # each of components to install 
-k8s_V = '1.21.1'           # Kubernetes 
-docker_V = '20.10.6-3.el7' # Docker  
-ctrd_V = '1.4.4-3.1.el7'   # Containerd 
+k8s_V = '1.22.0'           # Kubernetes 
+docker_V = '20.10.8-3.el7' # Docker  
+ctrd_V = '1.4.9-3.1.el7'   # Containerd 
 ## /configuration variables ##
 
 Vagrant.configure("2") do |config|
