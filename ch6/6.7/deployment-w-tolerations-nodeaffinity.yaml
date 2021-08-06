@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deploy-w-tolerations-nodeaffinity
+  name: deploy-w-tolerations-nodeaffinity
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: deploy-w-tolerations-nodeaffinity
+  template:
+    metadata:
+      labels:
+        app: deploy-w-tolerations-nodeaffinity
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      tolerations:
+      - effect: NoSchedule
+        key: DB
+        value: customer-info
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: inmemory
+            operator: In
+            values:
+            - redis
+            
