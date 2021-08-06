@@ -330,6 +330,9 @@ spec:
             - --validating-webhook=:8443
             - --validating-webhook-certificate=/usr/local/certificates/cert
             - --validating-webhook-key=/usr/local/certificates/key
+            # for k8s 1.22 && ingress v1 
+            # https://github.com/kubernetes/ingress-nginx/issues/7448
+            - --watch-ingress-without-class=true
           securityContext:
             capabilities:
               drop:
