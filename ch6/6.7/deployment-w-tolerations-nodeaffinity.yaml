@@ -21,13 +21,13 @@ spec:
       - effect: NoSchedule
         key: DB
         value: customer-info
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: inmemory
-            operator: In
-            values:
-            - redis
-            
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: inmemory
+                operator: In
+                values:
+                - redis
+           
