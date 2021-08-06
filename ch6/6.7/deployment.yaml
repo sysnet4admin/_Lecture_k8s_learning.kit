@@ -2,23 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: deploy-w-tolerations
-  name: deploy-w-tolerations
+    app: deploy-after-taint
+  name: deploy-after-taint
 spec:
   replicas: 6
   selector:
     matchLabels:
-      app: deploy-w-tolerations
+      app: deploy-after-taint
   template:
     metadata:
       labels:
-        app: deploy-w-tolerations
+        app: deploy-after-taint
     spec:
       containers:
       - image: nginx
         name: nginx
-      tolerations:
-      - effect: NoSchedule
-        key: DB
-        value: customer-info
 

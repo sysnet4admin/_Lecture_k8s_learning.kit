@@ -8,6 +8,6 @@
     30  status:
 
 ===
-kubectl taint nodes w1-k8s DB:NoSchedule
+kubectl taint nodes w3-k8s DB=customer-info:NoSchedule
 
 
