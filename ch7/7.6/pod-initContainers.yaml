@@ -11,7 +11,6 @@ spec:
     volumeMounts:
     - mountPath: /usr/share/nginx/html 
       name: empty-directory 
-
   initContainers:
   - name: html-builder 
     image: alpine 
@@ -22,7 +21,9 @@ spec:
     args: 
       - echo "This page created on $(date +%Y-%m-%d) by initContainers" > /html-dir/index.html;
         #sleep infinity;
-
   volumes:
   - name: empty-directory 
     emptyDir: {}
+
+
+
