@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: startup-w-others
+  name: startup-w-others
+spec:
+  containers:
+  - name: tardy-nginx 
+    image: sysnet4admin/tardy-nginx  
+    startupProbe:
+      exec:
+        command:
+        - cat 
+        - /tmp/healthy-on
+      initialDelaySeconds: 10
+      periodSeconds: 120
+    livenessProbe:
+      exec:
+        command:
+        - cat 
+        - /tmp/healthy-on
+      initialDelaySeconds: 10
+      periodSeconds: 30
+    readinessProbe:
+      exec:
+        command:
+        - cat 
+        - /tmp/healthy-on
+      initialDelaySeconds: 5
+      periodSeconds: 5
