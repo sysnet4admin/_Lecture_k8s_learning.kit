@@ -24,6 +24,3 @@ spec:
   volumes:
   - name: empty-directory 
     emptyDir: {}
-
-
-
