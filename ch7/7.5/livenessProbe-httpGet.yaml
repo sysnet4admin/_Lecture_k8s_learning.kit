@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    run: liveness-http
-  name: liveness-http
+    run: liveness-httpget
+  name: liveness-httpget
 spec:
   containers:
   - name: healthz-nginx 
