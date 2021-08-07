@@ -14,14 +14,14 @@ spec:
         - cat 
         - /tmp/healthy-on
       initialDelaySeconds: 10
-      periodSeconds: 30
+      periodSeconds: 120
     livenessProbe:
       exec:
         command:
         - cat 
         - /tmp/healthy-on
       initialDelaySeconds: 10
-      periodSeconds: 60
+      periodSeconds: 30
     readinessProbe:
       exec:
         command:
