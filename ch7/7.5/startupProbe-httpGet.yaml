@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    run: startupprobe-http
-  name: startupprobe-http
+    run: startup-http
+  name: startup-http
 spec:
   containers:
   - name: healthz-nginx 

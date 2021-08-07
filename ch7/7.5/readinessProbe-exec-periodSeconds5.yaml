@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    run: readinessprobe-exec
-  name: readinessprobe-exec
+    run: readiness-exec
+  name: readiness-exec
 spec:
   containers:
   - name: tardy-nginx 

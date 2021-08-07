@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    run: livenessprobe-exec
-  name: livenessprobe-exec
+    run: liveness-exec
+  name: liveness-exec
 spec:
   containers:
   - name: tardy-nginx 
