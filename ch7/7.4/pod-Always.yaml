@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    run: nslookup
-  name: nslookup
+    run: pod-always
+  name: pod-always
 spec:
   containers:
   - image: sysnet4admin/net-tools
