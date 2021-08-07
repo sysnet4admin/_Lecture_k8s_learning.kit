@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deploy-onfailure-failure
+  name: deploy-onfailure-failure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy-onfailure-failure
+  template:
+    metadata:
+      labels:
+        app: deploy-onfailure-failure
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+      restartPolicy: OnFailure
+

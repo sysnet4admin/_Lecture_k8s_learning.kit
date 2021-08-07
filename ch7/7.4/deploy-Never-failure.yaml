@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deploy-never-failure
+  name: deploy-never-failure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy-never-failure
+  template:
+    metadata:
+      labels:
+        app: deploy-never-failure
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+      restartPolicy: Never
+
