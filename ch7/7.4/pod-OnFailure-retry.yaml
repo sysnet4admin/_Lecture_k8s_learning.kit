@@ -10,6 +10,6 @@ spec:
     name: net-tools
     command: ["/bin/sh", "-c"]
     args:
-    - nslook kubernetes
+    - nslook kubernetes # typo issue
   restartPolicy: OnFailure 
 
