@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: deploy-podaffinity
-  name: deploy-podaffinity
+    app: deploy-anti-podaffinity
+  name: deploy-anti-podaffinity
 spec:
   replicas: 4
   selector:
     matchLabels:
-      app: deploy-podaffinity
+      app: deploy-anti-podaffinity
   template:
     metadata:
       labels:
-        app: deploy-podaffinity
+        app: deploy-anti-podaffinity
     spec:
       containers:
       - image: nginx
@@ -26,4 +26,5 @@ spec:
                 operator: NotIn
                 values:
                 - leader
-            topologyKey: topology.kubernetes.io/zone
+            # k8s cluster zone ex) topology.kubernetes.io/zone
+            topologyKey:  beta.kubernetes.io/arch
