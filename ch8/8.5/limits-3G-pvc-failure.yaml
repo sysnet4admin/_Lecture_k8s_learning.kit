@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: limits-3g-pvc
+  name: limits-3g-pvc-failure
   namespace: dev2
 spec:
   accessModes:

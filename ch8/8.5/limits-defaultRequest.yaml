@@ -4,7 +4,7 @@ metadata:
   name: limits-defaultrequest
   namespace: dev2
 spec:
-  replicas: 3
+  replicas: 6 # will be out of memory 
   selector:
     matchLabels:
       app: limits-defaultrequest
