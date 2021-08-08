@@ -26,4 +26,5 @@ spec:
                 operator: In
                 values:
                 - leader
-            topologyKey: topology.kubernetes.io/zone
+            # k8s cluster zone ex) topology.kubernetes.io/zone
+            topologyKey:  beta.kubernetes.io/arch
