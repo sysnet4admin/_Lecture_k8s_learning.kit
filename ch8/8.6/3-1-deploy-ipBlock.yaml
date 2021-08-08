@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: chk-info
+  name: deploy-ipblock   
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: chk-info
+  template:
+    metadata:
+      labels:
+        app: chk-info
+    spec:
+      containers:
+      - image: sysnet4admin/chk-info
+        name: chk-info

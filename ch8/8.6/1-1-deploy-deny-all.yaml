@@ -4,7 +4,7 @@ metadata:
   labels:
     role: sensitive  
     app: chk-info
-  name: deny-all
+  name: deploy-deny-all
 spec:
   replicas: 3
   selector:
@@ -26,7 +26,7 @@ kind: Service
 metadata:
   labels:
     app: chk-info
-  name: deny-all-svc
+  name: deploy-deny-all
 spec:
   ports:
   - port: 80
@@ -35,4 +35,3 @@ spec:
   selector:
     app: chk-info
   type: LoadBalancer
-status:

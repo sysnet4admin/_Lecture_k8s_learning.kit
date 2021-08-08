@@ -2,19 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    role: internal 
     app: chk-info
-  name: role-internal 
+  name: deploy-namespaceselector-dev2
+  namespace: dev2  
 spec:
   replicas: 3
   selector:
     matchLabels:
-      role: internal 
       app: chk-info
   template:
     metadata:
       labels:
-        role: internal 
         app: chk-info
     spec:
       containers:

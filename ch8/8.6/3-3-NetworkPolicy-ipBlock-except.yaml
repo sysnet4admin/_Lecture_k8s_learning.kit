@@ -12,6 +12,7 @@ spec:
   - from:
     - ipBlock:
         cidr: 172.16.0.0/16
+        # change your CIDR to shut it down 
         #except:
         # - 172.16.n.n/24
   egress:
