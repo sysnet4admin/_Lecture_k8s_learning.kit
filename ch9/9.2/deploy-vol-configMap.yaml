@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: vol-configmap
-  name: vol-configmap
+    app: deploy-vol-configMap
+  name: deploy-vol-configmap
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vol-configmap
+      app: deploy-vol-configmap
   template:
     metadata:
       labels:
-        app: vol-configmap
+        app: deploy-vol-configmap
     spec:
       containers:
       - image: sysnet4admin/sleepy 

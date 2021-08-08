@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: configmapkeyref
-  name: configmapkeyref
+    app: deploy-configmapkeyref
+  name: deploy-configmapkeyref
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: configmapkeyref
+      app: deploy-configmapkeyref
   template:
     metadata:
       labels:
-        app: configmapkeyref
+        app: deploy-configmapkeyref
     spec:
       containers:
       - image: sysnet4admin/sleepy 
