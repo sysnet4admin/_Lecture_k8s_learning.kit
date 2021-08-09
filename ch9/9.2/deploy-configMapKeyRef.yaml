@@ -20,7 +20,7 @@ spec:
         command: ["/bin/sh","-c"]
         args:
         - |
-          echo "sleepy is $APP_STATUS"
+          echo "sleepy $APP_STATUS"
           sleep 3600
         env:
         - name: APP_STATUS # mandantory field

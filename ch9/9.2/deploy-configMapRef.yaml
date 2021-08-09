@@ -23,7 +23,7 @@ spec:
         command: ["/bin/sh","-c"]
         args:
         - |
-          echo "sleepy is $STATUS"
+          echo "sleepy $STATUS"
           echo "NOTE: $NOTE"
           sleep 3600
         envFrom:
