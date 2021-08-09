@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: memberlist
+  namespace: metallb-system
+stringData:
+  secretkey: membersecurekey 
