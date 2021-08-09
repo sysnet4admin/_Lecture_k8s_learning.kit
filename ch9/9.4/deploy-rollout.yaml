@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rollout-nginx
+  name: deploy-rollout
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: rollout-nginx 
+      app: deploy-rollout 
   template:
     metadata:
       labels:
-        app: rollout-nginx
+        app: deploy-rollout
     spec:
       containers:
       - name: nginx
