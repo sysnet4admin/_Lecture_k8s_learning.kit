@@ -1,7 +1,34 @@
-kubectl get pods 
-kubectl get storageclasses.storage.k8s.io
+~/_Lecture_k8s_learning.kit/ch9/9.6/get_helm.sh
 
-nfs-provisioner-uninstaller.sh
+helm repo add edu https://k8s-edu.github.io/helm-charts
+helm repo update 
+helm search repo
+
+k get po -n metallb-system
+~/_Lecture_k8s_learning.kit/ch9/9.6/metallb-unintaller.sh
+k get po -n metallb-system
+
+cat ~/_Lecture_k8s_learning.kit/ch9/9.6/metallb-intaller-by-helm.sh
+cat ~/_Lecture_k8s_learning.kit/ch9/9.6/l2-config-by-helm.yaml
+
+helm install metallb edu/metallb \
+     --create-namespace \
+     --namespace=metallb-system \
+     -f ~/_Lecture_k8s_learning.kit/ch9/9.6/l2-config-by-helm.yaml
+
+k get po -n metallb-system
+k apply -f ~/_Lecture_k8s_learning.kit/ch9/9.6/deploy-w-pvc-svc.yaml
+
+####
+
+k get pv,pvc
+k get storageclasses.storage.k8s.io
+
+cat ~/_Lecture_k8s_learning.kit/ch9/9.6/nfs-provisioner-uninstaller.sh
+~/_Lecture_k8s_learning.kit/ch9/9.6/nfs-provisioner-uninstaller.sh
+
+
+
 
 helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
 helm repo list 
