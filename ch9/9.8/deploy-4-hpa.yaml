@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hpa-pods
+  name: deploy-4-hpa
   labels:
-    app: hpa-pods
+    app: deploy-4-hpa
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hpa-pods
+      app: deploy-4-hpa
   template:
     metadata:
       labels:
-        app: hpa-pods
+        app: deploy-4-hpa
     spec:
       containers:
       - name: chk-hn
@@ -26,10 +26,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: lb-hpa 
+  name: lb-deploy-4-hpa 
 spec:
   selector:
-    app: hpa-pods
+    app: deploy-4-hpa
   ports:
     - name: http
       port: 80
