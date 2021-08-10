@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
+# Main Source - https://github.com/metallb/metallb
+# path already provided by ch2 from vagrant up
 
-raw_git="raw.githubusercontent.com/sysnet4admin/IaC/master/manifests" 
-
-kubectl delete secret memberlist -n metallb-system
-kubectl delete -f https://$raw_git/svc/metallb-l2config.yaml
-kubectl delete -f https://$raw_git/svc/metallb-0.9.6.yaml
-
-echo "MetalLB uninstalled successfully"
+helm install metallb edu/metallb \
+     --create-namespace \
+     --namespace=metallb-system \
+     -f ~/_Lecture_k8s_learning.kit/ch9/9.6/l2-config-by-helm.yaml
 
 

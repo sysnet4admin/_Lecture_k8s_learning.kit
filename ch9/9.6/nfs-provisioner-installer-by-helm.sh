@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Main Source - https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
 # path already provided by ch5 
 # default storageClass.name is nfs-client 

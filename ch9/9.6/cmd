@@ -16,7 +16,10 @@ helm install metallb edu/metallb \
      --namespace=metallb-system \
      -f ~/_Lecture_k8s_learning.kit/ch9/9.6/l2-config-by-helm.yaml
 
+helm list -n metallb-system
+helm list -A
 k get po -n metallb-system
+
 k apply -f ~/_Lecture_k8s_learning.kit/ch9/9.6/deploy-w-pvc-svc.yaml
 
 ####
@@ -27,28 +30,19 @@ k get storageclasses.storage.k8s.io
 cat ~/_Lecture_k8s_learning.kit/ch9/9.6/nfs-provisioner-uninstaller.sh
 ~/_Lecture_k8s_learning.kit/ch9/9.6/nfs-provisioner-uninstaller.sh
 
+k get pv,pvc
+k get storageclasses.storage.k8s.io
 
+helm install nfs-provisioner edu/nfs-subdir-external-provisioner \
+    --set nfs.server=192.168.1.10 \
+    --set nfs.path=/nfs_shared/dynamic-vol \
+    --set storageClass.name=managed-nfs-storage     
 
+k get pv,pvc
+k get storageclasses.storage.k8s.io
+helm list
 
-helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
-helm repo list 
-helm repo update 
+k delete -f ~/_Lecture_k8s_learning.kit/ch9/9.6/deploy-w-pvc-svc.yaml
+k apply -f ~/_Lecture_k8s_learning.kit/ch9/9.6/deploy-w-pvc-svc.yaml
 
-sh nfs-provisioner-installer-by-helm.sh
-
-kubectl get storageclasses.storage.k8s.io
-
-ka deploy-pvc.yaml 
-
-kubectl get pods 
-kubectl get pv,pvc 
-
-===
-
-../9.5/kustomize build | kubectl delete -f -
-
-helm repo add edu IaC-Source/edu 
-helm repo list 
-helm repo update 
-
-sh metallb-installer-by-helm.sh 
+k delete -f ~/_Lecture_k8s_learning.kit/ch9/9.6/deploy-w-pvc-svc.yaml
