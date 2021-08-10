@@ -1,5 +1,5 @@
-[root@m-k8s 9.5]# kubectl apply -k .
 
-
-[root@m-k8s 9.5]# k delete -k .
+cd ~/_Lecture_k8s_learning.kit/ch9/9.7/metrics-server
+k apply -k .
+k delete -k .
 
