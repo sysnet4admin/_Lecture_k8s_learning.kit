@@ -1,5 +1,5 @@
 # Main_Source_From  
-# - https://raw.githubusercontent.com/kubernetes/dashboard/v2.3.1/aio/deploy/recommended.yaml
+# - https://github.com/kubernetes/dashboard
 # Port changement refer From
 # - https://github.com/kubernetes/dashboard/blob/63c9c84769130601ec2c05ef4d96887c563c0186/src/app/backend/dashboard.go#L48
 
@@ -117,7 +117,7 @@ spec:
     spec:
       containers:
         - name: kubernetes-dashboard
-          image: kubernetesui/dashboard:v2.3.1
+          image: kubernetesui/dashboard:v2.2.0
           imagePullPolicy: Always
           ports:
             - containerPort: 9090
@@ -126,7 +126,7 @@ spec:
             - --enable-skip-login
             - --disable-settings-authorizer=true
             - --enable-insecure-login
-            - --insecure-bind-address=0.0.0.0                      
+            - --insecure-bind-address=0.0.0.0
             - --namespace=kubernetes-dashboard
             # Uncomment the following line to manually specify Kubernetes API server Host
             # If not specified, Dashboard will attempt to auto discover the API server and connect
@@ -200,8 +200,7 @@ spec:
       labels:
         k8s-app: dashboard-metrics-scraper
       annotations:
-      # custom by sysnet4admin due to warning 
-      # seccomp.security.alpha.kubernetes.io/pod: 'runtime/default'
+        seccomp.security.alpha.kubernetes.io/pod: 'runtime/default'
     spec:
       containers:
         - name: dashboard-metrics-scraper
