@@ -123,7 +123,6 @@ spec:
             - containerPort: 9090
               protocol: TCP
           args:
-            - --auto-generate-certificates
             - --enable-skip-login
             - --disable-settings-authorizer=true
             - --enable-insecure-login
