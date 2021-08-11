@@ -1,11 +1,12 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-make-fail
+  name: job-curl-fail
 spec:
   template:
     spec:
       containers:
-      - name: job-make-fail
+      - name: net-tools
         image: sysnet4admin/net-tools
-        command: ["curlchk",  "nginx"]
+        command: ["curlchk",  "hoon"]
+      restartPolicy: Never
