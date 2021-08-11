@@ -33,3 +33,4 @@ spec:
                 operator: NotIn
                 values:
                 - tesla-a100
+    
