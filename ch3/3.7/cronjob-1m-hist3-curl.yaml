@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: cj-1min-curl 
+  name: cj-1m-hist3-curl 
 spec:
   schedule: "*/1 * * * *"  
   jobTemplate:             # Template for job 

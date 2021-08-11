@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: cj-1min-curl 
+  name: cj-1m-hist10-curl 
 spec:
   schedule: "*/1 * * * *"  
   successfulJobsHistoryLimit: 10
