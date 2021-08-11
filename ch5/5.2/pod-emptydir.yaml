@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: po-emptydir 
+  name: pod-emptydir 
   labels:
     app: nginx 
 spec:
