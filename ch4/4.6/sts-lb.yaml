@@ -20,10 +20,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: test
+  name: sts-svc
 spec:
   selector:
     app: sts
   ports:
     - port: 80
-  clusterIP: None
+  type: LoadBalancer
+
+
