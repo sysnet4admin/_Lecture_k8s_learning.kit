@@ -5,12 +5,11 @@ metadata:
 spec:
   schedule: "*/1 * * * *"  
   jobTemplate:             # Template for job 
-    spec:                  # same as above 
+    spec:                  # same as before 
       template:
         spec:
           containers:
-          - name: cj-1min-curl 
+          - name: net-tools
             image: sysnet4admin/net-tools
             command: ["curlchk",  "nginx"]
           restartPolicy: Never
-
