@@ -8,7 +8,7 @@ spec:
   template:
     spec:
       containers:
-      - name: job-activedeadlineseconds
+      - name: net-tools
         image: sysnet4admin/net-tools
         command: ["/bin/sh", "-c"]
         args:
