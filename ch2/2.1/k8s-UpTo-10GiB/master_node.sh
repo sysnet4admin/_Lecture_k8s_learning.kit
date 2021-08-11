@@ -18,7 +18,7 @@ kubectl apply -f https://$raw_git/172.16_net_calico_v1.yaml
 # config metallb for LoadBalancer service
 kubectl apply -f https://$raw_git/svc/metallb-0.9.6.yaml
 
-# create configmap for metallb (192.168.1.11 - 13)
+# create configmap for metallb (192.168.1.11 - 19)
 kubectl apply -f https://$raw_git/svc/metallb-l2config.yaml
 
 # create secret for metallb 
