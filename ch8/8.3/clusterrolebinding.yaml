@@ -5,7 +5,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: sa-pod-admin 
-  apiGroup: ""
+  apiGroup: "*"
 roleRef:
   kind: ClusterRole
   name: pod-admin 
