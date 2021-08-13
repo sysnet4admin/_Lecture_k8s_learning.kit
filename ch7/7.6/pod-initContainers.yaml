@@ -20,7 +20,6 @@ spec:
     command: ["/bin/sh", "-c"]
     args: 
       - echo "This page created on $(date +%Y-%m-%d) by initContainers" > /html-dir/index.html;
-        #sleep infinity;
   volumes:
   - name: empty-directory 
     emptyDir: {}
