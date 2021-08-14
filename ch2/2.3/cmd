@@ -1,12 +1,12 @@
-kubectl run nginx --image=nginx 
-kubectl get pod
-kubectl create deployment nginx --image=nginx 
-kubectl scale deployment nginx --replicas=4 
-kubectl get pods 
-kubectl delete pod nginx 
-kubectl delete deployment nginx 
+k run nginx --image=nginx 
+k get pod
+k create deployment nginx --image=nginx 
+k scale deployment nginx --replicas=3 
+k get pods 
+k delete pod nginx 
+k delete deployment nginx 
 
-kubectl apply -f apy-nginx.yaml 
-kubectl exec apy-nginx-<replica>-<HASH> -it -- /bin/bash  
-kubectl edit > replicas=1
-kubectl delete -f apy-nginx.yaml 
+k apply -f ~/_Lecture_k8s_learning.kit/ch2/2.3/apy-nginx.yaml 
+k exec apy-nginx-<replica>-<HASH> -it -- /bin/bash  
+k edit > replicas=1
+k delete deployment apy-nginx 

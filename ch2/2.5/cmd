@@ -1,14 +1,11 @@
-kubectl apply -f evt-desc.yaml 
+k apply -f ~/_Lecture_k8s_learning.kit/ch2/2.5/evt-desc.yaml 
 
-kubectl get events 
-kubectl describe < po | deploy | others> < Name >
+k get events 
+k describe < po | deploy | others> < Name >
 
-kubectl apply -f logs.yaml 
+k apply -f ~/_Lecture_k8s_learning.kit/ch2/2.5/logs.yaml 
 
-kubectl logs < Name >
+k logs < Name >
 
-
-kubectl delete -f evt-desc.yaml 
-kubectl delete -f logs.yaml 
-
-NOW kubectl => k 
+k delete -f evt-desc.yaml 
+k delete -f logs.yaml 
