@@ -5,6 +5,7 @@ k apply -f simple-command.yaml
 k get po -w
 k exec simple-command -it -- nslookup kubernetes
 
+k run net --image=sysnet4admin/net-tools -- sleep 3600
 ===
 
 k apply -f multiple-command-v1.yaml
