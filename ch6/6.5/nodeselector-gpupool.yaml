@@ -7,5 +7,5 @@ spec:
   - name: nginx
     image: nginx
   nodeSelector:
-    gpupool: nvidia 
+    gpupool: nvidia
 
