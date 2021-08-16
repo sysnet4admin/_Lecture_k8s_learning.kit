@@ -17,11 +17,11 @@ spec:
       - name: chk-hn
         image: sysnet4admin/chk-hn
         volumeMounts:
-        - name: each-sts-Backup
+        - name: each-sts-backup
           mountPath: /backup_data
   volumeClaimTemplates:
   - metadata:
-      name: each-sts-Backup
+      name: each-sts-backup
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: "managed-nfs-storage"
