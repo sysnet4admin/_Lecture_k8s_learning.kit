@@ -26,9 +26,10 @@ spec:
                 operator: In
                 values:
                 - nvidia
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
               - key: accelerator
                 operator: NotIn
                 values:
