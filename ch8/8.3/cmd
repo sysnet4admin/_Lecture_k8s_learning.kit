@@ -21,7 +21,7 @@ serviceaccount/dev1-hoon created
 serviceaccount/dev2-moon created
 
 
-[root@m-k8s ~]# ka ns-sa-dev.yaml
+[root@m-k8s ~]# k apply -f ns-sa-dev.yaml
 
 [root@m-k8s ~]# k get sa -n dev1
 NAME        SECRETS   AGE
@@ -32,8 +32,8 @@ NAME        SECRETS   AGE
 default     1         7h30m
 dev2-moon   1         7h30m
 
-[root@m-k8s ~]# ka role-get-dev1.yaml
-[root@m-k8s ~]# ka rolebidning-dev1.yaml
+[root@m-k8s ~]# k apply -f role-get-dev1.yaml
+[root@m-k8s ~]# k apply -f rolebidning-dev1.yaml
 
 [root@m-k8s ~]# sh set-ctx-dev1.sh
 
@@ -56,8 +56,8 @@ k delete po nginx -n dev1 >>> error
  
 
 
-[root@m-k8s ~]# ka role-gcr-dev2.yaml
-[root@m-k8s ~]# ka rolebidning-dev2.yaml
+[root@m-k8s ~]# k apply -f role-gcr-dev2.yaml
+[root@m-k8s ~]# k apply -f rolebidning-dev2.yaml
 
 [root@m-k8s ~]# sh set-ctx-dev2.sh
 
@@ -79,15 +79,15 @@ k delete po nginx -n dev2
 
 === clusterrole ===
 
-[root@m-k8s ~]# ka role-ka sa-pod-admin.yaml
+[root@m-k8s ~]# k apply -f role-k apply -f sa-pod-admin.yaml
 [root@m-k8s ~]# k get sa
 NAME                     SECRETS   AGE
 default                  1         41d
 nfs-client-provisioner   1         34d
 sa-pod-admin             1         17m
 
-[root@m-k8s ~]# ka clusterrole.yaml
-[root@m-k8s ~]# ka clusterrolebinding.yaml
+[root@m-k8s ~]# k apply -f clusterrole.yaml
+[root@m-k8s ~]# k apply -f clusterrolebinding.yaml
 
 
 [root@m-k8s ~]# sh set-ctx-pod-admin.sh
