@@ -39,10 +39,11 @@ dev2-moon   1         7h30m
 
 [root@m-k8s ~]# k config get-contexts
 CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE
-          ctx-dev2-moon                 kubernetes   dev2-set-moon
-          ctx-pod-admin                 kubernetes   set-pod-admin
+          ctx-dev1-hoon                 kubernetes   dev1-set-hoon
 *         kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
 
+k run nginx-admin --image=nginx -n dev1 <<< as a admin 
+k run nginx-admin --image=nginx -n dev2
 
 [root@m-k8s ~]# k config use-context ctx-dev1-hoon
 
