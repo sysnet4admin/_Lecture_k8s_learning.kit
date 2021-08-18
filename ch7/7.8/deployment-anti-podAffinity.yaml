@@ -26,5 +26,5 @@ spec:
                 operator: NotIn
                 values:
                 - leader
-            # k8s cluster zone ex) topology.kubernetes.io/zone
-            topologyKey:  beta.kubernetes.io/arch
+            # If you want to change it, modify the admission controller, or disable.
+            topologyKey:  kubernetes.io/hostname
