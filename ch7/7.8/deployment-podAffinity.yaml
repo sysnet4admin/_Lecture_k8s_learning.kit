@@ -28,4 +28,4 @@ spec:
                 - leader
             # If you want to change topologyKey, 
             # modify the admission controller, or disable.
-            topologyKey:  kubernetes.io/hostname
+            topologyKey: kubernetes.io/hostname
