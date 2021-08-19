@@ -6,7 +6,7 @@ subjects:
 - kind: ServiceAccount
   name: sa-pod-admin 
   apiGroup: ""
-  # need for subjects for clusterrolebinding
+  # need namespace for CRB subjects
   namespace: default
 roleRef:
   kind: ClusterRole
