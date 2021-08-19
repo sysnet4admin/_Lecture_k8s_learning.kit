@@ -5,7 +5,9 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: sa-pod-admin 
-  apiGroup: "*"
+  apiGroup: ""
+  # need for subjects for clusterrolebinding
+  namespace: default
 roleRef:
   kind: ClusterRole
   name: pod-admin 
