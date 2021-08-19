@@ -6,25 +6,4 @@ spec:
   containers:
   - image: sysnet4admin/net-tools-ifn
     name: net
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: net-dev1
-  namespace: dev1
-spec:
-  containers:
-  - image: sysnet4admin/net-tools-ifn
-    name: net
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: net-dev2
-  namespace: dev2
-spec:
-  containers:
-  - image: sysnet4admin/net-tools-ifn
-    name: net
-
 
