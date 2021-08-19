@@ -9,6 +9,6 @@ subjects:
   apiGroup: ""
 roleRef:
   kind: Role
-  name: role-gcr-dev2
+  name: role-gct-dev2
   apiGroup: rbac.authorization.k8s.io
 

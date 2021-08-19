@@ -4,6 +4,6 @@ metadata:
   namespace: dev2
   name: role-gct-dev2
 rules:
-- apiGroups: [""]
+- apiGroups: ["*"]
   resources: ["pods", "deployments"]
   verbs: ["get", "list","create"]
