@@ -17,9 +17,6 @@ spec:
       containers:
       - image: sysnet4admin/sleepy 
         name: sleepy 
-        envFrom:
-        - configMapRef:
-            name: nginx-config
         command: ["/bin/sh","-c"]
         args:
         - |
