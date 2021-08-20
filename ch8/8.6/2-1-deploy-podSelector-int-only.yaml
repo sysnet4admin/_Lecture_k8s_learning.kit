@@ -4,7 +4,7 @@ metadata:
   labels:
     role: internal 
     app: chk-info
-  name: deploy-podSelector-int-only   
+  name: deploy-podselector-int-only   
 spec:
   replicas: 3
   selector:
