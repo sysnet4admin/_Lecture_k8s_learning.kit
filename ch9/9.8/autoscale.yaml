@@ -1,7 +1,7 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: hpa-config
+  name: deploy-4-hpa
 spec:
   maxReplicas: 10
   minReplicas: 1
