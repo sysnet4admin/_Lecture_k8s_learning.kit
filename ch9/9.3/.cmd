@@ -19,9 +19,9 @@ k delete secrets mysql-cred
 cat secrets-immutable.yaml 
 ka secrets-immutable.yaml 
 
-[root@m-k8s 8.3]# echo ZGItdXNlcg== | base64 --decode
+[root@m-k8s 9.3]# echo ZGItdXNlcg== | base64 --decode
 db-user
-[root@m-k8s 8.3]# echo aG9vbg== | base64 --decode
+[root@m-k8s 9.3]# echo aG9vbg== | base64 --decode
 hoon
 
 

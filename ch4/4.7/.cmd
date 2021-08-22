@@ -12,4 +12,3 @@ k get endpoints
 [root@net /]# curl external-data
 request_method : GET | ip_dest: 172.16.132.4
 
-

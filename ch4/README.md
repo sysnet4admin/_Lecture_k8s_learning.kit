@@ -1,5 +1,5 @@
 ### 다루는 내용 
-- 4.2: 간단한 방법(HostPort, hostNetwork)
+- 4.2: 간단한 방법(port-forward, HostPort, hostNetwork)
 - 4.3: 노드포트(NodePort)
 - 4.4: 로드밸런서(LoadBalancer)
 - 4.5: 외부이름(ExternalName)

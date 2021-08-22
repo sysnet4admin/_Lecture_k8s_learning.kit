@@ -10,4 +10,6 @@
 ===
 kubectl taint nodes w3-k8s DB=customer-info:NoSchedule
 
+kubectl taint nodes w3-k8s DB=customer-info:NoSchedule-
+
 
