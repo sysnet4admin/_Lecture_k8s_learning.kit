@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sourceranges
+  labels:
+    app: sourceranges
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sourceranges
+  template:
+    metadata:
+      labels:
+        app: sourceranges
+    spec:
+      containers:
+      - name: chk-hn
+        image: sysnet4admin/chk-info
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb-sourceranges
+spec:
+  selector:
+    app: sourceranges
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.22
+  # allow src ip range 
+  loadBalancerSourceRanges:
+  - 192.168.1.0/24

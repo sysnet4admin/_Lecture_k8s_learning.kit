@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-ip
+  labels:
+    app: static-ip
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: static-ip
+  template:
+    metadata:
+      labels:
+        app: static-ip
+    spec:
+      containers:
+      - name: chk-hn
+        image: sysnet4admin/chk-info
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb-static-ip
+spec:
+  selector:
+    app: static-ip
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.21
