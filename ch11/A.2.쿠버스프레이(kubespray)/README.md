@@ -1,11 +1,13 @@
-# Hot to install and run kubernetes by kubespray 
+# How to install and run kubernetes by kubespray 
 
-### Provisioning VM(m3+w9) by vagrant (require 24GiB or above Memories) 
+### Provisioning VMs(m3+w9) by vagrant (require 24GiB or above Memories) 
 ``` bash 
 $ vagrant up 
 ```
 
-### login m11-k8s
+### Deploy kubernetes cluster by kubesprary 
+1. connect to m11-k8s 
+2. run this command on m11-k8s
 ```bash 
 $ sh auto_pass.sh
 $ ansible-playbook kubespray/cluster.yml -i ansible_hosts.ini
