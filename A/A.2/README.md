@@ -14,5 +14,5 @@ $ ansible-playbook kubespray/cluster.yml -i ansible_hosts.ini
 ```
 
 Note: 
- - 1. if you need to add or remove for the hosts, please modify ansible_hosts.ini manually.
- - 2. If you want to change kubernetes version, please change kube_version on `group_vars/all` 
+ - If you need to add or remove for the hosts, please modify ansible_hosts.ini manually.
+ - If you want to change kubernetes version, please change kube_version on `group_vars/all` 
