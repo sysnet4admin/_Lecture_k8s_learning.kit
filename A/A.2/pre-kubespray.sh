@@ -43,7 +43,7 @@ pip3.6 install -r /root/requirements.txt
 # fixed k8s version to v1.21.3
 mkdir /root/group_vars
 cat <<EOF >  /root/group_vars/all
-kube_version: v1.21.3
+kube_version: v1.21.5
 EOF
 
 # add ansible hosts file 
