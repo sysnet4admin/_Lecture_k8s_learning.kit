@@ -92,5 +92,3 @@ kube-master
 kube-node
 calico-rr
 EOF
-
-
