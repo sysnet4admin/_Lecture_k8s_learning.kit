@@ -40,7 +40,7 @@ MarkupSafe==1.1.1
 EOF
 pip3.6 install -r /root/requirements.txt
 
-# fixed k8s version to v1.21.3
+# fixed k8s version
 mkdir /root/group_vars
 cat <<EOF >  /root/group_vars/all
 kube_version: v1.22.1
