@@ -1,27 +1,18 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-initcontainers 
+  name: emptydir-memory-10m
   labels:
-    app: nginx 
+    app: emptydir-memory-10m 
 spec:
   containers:
-  - name: web-page
+  - name: emptydir-memory-10m 
     image: nginx 
     volumeMounts:
-    - mountPath: /usr/share/nginx/html 
+    - mountPath: /emptydir
       name: empty-directory 
-  initContainers:
-  - name: html-builder 
-    image: alpine 
-    volumeMounts:
-    - mountPath: /html-dir 
-      name: empty-directory 
-    command: ["/bin/sh", "-c"]
-    args: 
-      - echo "This page created on $(date +%Y-%m-%d) by initContainers" > /html-dir/index.html;
   volumes:
   - name: empty-directory 
-    emptyDir:
+    emptyDir: 
       medium: Memory
       sizeLimit: "10Mi"
