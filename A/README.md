@@ -4,3 +4,4 @@
 - A.004: 로드밸런서의 고정(static) IP와 소스 범위(SourceRanges)
 - A.005: 웹UI에서 네트워크 정책 생성하기 (실리움/Cilium 제공)
 - A.006: 컨피그맵이나 시크릿의 변동을 인식해서 적용하는 리로더(Reloader)
+- A.007: 기능 게이트(Feature Gates)
