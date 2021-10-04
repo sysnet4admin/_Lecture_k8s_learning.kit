@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: emptydir-default 
-    image: sysnet4admin/chk-info
+    image: sysnet4admin/sleepy
     volumeMounts:
     - mountPath: /emptydir
       name: empty-directory 
