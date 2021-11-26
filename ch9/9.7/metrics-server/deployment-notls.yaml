@@ -25,7 +25,7 @@ spec:
         # skip tls internal usage purpose
           - --kubelet-insecure-tls
           - --cert-dir=/tmp
-          - --secure-port=443
+          - --secure-port=4443
           - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
           - --kubelet-use-node-status-port
           - --metric-resolution=15s
@@ -35,7 +35,7 @@ spec:
             memory: 200Mi
         ports:
         - name: https
-          containerPort: 443
+          containerPort: 4443
           protocol: TCP
         readinessProbe:
           httpGet:
