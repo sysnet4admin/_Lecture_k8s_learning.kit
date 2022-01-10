@@ -120,7 +120,68 @@ Test >> to deploy each of deployments (hostpath-varlog.yaml and hostpath-tmp.yam
 
 
 # ImagePolicyWebhook
+run before starting 
+run.sh (make admission dir and transfer files)
 
+ssh wk8s-m
+check ing ing all of files 
 
+vi /etc/kubernetes/manifests/kube-apiserver.yaml 
+<snipped>
+    - --admission-control-config-file=/etc/kubernetes/admission/admission.yaml
+    - --enable-admission-plugins=NodeRestriction,ImagePolicyWebhook << add ImagePolicyWebhook
+<snipped>
+    - mountPath: /etc/kubernetes/admission
+      name: admission
+      readOnly: true
+<snipped>
+  - hostPath:
+      path: /etc/kubernetes/admission
+      type: DirectoryOrCreate
+    name: admission
+<snipped>
+
+Deploy nginx for testing purpose
+k run nginx --image=nginx 
+Error from server (Forbidden): pods "nginx" is forbidden: Post "https://ext-svc:8080/img-validation?timeout=30s": dial tcp: lookup ext-svc on 10.0.2.3:53: no such host
 
 # API Audit log  
+
+searching audit policy 
+
+ssh bk8s-m
+
+mkdir /etc/kubernetes/audit
+
+
+vi /etc/kubernetes/manifests/kube-apiserver.yaml 
+<snipped>
+    - --audit-policy-file=/etc/kubernetes/audit/policy.yaml
+    - --audit-log-path=/etc/kubernetes/audit/audit.log
+<snipped>
+    - mountPath: /etc/kubernetes/audit
+      name: audit
+      readOnly: true << it should remove 
+<snipped>
+  - hostPath:
+      path: /etc/kubernetes/audit
+      type: DirectoryOrCreate
+    name: audit
+<snipped>
+
+root@bk8s-m:/etc/kubernetes/audit# cat policy.yaml
+apiVersion: audit.k8s.io/v1 # This is required.
+kind: Policy
+# Don't generate audit events for all requests in RequestReceived stage.
+rules:
+  - level: Metadata
+    resources:
+    - group: ""
+      resources: ["pods/log", "pods/status"]
+  - level: None
+
+root@bk8s-m:/etc/kubernetes/audit# tail audit.log
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"772a92e7-2261-45d5-83aa-a6a54380f8b2","stage":"RequestReceived","requestURI":"/api/v1/namespaces/kube-system/pods/kube-scheduler-bk8s-m/status","verb":"patch","user":{"username":"system:node:bk8s-m","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.1.110"],"userAgent":"Go-http-client/2.0","objectRef":{"resource":"pods","namespace":"kube-system","name":"kube-scheduler-bk8s-m","apiVersion":"v1","subresource":"status"},"requestReceivedTimestamp":"2022-01-10T08:08:25.214688Z","stageTimestamp":"2022-01-10T08:08:25.214688Z"}
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"772a92e7-2261-45d5-83aa-a6a54380f8b2","stage":"ResponseComplete","requestURI":"/api/v1/namespaces/kube-system/pods/kube-scheduler-bk8s-m/status","verb":"patch","user":{"username":"system:node:bk8s-m","groups":["system:nodes","system:authenticated"]},"sourceIPs":["192.168.1.110"],"userAgent":"Go-http-client/2.0","objectRef":{"resource":"pods","namespace":"kube-system","name":"kube-scheduler-bk8s-m","apiVersion":"v1","subresource":"status"},"responseStatus":{"metadata":{},"code":200},"requestReceivedTimestamp":"2022-01-10T08:08:25.214688Z","stageTimestamp":"2022-01-10T08:08:25.237741Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":""}}
+
+
