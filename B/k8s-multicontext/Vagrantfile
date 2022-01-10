@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
         cfg.vm.network "private_network", ip: "192.168.1.#{cv[2]}#{i}"
         cfg.vm.network "forwarded_port", guest: 22, host: "60#{cv[2]}#{i}", auto_correct: true, id: "ssh"
         cfg.vm.synced_folder "../data", "/vagrant", disabled: true
-        cfg.vm.provision "shell", path: "k8s_env_build.sh"
+        cfg.vm.provision "shell", path: "k8s_env_build.sh", args: [ cv[0], cv[1], cv[2], cv[3] ]
         cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, docker_V, ctrd_V ]
         cfg.vm.provision "shell", path: "work_nodes.sh", args: [ cv[1], "#{cv[2]}#{i}" ]
       end
