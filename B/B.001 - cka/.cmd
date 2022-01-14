@@ -53,8 +53,7 @@ volumeBindingMode: WaitForFirstConsumer
 
 ssh root@bk8s-w1 mkdir -p /data/vol/pv
 
-
-k run pv-pod --image=sysnet4admin/sleepy --dry-run -o yaml > pv-pod.yaml
+create pv,pvc 
 
 root@10cka-con:~# cat pv-data.yaml 
 apiVersion: v1
