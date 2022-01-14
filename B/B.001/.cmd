@@ -79,7 +79,7 @@ spec:
           values:
           - bk8s-w1
 
-root@10cka-con:~# cat pvd-data.yaml 
+root@10cka-con:~# cat pvc-data.yaml 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -93,13 +93,13 @@ spec:
       storage: 1Gi
 
 
-root@10cka-con:~# cat storage-pod.yaml 
+root@10cka-con:~# cat local-pod.yaml 
 apiVersion: v1
 kind: Pod
 metadata:
-  name: storage-pod 
+  name: local-pod 
   labels:
-    name: storage-pod 
+    name: local-pod 
 spec:
   containers:
   - name: sleepy 
