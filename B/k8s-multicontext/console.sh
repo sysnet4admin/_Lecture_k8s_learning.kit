@@ -45,3 +45,17 @@ sshpass -p 'vagrant' scp -o StrictHostKeyChecking=no root@192.168.1.$4:/root/.ku
 # flatten .kube_config 
 export KUBECONFIG=$va_k8s_cfg-$2:$va_k8s_cfg-$3:$va_k8s_cfg-$4
 kubectl config view --flatten > $va_k8s_cfg 
+
+# git clone k8s-code
+git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git
+mv /home/vagrant/_Lecture_k8s_learning.kit $HOME
+find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
+
+# make rerepo-k8s-learning.kit and put permission
+cat <<EOF > /usr/local/bin/rerepo-k8s-learning.kit
+#!/usr/bin/env bash
+rm -rf $HOME/_Lecture_k8s_learning.kit
+git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git $HOME/_Lecture_k8s_learning.kit
+find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
+EOF
+chmod 700 /usr/local/bin/rerepo-k8s-learning.kit
