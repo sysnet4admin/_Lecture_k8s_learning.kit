@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+## configuration variables ###
+k8s_V = '1.23.1-00'            # Kubernetes 
+docker_V = '5:20.10.12~3-0~ubuntu-focal' # Docker  
+ctrd_V = '1.4.12-1'    # Containerd 
+## /configuration variables ###
+
+Vagrant.configure("2") do |config|
+
+  #==============#
+  # Console Node #
+  #==============#
+
+  config.vm.define "k8s-console" do |cfg|
+    cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+    cfg.vm.provider "virtualbox" do |vb|
+      vb.name = "k8s-console(github_SysNet4Admin)"
+      vb.cpus = 1
+      vb.memory = 1024
+    end
+    cfg.vm.host_name = "k8s-console"
+    cfg.vm.network "private_network", ip: "192.168.1.92"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60092, auto_correct: true, id: "ssh"
+    cfg.vm.synced_folder "../data", "/vagrant", disabled: true
+    cfg.vm.provision "shell", path: "console.sh", args: [ k8s_V ]
+  end
+
+end
