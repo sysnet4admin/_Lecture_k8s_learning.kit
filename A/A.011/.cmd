@@ -4,6 +4,9 @@
 # export PATH=$PWD/bin:$PATH
 sh ~/_Lecture_k8s_learning.kit/A/A.011/01.istio/cp-istioctl.sh
 
+#(optional) if you want to check istio:
+istioctl x precheck
+
 # install istio components 
 istioctl install --set profile=demo -y
 
@@ -17,8 +20,10 @@ kubectl get svc istio-ingressgateway -n istio-system
 # install DashBoard 
 kubectl apply -f ~/_Lecture_k8s_learning.kit/A/A.011/01.istio/sample/addons
 
-# basic command like below but I changed to LoadBalancer 
-# istioctl dashboard kiali --address 192.168.1.10&
+# basic command like below but I changed to LoadBalancer Thus...
+# istioctl dashboard kiali --address 192.168.1.20&
+kubectl get svc -n istio-system 
+# 192.168.1.20:20001
 
 # run loadgenerator and check status on kiali's graph
 sh ~/_Lecture_k8s_learning.kit/A/A.011/01.istio/loadgenerator.sh
