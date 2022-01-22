@@ -11,12 +11,12 @@ curl -L  https://github.com/sysnet4admin/BB/raw/main/istioctl/v1.12.2/istioctl.b
 echo 'source /etc/bash_completion.d/istioctl.bash' >> ~/.bashrc
 
 cat <<EOF > /tmp/istio_installer.sh
-istioctl install --set profile=demo -y
+/usr/local/bin/istioctl install --set profile=demo -y
 kubectl apply -f ~/_Lecture_k8s_learning.kit/A/A.011/01.istio/samples/addons
 EOF
 
-# background istio_installer.sh after 30min
-bash -c 'sleep 1800; sh /tmp/istio_installer.sh' &
+# background istio_installer.sh after 20min
+bash -c 'sleep 1200; sh /tmp/istio_installer.sh' &
 
 # injection to istio for each lab
 
