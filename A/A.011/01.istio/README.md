@@ -12,5 +12,5 @@ This Source came from here and modify it for easy test purpose
 `kiali.yaml`
 1. From ClusterIP to LoadBalancer  
 2. Static IP 
- - type: LoadBalancer                   # Change from clusterIP to LoadBalancer
- - loadBalancerIP: 192.168.1.20         # Static IP
+    type: LoadBalancer                   # Change from clusterIP to LoadBalancer
+    loadBalancerIP: 192.168.1.20         # Static IP
