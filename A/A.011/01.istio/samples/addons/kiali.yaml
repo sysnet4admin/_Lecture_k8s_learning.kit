@@ -98,7 +98,7 @@ data:
     server:
       metrics_enabled: true
       metrics_port: 9090
-      port: 80               # Change from 20001 to 80 
+      port: 20001 
       web_root: /kiali
 ...
 ---
@@ -408,7 +408,7 @@ spec:
   ports:
   - name: http
     protocol: TCP
-    port: 80                           # Change from 20001 to 80 
+    port: 20001
   - name: http-metrics
     protocol: TCP
     port: 9090
@@ -480,7 +480,7 @@ spec:
           runAsNonRoot: true
         ports:
         - name: api-port
-          containerPort: 80 # Change from 20001 to 80 
+          containerPort: 20001 
         - name: http-metrics
           containerPort: 9090
         readinessProbe:
