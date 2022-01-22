@@ -43,4 +43,3 @@ kubectl create ns sock-shop
 kubectl label namespace sock-shop istio-injection=enabled 
 
 kubectl apply -f ~/_Lecture_k8s_learning.kit/A/A.011/21.sock-shop/manifests
-
