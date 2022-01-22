@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
-cp ./bin/istioctl /usr/local/bin
+# install istioctl  
+curl -L  https://github.com/sysnet4admin/BB/raw/main/istioctl/v1.12.2/istioctl -o /usr/local/bin/istioctl
+chmod 744 /usr/local/bin/istioctl
 echo "Successfully installed istioctl"
