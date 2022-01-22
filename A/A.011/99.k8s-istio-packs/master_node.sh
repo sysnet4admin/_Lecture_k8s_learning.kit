@@ -70,12 +70,4 @@ cd $HOME/_Lecture_k8s_learning.kit/ch9/9.7/metrics-server/ ; kubectl apply -k .
 
 # create dev1, dev2 namespaces
 kubectl create ns dev1
-kubectl create ns dev2
-
-# install istioctl 
-curl -L  https://github.com/sysnet4admin/BB/raw/main/istioctl/v1.12.2/istioctl -o /usr/local/bin/istioctl
-chmod 744 /usr/local/bin/istioctl
-
-# istio auto completion 
-curl -L  https://github.com/sysnet4admin/BB/raw/main/istioctl/v1.12.2/istioctl.bash -o /etc/bash_completion.d/istioctl.bash
-echo '/etc/bash_completion.d/istioctl.bash' >> ~/.bashrc source 
+kubectl create ns dev2  

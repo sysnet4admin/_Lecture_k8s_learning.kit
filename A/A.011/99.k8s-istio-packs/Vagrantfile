@@ -56,4 +56,12 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  #=============#
+  # deploy apps #
+  #=============#
+
+    config.vm.define "m-k8s-#{k8s_V[0..3]}" do |cfg|
+      cfg.vm.provision "shell", path: "post-deploy.sh"
+    end
+
 end
