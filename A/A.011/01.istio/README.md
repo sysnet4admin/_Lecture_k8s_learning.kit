@@ -2,8 +2,8 @@ This Source came from here and modify it for easy test purpose
  - https://istio.io/latest/docs/setup/getting-started/
 
 # Pre-Check Conditions 
-- istioctl version: 1.12.2
-- istio & istioctl installed: `istioctl proxy-status` 
+- installed istioctl version: 1.12.2
+- check istio & istioctl installed: `istioctl proxy-status` 
 > If not, `istioctl install --set profile=demo -y`
 - Create namespace: `kubectl create ns bookinfo` 
 - Inject label: `kubectl label namespace bookinfo istio-injection=enabled` 
