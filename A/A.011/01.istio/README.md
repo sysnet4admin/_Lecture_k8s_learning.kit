@@ -4,9 +4,9 @@ This Source came from here and modify it for easy test purpose
 # Pre-Check Conditions 
 - istioctl version: 1.12.2
 - istio & istioctl installed: `istioctl proxy-status` 
-> if not, `istioctl install --set profile=demo -y`
-- kubectl create ns bookinfo 
-- kubectl label namespace bookinfo istio-injection=enabled 
+> If not, `istioctl install --set profile=demo -y`
+- Create namespace: `kubectl create ns bookinfo` 
+- Inject label: `kubectl label namespace bookinfo istio-injection=enabled` 
 
 # Changement 
 `kiali.yaml`
