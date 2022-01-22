@@ -10,13 +10,13 @@ chmod 744 /usr/local/bin/istioctl
 curl -L  https://github.com/sysnet4admin/BB/raw/main/istioctl/v1.12.2/istioctl.bash -o /etc/bash_completion.d/istioctl.bash
 echo 'source /etc/bash_completion.d/istioctl.bash' >> ~/.bashrc
 
-cat <<EOF > /tmp/istio_installer.sh
-/usr/local/bin/istioctl install --set profile=demo -y
+cat <<EOF > $HOME/istio_installer.sh
+istioctl install --set profile=demo -y
 kubectl apply -f ~/_Lecture_k8s_learning.kit/A/A.011/01.istio/samples/addons
 EOF
 
 # background istio_installer.sh after 20min
-bash -c 'sleep 1200; sh /tmp/istio_installer.sh' &
+#bash -c 'sleep 1200; sh /tmp/istio_installer.sh' &
 
 # injection to istio for each lab
 
