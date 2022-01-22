@@ -79,6 +79,3 @@ chmod 744 /usr/local/bin/istioctl
 # istio auto completion 
 curl -L  https://github.com/sysnet4admin/BB/raw/main/istioctl/v1.12.2/istioctl.bash -o /etc/bash_completion.d/istioctl.bash
 echo '/etc/bash_completion.d/istioctl.bash' >> ~/.bashrc source 
-
-# install istio components 
-/usr/local/bin/istioctl install --set profile=demo -y
