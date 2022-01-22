@@ -31,6 +31,7 @@ Vagrant.configure("2") do |config|
       cfg.vm.provision "shell", path: "k8s_env_build.sh", args: N
       cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, docker_V, ctrd_V ]
       cfg.vm.provision "shell", path: "master_node.sh"
+      cfg.vm.provision "shell", path: "istio.sh"
     end
 
   #==============#
@@ -55,13 +56,5 @@ Vagrant.configure("2") do |config|
       cfg.vm.provision "shell", path: "work_nodes.sh"
     end
   end
-
-  #=============#
-  # deploy apps #
-  #=============#
-
-    config.vm.define "m-k8s-#{k8s_V[0..3]}" do |cfg|
-      cfg.vm.provision "shell", path: "post-deploy.sh"
-    end
 
 end

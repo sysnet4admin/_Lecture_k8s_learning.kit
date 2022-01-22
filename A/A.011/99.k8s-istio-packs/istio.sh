@@ -10,12 +10,10 @@ chmod 744 /usr/local/bin/istioctl
 curl -L  https://github.com/sysnet4admin/BB/raw/main/istioctl/v1.12.2/istioctl.bash -o /etc/bash_completion.d/istioctl.bash
 echo 'source /etc/bash_completion.d/istioctl.bash' >> ~/.bashrc
 
-## install instio components 
-/usr/local/bin/istioctl install --set profile=demo -y
-
-## install DashBoard 
+cat <<EOF > $HOME/istio_installer.sh
+istioctl install --set profile=demo -y
 kubectl apply -f ~/_Lecture_k8s_learning.kit/A/A.011/01.istio/sample/addons
-
+EOF
 
 # injection to istio for each lab
 
