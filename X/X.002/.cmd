@@ -135,56 +135,28 @@ spec:
 status: {}
 
 
-5 B.13.003-6.Defining and Mounting a PersitentVolume
+5 X.13.002-6.Creating a Scheduled Container Operation
 
-apiVersion: v1
-kind: PersistentVolume
+[root@m-k8s ~]# cat cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
 metadata:
-  name: pv
+  name: current-date
 spec:
-  capacity:
-    storage: 512m
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-storage
-  hostPath:
-    path: /data/config
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: nginx
+            command:
+            - /bin/sh
+            - -c
+            - 'echo "Current date: $(date)"'
+          restartPolicy: OnFailure
 
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 256m
-  storageClassName: local-storage
-
-k run app --image=nginx --dry-run -o yaml > app.yaml
-
-app.yaml 
-apiVersion: v1
-kind: Pod
-metadata:
-  creationTimestamp: null
-  labels:
-    run: app
-  name: app
-spec:
-  nodeName: bk8s-w1
-  containers:
-  - image: nginx
-    name: app
-    volumeMounts:
-      - mountPath: "/var/app/config"
-        name: configpvc
-
-  volumes:
-    - name: configpvc
-      persistentVolumeClaim:
-        claimName: pvc
-  dnsPolicy: ClusterFirst
-  restartPolicy: Always
-status: {}
+[root@m-k8s ~]# k get cronjobs.batch current-date -o yaml | grep -i history
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
