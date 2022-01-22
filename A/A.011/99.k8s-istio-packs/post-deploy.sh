@@ -11,7 +11,7 @@ curl -L  https://github.com/sysnet4admin/BB/raw/main/istioctl/v1.12.2/istioctl.b
 echo 'source /etc/bash_completion.d/istioctl.bash' >> ~/.bashrc
 
 ## install instio components 
-istioctl install --set profile=demo -y
+/usr/local/bin/istioctl install --set profile=demo -y
 
 ## install DashBoard 
 kubectl apply -f ~/_Lecture_k8s_learning.kit/A/A.011/01.istio/sample/addons
