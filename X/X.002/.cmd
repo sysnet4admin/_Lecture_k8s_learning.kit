@@ -160,3 +160,4 @@ spec:
 [root@m-k8s ~]# k get cronjobs.batch current-date -o yaml | grep -i history
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 3
+
