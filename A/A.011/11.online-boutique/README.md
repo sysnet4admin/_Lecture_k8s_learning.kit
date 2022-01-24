@@ -10,3 +10,4 @@ This Source came from here and modify it for easy test purpose
 
 # Changement 
 1. namespace add to online-boutique
+2. loadgenerator's users from 10 to 1  

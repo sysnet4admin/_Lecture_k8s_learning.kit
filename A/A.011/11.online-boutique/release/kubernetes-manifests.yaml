@@ -526,7 +526,8 @@ spec:
         - name: FRONTEND_ADDR
           value: "frontend:80"
         - name: USERS
-          value: "10"
+#          value: "10"
+          value: "1"      # Change from 10 to 1 
         resources:
           requests:
             cpu: 300m
