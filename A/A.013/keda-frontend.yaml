@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: keda-frontend
+  name: keda-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: keda-frontend
+  template:
+    metadata:
+      labels:
+        app: keda-frontend
+    spec:
+      containers:
+      - image: nginx
+        name: nginx

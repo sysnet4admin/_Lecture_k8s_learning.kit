@@ -1,0 +1,25 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: keda-backend-scaledobject
+spec:
+  scaleTargetRef:
+    name: keda-backend
+  minReplicaCount: 1
+  maxReplicaCount: 6
+  pollingInterval: 5
+  triggers:  
+
+  - type: cron
+    metadata:
+      # run in 30min
+      start: 10 19 * * *        # min hour day month / day of the week
+      end:   20 19 * * *          # min hour day month / day of the week 
+      timezone: Asia/Seoul
+      desiredReplicas: "2"
+
+  - type: kubernetes-workload
+    metadata:
+      podSelector: 'app=keda-frontend'
+      value: '3'
+

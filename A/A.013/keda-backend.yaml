@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: keda-backend
+  name: keda-backend
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: keda-backend
+  template:
+    metadata:
+      labels:
+        app: keda-backend
+    spec:
+      containers:
+      - image: sysnet4admin/sleepy
+        name: sleepy
+
