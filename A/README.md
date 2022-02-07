@@ -11,4 +11,4 @@
 - A.011: 서비스메시 이스티오(Istio) 데모 
 - A.012: 파워유저용 k9s on kui
 - A.013: 이벤트로 애플리케이션을 자동 조절하기(KETA)
-- A.014: runtime 간단 비교 (dockershim vs containerd)
+- A.014: 컨테이너 런타임에 대한 간단 비교 (dockershim vs containerd)
