@@ -1,7 +1,5 @@
 ### 실습 랩 All-in-one (v1.23.3)
-
-#### containerd
-노드의 Runtime 상태는 다음과 같습니다.
+노드의 Runtime (`containerd`)상태는 다음과 같습니다.
 ```bash
 [root@m-k8s ~]# k get node -o wide 
 NAME     STATUS   ROLES                  AGE     VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE                KERNEL-VERSION                CONTAINER-RUNTIME
