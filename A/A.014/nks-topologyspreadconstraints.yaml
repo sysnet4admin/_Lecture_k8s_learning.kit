@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nks-topologyspreadconstraints
+  name: nks-topologyspreadconstraints
+spec:
+  replicas: 9
+  selector:
+    matchLabels:
+      app: nks-topologyspreadconstraints
+  template:
+    metadata:
+      labels:
+        app: nks-topologyspreadconstraints
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: regionNo
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: nks-topologyspreadconstraints
+      - maxSkew: 1
+        topologyKey: zoneNo
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: nks-topologyspreadconstraints
