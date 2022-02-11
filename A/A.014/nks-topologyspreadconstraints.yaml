@@ -5,7 +5,7 @@ metadata:
     app: nks-topologyspreadconstraints
   name: nks-topologyspreadconstraints
 spec:
-  replicas: 9
+  replicas: 3
   selector:
     matchLabels:
       app: nks-topologyspreadconstraints
@@ -19,13 +19,13 @@ spec:
         name: nginx
       topologySpreadConstraints:
       - maxSkew: 1
-        topologyKey: regionNo
+        topologyKey: failure-domain.beta.kubernetes.io/region
         whenUnsatisfiable: DoNotSchedule
         labelSelector:
           matchLabels:
             app: nks-topologyspreadconstraints
       - maxSkew: 1
-        topologyKey: zoneNo
+        topologyKey: failure-domain.beta.kubernetes.io/zone
         whenUnsatisfiable: DoNotSchedule
         labelSelector:
           matchLabels:

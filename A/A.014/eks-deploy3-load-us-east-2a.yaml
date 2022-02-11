@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: eks-deploy3-load-us-east-2a
+  name: eks-deploy3-load-us-east-2a
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: eks-deploy3-load-us-east-2a
+  template:
+    metadata:
+      labels:
+        app: eks-deploy3-load-us-east-2a
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+      nodeSelector:
+        failure-domain.beta.kubernetes.io/zone: us-east-2a

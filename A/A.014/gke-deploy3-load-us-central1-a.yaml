@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gke-deploy3-load-us-central1-a
+  name: gke-deploy3-load-us-central1-a
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gke-deploy3-load-us-central1-a
+  template:
+    metadata:
+      labels:
+        app: gke-deploy3-load-us-central1-a
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+      nodeSelector:
+        failure-domain.beta.kubernetes.io/zone: us-central1-a
