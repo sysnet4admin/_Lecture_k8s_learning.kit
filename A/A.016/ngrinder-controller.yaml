@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ngrinder-controller
+  name: ngrinder-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ngrinder-controller
+  template:
+    metadata:
+      labels:
+        app: ngrinder-controller
+    spec:
+      containers:
+      - name: ngrinder
+        image: ngrinder/controller:3.5.4
+        ports:
+        # Controller's web port 
+        - containerPort: 80
+        # Health-chceck && Keepalive 
+        - containerPort: 16001
+        # Agents's ports 
+        - containerPort: 12000
+        - containerPort: 12001
+        - containerPort: 12002
+        - containerPort: 12003
+        - containerPort: 12004
+        - containerPort: 12005
+        - containerPort: 12006
+        - containerPort: 12007
+        - containerPort: 12008
+        - containerPort: 12009
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ngrinder-controller-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: ngrinder-controller
+  ports:
+ # each of port has own purpose. See above 
+  - name: port80
+    port: 80
+    targetPort: 80
+  - name: port16001
+    port: 16001
+    targetPort: 16001
+  - name: port12000
+    port: 12000
+    targetPort: 12000
+  - name: port12001
+    port: 12001
+    targetPort: 12001
+  - name: port12002
+    port: 12002
+    targetPort: 12002
+  - name: port12003
+    port: 12003
+    targetPort: 12003
+  - name: port12004
+    port: 12004
+    targetPort: 12004
+  - name: port12005
+    port: 12005
+    targetPort: 12005
+  - name: port12006
+    port: 12006
+    targetPort: 12006
+  - name: port12007
+    port: 12007
+    targetPort: 12007
+  - name: port12008
+    port: 12008
+    targetPort: 12008
+  - name: port12009
+    port: 12009
+    targetPort: 12009

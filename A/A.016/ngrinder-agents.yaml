@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: ngrinder-agent
+  name: ngrinder-agent
+spec:
+  selector:
+    matchLabels:
+      app: ngrinder-agent
+  template:
+    metadata:
+      labels:
+        app: ngrinder-agent
+    spec:
+      containers:
+      - name: ngrinder-agent
+        image: ngrinder/agent:3.5.4
+        # LB ip or domain name or any reachable address to connect the nGrinder controller 
+        # args: [ngrinder.test.com:80]
+        args: [nnn.nnn.nnn.nnn:80]
