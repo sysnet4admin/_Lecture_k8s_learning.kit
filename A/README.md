@@ -12,6 +12,6 @@
 - A.012: 파워유저용 k9s on kui
 - A.013: 이벤트로 애플리케이션을 자동 조절하기(KEDA)
 - A.014: 각 클라우드(EKS,AKS,GKE,NKS)에서 토폴로지 분배 제약 조건 확인하기(feat. 클라우드 레이블) 
-- A.015: 컨테이너 런타임에 대한 간단 비교 (dockershim vs containerd)
-- A.016: nGrinder를 이용한 HPA 부하 성능테스트 
+- A.015: 쿠버네티스 v1.24에서 발생할 컨테이너 런타임의 변경에 관해서 (dockershim vs containerd)
+- A.016: nGrinder를 이용한 HPA 부하 성능 테스트 아키택처 
 - A.017: 쿠버네티스의 또 다른 오토스케일(CA, VPA)
