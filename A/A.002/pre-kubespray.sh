@@ -2,7 +2,9 @@
 
 yum install python36 python36-pip git -y
 
-git clone https://github.com/kubernetes-sigs/kubespray.git
+# git clone https://github.com/kubernetes-sigs/kubespray.git
+# to avoid kubectl missing error
+git clone -b release-2.17 https://github.com/kubernetes-sigs/kubespray.git
 sudo mv kubespray /root
 
 # docker? it is not pre-requirement but if it is not exist, it will fail. 
