@@ -15,3 +15,4 @@
 - A.015: 쿠버네티스 v1.24에서 발생할 컨테이너 런타임의 변경에 관해서 (dockershim vs containerd)
 - A.016: nGrinder를 이용한 HPA 부하 성능 테스트 아키택처 
 - A.017: 쿠버네티스의 또 다른 오토스케일(CA, VPA)
+- A.018: ReadWriteMany를 클라우드에서 잘 사용하는 법 
