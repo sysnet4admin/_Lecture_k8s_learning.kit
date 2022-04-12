@@ -2,8 +2,8 @@
 
 # init kubernetes (w/ containerd)
 kubeadm init --token 123456.1234567890123456 --token-ttl 0 \
---pod-network-cidr=172.16.0.0/16 --apiserver-advertise-address=192.168.1.10 \
---cri-socket=unix:///run/containerd/containerd.sock
+             --pod-network-cidr=172.16.0.0/16 --apiserver-advertise-address=192.168.1.10 \
+             --cri-socket=unix:///run/containerd/containerd.sock
 
 # config for master node only 
 mkdir -p $HOME/.kube
@@ -24,9 +24,6 @@ kubectl apply -f https://$raw_git/svc/metallb-l2config-xd.yaml
 
 # create secret for metallb 
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-
-# install bash-completion for kubectl 
-yum install bash-completion -y 
 
 # kubectl completion on bash-completion dir
 kubectl completion bash >/etc/bash_completion.d/kubectl
@@ -52,8 +49,8 @@ chmod 700 /usr/local/bin/rerepo-k8s-learning.kit
 
 ##### Addtional configuration for All-in-one
 # install deploying tools 
-sh $HOME/_Lecture_k8s_learning.kit/ch9/9.5/kustomize-installer.sh
-sh $HOME/_Lecture_k8s_learning.kit/ch9/9.6/get_helm.sh >/dev/null 2>&1
+bash $HOME/_Lecture_k8s_learning.kit/ch9/9.5/kustomize-installer.sh
+bash $HOME/_Lecture_k8s_learning.kit/ch9/9.6/get_helm.sh >/dev/null 2>&1
 
 # helm completion on bash-completion dir and run manually due to hem limitation. 
 cat <<EOF > /tmp/helm_completion.sh
@@ -62,7 +59,7 @@ exec bash
 EOF
 
 # install nfs-provisioner
-sh $HOME/_Lecture_k8s_learning.kit/ch5/5.6/nfs-exporter.sh dynamic-vol
+bash $HOME/_Lecture_k8s_learning.kit/ch5/5.6/nfs-exporter.sh dynamic-vol
 kubectl apply -f $HOME/_Lecture_k8s_learning.kit/ch5/5.6/nfs-subdir-external-provisioner
 kubectl apply -f $HOME/_Lecture_k8s_learning.kit/ch5/5.6/storageclass.yaml
 

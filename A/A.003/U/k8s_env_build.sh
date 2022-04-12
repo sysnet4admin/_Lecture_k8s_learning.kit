@@ -5,40 +5,34 @@ echo 'alias vi=vim' >> /etc/profile
 
 # swapoff -a to disable swapping
 swapoff -a
-# sed to comment the swap partition in /etc/fstab
-sed -i.bak -r 's/(.+ swap .+)/#\1/' /etc/fstab
+# sed to comment the swap partition in /etc/fstab (Rmv blank)
+sed -i.bak -r 's/(.+swap.+)/#\1/' /etc/fstab
 
-# kubernetes repo
-gg_pkg="packages.cloud.google.com/yum/doc" # Due to shorten addr for key
-cat <<EOF > /etc/yum.repos.d/kubernetes.repo
-[kubernetes]
-name=Kubernetes
-baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-enabled=1
-gpgcheck=0
-repo_gpgcheck=0
-gpgkey=https://${gg_pkg}/yum-key.gpg https://${gg_pkg}/rpm-package-key.gpg
-EOF
+# add kubernetes repo
+apt-get update && apt-get install apt-transport-https ca-certificates curl
+curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg \
+            https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] \
+      https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
 
 # add docker-ce repo
-yum install yum-utils -y 
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+apt-get install -y \
+        ca-certificates \
+        curl \
+        gnupg \
+        lsb-release
 
-# Set SELinux in permissive mode (effectively disabling it)
-setenforce 0
-sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# Setup required sysctl params, these persist across reboots
-cat <<EOF >  /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables  = 1
-net.ipv4.ip_forward                 = 1
-EOF
-
-# Load br_netfilter(/etc/modules-load.d/containerd.conf)  
+# enable br_filter for iptables 
 modprobe br_netfilter
 
 # local small dns & vagrant cannot parse and delivery shell code.
+echo "127.0.0.1 localhost" > /etc/hosts # localhost name will use by calico-node
 echo "192.168.1.10 m-k8s" >> /etc/hosts
 for (( i=1; i<=$1; i++  )); do echo "192.168.1.10$i w$i-k8s" >> /etc/hosts; done
 
