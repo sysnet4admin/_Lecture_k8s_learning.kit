@@ -2,11 +2,11 @@
 실습을 하기 위해서 필요한 패키지를 종합해 놓음. 
 따라서 수시로 업데이트 될 수 있습니다.  
 
-#### C: CentOS (v1.23.1)
-
-이름              | 버전     |   빈칸 
+#### C: CentOS (v1.23.3)
+이름            | 버전     |   빈칸 
 ----            | ----    | ---- 
 kubernetes      | v1.23.1 | 
+ContainerD      | 1.4.12  |
 MetalLB         | v0.10.2 | 
 nfs-provisioner | 4.0.2   |
 Metrics Server  | 0.5.0   |
@@ -14,10 +14,10 @@ Kustomize       | 4.2.0   |
 Helm            | 3.6.3   |
 
 #### U: Ubuntu (v1.23.5)
-
-이름              | 버전     |   빈칸 
+이름            | 버전     |   빈칸 
 ----            | ----    | ---- 
-kubernetes      | v1.23.5 | 
+kubernetes      | v1.23.5 |
+ContainerD      | 1.4.12  |
 MetalLB         | v0.10.2 | 
 nfs-provisioner | 4.0.2   |
 Metrics Server  | 0.5.0   |
