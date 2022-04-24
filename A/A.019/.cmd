@@ -1,7 +1,7 @@
 watch kubectl top node 
 watch kubectl get deploy 
 
-k apply -f <pod-cnt110.yaml>
+k apply -f _Lecture_k8s_learning.kit/A/A.019/pod-cnt110.yaml
 k get po -o wide 
 k scale deploy pod-cnt110 --replicas=10
 .... (if you have fully enough computer, directly to the 110 pods)
