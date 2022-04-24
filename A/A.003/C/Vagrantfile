@@ -5,9 +5,9 @@
 # max number of worker nodes
 N = 3 
 # each of components to install 
-k8s_V = '1.23.1'           # Kubernetes 
-docker_V = '20.10.8-3.el7' # Docker  
-ctrd_V = '1.4.9-3.1.el7'   # Containerd 
+k8s_V = '1.23.3'           # Kubernetes 
+docker_V = '20.10.12-3.el7' # Docker  
+ctrd_V = '1.4.12-3.1.el7'   # Containerd 
 ## /configuration variables ##
 
 Vagrant.configure("2") do |config|
@@ -16,13 +16,13 @@ Vagrant.configure("2") do |config|
   # Master Node #
   #=============#
 
-    config.vm.define "m-k8s-#{k8s_V[0..3]}" do |cfg|
+    config.vm.define "m-k8s-#{k8s_V[0..5]}" do |cfg|
       cfg.vm.box = "sysnet4admin/CentOS-k8s"
       cfg.vm.provider "virtualbox" do |vb|
-        vb.name = "m-k8s-#{k8s_V[0..3]}(github_SysNet4Admin)"
+        vb.name = "m-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
         vb.cpus = 2
         vb.memory = 2048
-        vb.customize ["modifyvm", :id, "--groups", "/k8s-SgMST-#{k8s_V[0..3]}(github_SysNet4Admin)"]
+        vb.customize ["modifyvm", :id, "--groups", "/k8s-C#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
       end
       cfg.vm.host_name = "m-k8s"
       cfg.vm.network "private_network", ip: "192.168.1.10"
@@ -38,13 +38,13 @@ Vagrant.configure("2") do |config|
   #==============#
 
   (1..N).each do |i|
-    config.vm.define "w#{i}-k8s-#{k8s_V[0..3]}" do |cfg|
+    config.vm.define "w#{i}-k8s-#{k8s_V[0..5]}" do |cfg|
       cfg.vm.box = "sysnet4admin/CentOS-k8s"
       cfg.vm.provider "virtualbox" do |vb|
-        vb.name = "w#{i}-k8s-#{k8s_V[0..3]}(github_SysNet4Admin)"
+        vb.name = "w#{i}-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
         vb.cpus = 1
         vb.memory = 2048
-        vb.customize ["modifyvm", :id, "--groups", "/k8s-SgMST-#{k8s_V[0..3]}(github_SysNet4Admin)"]
+        vb.customize ["modifyvm", :id, "--groups", "/k8s-C#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
       end
       cfg.vm.host_name = "w#{i}-k8s"
       cfg.vm.network "private_network", ip: "192.168.1.10#{i}"

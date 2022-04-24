@@ -28,11 +28,14 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 setenforce 0
 sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
-# RHEL/CentOS 7 have reported traffic issues being routed incorrectly due to iptables bypassed
+# Setup required sysctl params, these persist across reboots
 cat <<EOF >  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
+net.bridge.bridge-nf-call-iptables  = 1
+net.ipv4.ip_forward                 = 1
 EOF
+
+# Load br_netfilter(/etc/modules-load.d/containerd.conf)  
 modprobe br_netfilter
 
 # local small dns & vagrant cannot parse and delivery shell code.
