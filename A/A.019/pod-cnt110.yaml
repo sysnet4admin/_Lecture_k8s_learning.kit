@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pod-cnt110
+  name: pod-cnt110
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod-cnt110
+  template:
+    metadata:
+      labels:
+        app: pod-cnt110
+    spec:
+      containers:
+      - image: alpine
+        name: alpine
+        command: ["/bin/sh", "-c", "sleep 3600"]
+      nodeName: w3-k8s
