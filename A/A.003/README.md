@@ -13,10 +13,10 @@ Metrics Server  | 0.5.0   |
 Kustomize       | 4.2.0   |
 Helm            | 3.6.3   |
 
-#### U: Ubuntu (v1.24.0)
+#### U: Ubuntu (v1.24.1) <<<< It will work properly the end of May.
 이름            | 버전     |   빈칸 
 ----            | ----    | ---- 
-kubernetes      | v1.24.0 |
+kubernetes      | v1.24.1 |
 ContainerD      | 1.6.4  |
 MetalLB         | v0.10.2 | 
 nfs-provisioner | 4.0.2   |
