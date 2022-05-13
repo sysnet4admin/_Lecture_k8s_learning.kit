@@ -7,6 +7,8 @@ docker_V = '5:20.10.15~3-0~ubuntu-focal' # Docker
 ctrd_V = '1.6.4-1'   # Containerd
 ## /configuration variables ###
 
+Vagrant.configure("2") do |config|
+
   #==============#
   # Console Node #
   #==============#
@@ -24,7 +26,8 @@ ctrd_V = '1.6.4-1'   # Containerd
     cfg.vm.network "forwarded_port", guest: 22, host: 60009, auto_correct: true, id: "ssh"
     cfg.vm.synced_folder "../data", "/vagrant", disabled: true
     cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, docker_V, ctrd_V ]
-    cfg.vm.provision "file", source: "grap_kubeconfig.sh", destination: "grap_kubeconfig.sh" 
+    cfg.vm.provision "file", source: "grap_kubeconfig.sh", destination: "/tmp/grap_kubeconfig.sh"
+    cfg.vm.provision "shell", inline: "chmod 744 /tmp/grap_kubeconfig.sh ; mv /tmp/grap_kubeconfig.sh /root/grap_kubeconfig.sh" 
   end
 
 end
