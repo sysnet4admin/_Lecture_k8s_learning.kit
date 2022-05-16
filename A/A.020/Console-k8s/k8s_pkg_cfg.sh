@@ -24,3 +24,9 @@ echo 'alias k=kubectl' >> ~/.bashrc
 echo "alias ka='kubectl apply -f'" >> ~/.bashrc
 echo "alias kd='kubectl delete -f'" >> ~/.bashrc
 echo 'complete -F __start_kubectl k' >> ~/.bashrc
+
+# helm installed 
+DESIRED_VERSION=v3.8.2
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
