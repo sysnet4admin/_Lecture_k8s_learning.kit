@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 # install pre-requirement  for centos 
-yum install python3 sshfs -y
-echo "successfully installed python3 sshfs"
+if [[ "$(awk -F '=' '/PRETTY_NAME/ { print $2 }' /etc/os-release)" = *"CentOS"* ]]; then 
+  yum install python3 sshfs -y
+  echo "successfully installed python3 sshfs on CentOS"
+fi 
 
 # download binary and chmod to run 
 curl -fL https://app.getambassador.io/download/tel2/linux/amd64/2.5.8/telepresence -o /usr/local/bin/telepresence
