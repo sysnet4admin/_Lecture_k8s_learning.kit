@@ -11,10 +11,14 @@ telepresence connect
 telepresence list 
 
 kubectl run chk-ip --image=sysnet4admin/chk-ip 
-kubectl expose chk-ip --port=80
+kubectl expose po chk-ip --port=80
 telepresence list 
 
 curl chk-ip.default 
+
+kubectl run ssh --image=sysnet4admin/ssh 
+kubectl expose po ssh --port=22 
+ssh hoon@ssh.default 
 
 # local dev enviroment 
 # if 'fresh' is not working on properly, run 'go build main.go && ./main'
