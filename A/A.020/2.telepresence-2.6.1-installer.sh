@@ -7,7 +7,7 @@ if [[ "$(awk -F '=' '/PRETTY_NAME/ { print $2 }' /etc/os-release)" = *"CentOS"* 
 fi 
 
 # download binary and chmod to run 
-curl -fL https://app.getambassador.io/download/tel2/linux/amd64/2.5.8/telepresence -o /usr/local/bin/telepresence
+curl -fL https://app.getambassador.io/download/tel2/linux/amd64/2.6.1/telepresence -o /usr/local/bin/telepresence
 chmod a+x /usr/local/bin/telepresence
 
 # install traffic-manager 
@@ -16,4 +16,4 @@ helm repo update
 helm install traffic-manager datawire/telepresence \
 --create-namespace \
 --namespace ambassador \
---set image.tag=2.5.8  
+--set image.tag=2.6.1  
