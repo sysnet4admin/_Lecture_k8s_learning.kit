@@ -1,3 +1,6 @@
+# install console-k8s (192.168.1.9)
+vagrant up console-k8s
+
 # like bastion or vpn 
 
 ./2.telepresence-2.5.8-installer.sh
