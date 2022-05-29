@@ -17,6 +17,7 @@
 - A.017: ReadWriteMany(RWX)를 클라우드에서 잘 사용하는 법
 - A.018: 쿠버네티스 Storage 성능 테스트 도구를 찾는 여정과 kDbench 소개
 - A.019: 가장 가성비 좋게 워커노드를 구성하는 법 (110 pods per node) 
-- A.020: Telepresence: Local development against a remote Kubernetes or OpenShift cluster
+- A.021: Telepresence: Local development against a remote Kubernetes or OpenShift cluster
+- A.022: HPA autoscaling/v2를 이용해서 구성하는 Custom Metrics API (w/ 프로메테우스 어댑터) 
 - A.030: 쿠버네티스의 또 다른 오토스케일(CA, VPA)
 
