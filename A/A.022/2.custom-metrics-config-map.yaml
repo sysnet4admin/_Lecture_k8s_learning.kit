@@ -119,9 +119,9 @@ data:
     - seriesQuery: 'http_requests_total{kubernetes_namespace!="",kubernetes_pod_name!=""}'
       resources:
         overrides:
-          kubernetes_namespace: {resource: "namespace"}
-          kubernetes_pod_name: {resource: "pod"}
+          namespace:
+            resource: namespace
       name:
-        matches: "^(.*)_total"
+        matches: ^(.*)_total
         as: "${1}_per_second"
       metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)'
