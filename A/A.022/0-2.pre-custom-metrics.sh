@@ -31,6 +31,8 @@ data:
   serving.key: $(cat apiserver-key.pem | base64 --wrap=0)
 EOF
 
+# create name for custom-metrics
+kubectl create ns custom-metrics
 # create secret info in custom-metrics namespace 
 kubectl apply -f cm-adapter-serving-certs.yaml 
 
