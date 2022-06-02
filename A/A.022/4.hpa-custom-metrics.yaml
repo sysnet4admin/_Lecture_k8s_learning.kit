@@ -6,14 +6,14 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment 
-    name: pod-adapers 
+    name: pod-adapters
   minReplicas: 2
   maxReplicas: 10
   metrics:
     - type: Pods
       pods:
         metric:
-          name: http_requests
+          name: nginx_http_requests_total
         target:
           type: AverageValue
           averageValue: 10
