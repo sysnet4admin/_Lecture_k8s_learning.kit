@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+data:
+  default.conf: |
+    server {
+      listen       80;
+      server_name  nginx;
+      location / {
+          root   /usr/share/nginx/html;
+          index  index.html index.htm;
+      }
+      error_page   500 502 503 504  /50x.html;
+      location = /50x.html {
+          root   /usr/share/nginx/html;
+      }
+      location /stub_status {
+        stub_status;
+        allow 127.0.0.1;
+        allow 192.168.1.0/24;
+        allow 172.16.0.0/16;
+        deny all;   #deny all other hosts
+      }
+    }

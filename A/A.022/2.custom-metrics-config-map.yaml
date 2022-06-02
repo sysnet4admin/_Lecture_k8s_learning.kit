@@ -115,13 +115,3 @@ data:
         matches: ^.*_queue$
         as: "$0"
       metricsQuery: max(<<.Series>>{<<.LabelMatchers>>})
-    # add for http_request 
-    - seriesQuery: 'http_requests_total{kubernetes_namespace!="",kubernetes_pod_name!=""}'
-      resources:
-        overrides:
-          namespace:
-            resource: namespace
-      name:
-        matches: ^(.*)_total
-        as: "${1}_per_second"
-      metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)'
