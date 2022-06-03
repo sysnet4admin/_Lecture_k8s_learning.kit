@@ -34,7 +34,7 @@ k get hpa
 
 ./6.curl-get.sh 192.168.1.12
 # from other terminal 
-watch kubectl get hpa
+watch kubectl get hpa,deploy
 
 
 
