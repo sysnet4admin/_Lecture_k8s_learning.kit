@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: web-page
-        image: nginx
+        image: sysnet4admin/chk-hn # chagne due to many of curls 
         volumeMounts:
         - mountPath: /etc/nginx/conf.d
           name: nginx-conf
