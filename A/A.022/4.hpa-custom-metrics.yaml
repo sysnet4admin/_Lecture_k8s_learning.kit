@@ -13,7 +13,7 @@ spec:
     - type: Pods
       pods:
         metric:
-          name: nginx_http_requests_total
+          name: nginx_http_requests_per_second
         target:
           type: AverageValue
           averageValue: 10
