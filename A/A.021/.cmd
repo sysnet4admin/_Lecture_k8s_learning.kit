@@ -36,5 +36,8 @@ vi edgey-corp-go/DataProcessingService/main.go
 curl dataprocessingservice:3000/color
 curl localhost:3000/color 
 
+telepresence leave
+telepresence quit
+telepresence status 
 telepresence uninstall --everything
 telepresence status 
