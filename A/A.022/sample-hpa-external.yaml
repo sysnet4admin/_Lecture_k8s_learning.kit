@@ -1,0 +1,23 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: deploy-4-hpa-ext
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: deploy-4-hpa
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: External
+    external:
+      metric:
+        name: <metrics-name> # ex) queue_messages_ready
+        selector:
+          matchLabels:
+            queue: <queue-name> # ex) "worker_tasks"
+      target:
+        type: AverageValue
+        averageValue: 30
+
