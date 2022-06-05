@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 
-# install jq 
-yum install jq -y 
+# install pre-requirement  for centos 
+if [[ "$(awk -F '=' '/PRETTY_NAME/ { print $2 }' /etc/os-release)" = *"CentOS"* ]]; then 
+  yum install jq -y
+  echo "successfully installed jq on CentOS"
+elif [[ "$(awk -F '=' '/PRETTY_NAME/ { print $2 }' /etc/os-release)" = *"Ubuntu"* ]]; then
+  apt-get install jq -y
+  echo "successfully installed jq on CentOS"  
+else
+  echo "Please install jq manually"
+fi 
+
 
 # install cfssl cfssljson for gencerts
 curl -L https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl_1.6.1_linux_amd64 -o /usr/local/bin/cfssl
