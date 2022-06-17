@@ -13,3 +13,5 @@ pluto detect-files -o csv
 pluto detect-files -d ~/_Lecture_k8s_learning.kit/
 pluto detect-files -d ~/_Lecture_k8s_learning.kit/ -o markdown
 
+kubectl convert --help 
+

@@ -1,0 +1,19 @@
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-4-pod-adapters 
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment 
+    name: pod-adapters
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Pods
+      pods:
+        metric:
+          name: nginx_http_requests_per_second
+        target:
+          type: AverageValue
+          averageValue: 10
