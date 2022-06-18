@@ -4,5 +4,5 @@
 helm repo add edu https://iac-source.github.io/helm-charts
 helm repo update
 
-helm install metallb edu/metallb --namespace=dev1
+helm install metallb edu/metallb --namespace=metallb-system 
 
