@@ -16,8 +16,15 @@ pluto detect-files -d ~/_Lecture_k8s_learning.kit/ -o markdown
 pluto detect-files --target-versions k8s=v1.18.0 -o markdown 
 pluto detect-files --target-versions k8s=v1.22.1 -o markdown 
 
+kubectl get all -A -o yaml > /tmp/all.yaml
+pluto detect-files -d /tmp/all.yaml
+
+./pluto-detect-helm-sample/metallb-uninstaller.sh 
 ./pluto-detect-helm-sample/bad-metallb-psp-v1beta1.sh
 pluto detect-helm -o markdown
+
+git clone https://github.com/IaC-Source/helm-charts.git
+helm template helm-charts/metallb/ | pluto detect -
 
 
 # DEMO kubectl convert 
