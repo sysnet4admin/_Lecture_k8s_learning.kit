@@ -1,23 +1,23 @@
-# install console-k8s (192.168.1.9)
+# install console-k8s (192.168.1.241)
 vagrant up console-k8s
 
 # like bastion or vpn 
 
-./2.telepresence-2.5.8-installer.sh
+./2.telepresence-2.6.6-installer.sh
 
 telepresence version 
 telepresence status 
 telepresence connect 
 telepresence list 
 
-kubectl run chk-ip --image=sysnet4admin/chk-ip 
-kubectl expose po chk-ip --port=80
+kubectl create deploy chk-ip --image=sysnet4admin/chk-ip 
+kubectl expose deploy chk-ip --port=80
 telepresence list 
 
 curl chk-ip.default 
 
-kubectl run ssh --image=sysnet4admin/ssh 
-kubectl expose po ssh --port=22 
+kubectl create deploy ssh --image=sysnet4admin/ssh 
+kubectl expose deploy ssh --port=22 
 ssh hoon@ssh.default 
 
 # local dev enviroment 
@@ -36,7 +36,8 @@ vi edgey-corp-go/DataProcessingService/main.go
 curl dataprocessingservice:3000/color
 curl localhost:3000/color 
 
-telepresence leave
+telepresence status
+helm uninstall traffic-manager -n ambassador
 telepresence quit
 telepresence status 
 telepresence uninstall --everything
