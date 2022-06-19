@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-# install old metallb by helm to dev1 namespace
-helm repo add edu https://iac-source.github.io/helm-charts
+# install old metallb by helm
+helm repo add iac https://iac-source.github.io/helm-charts
 helm repo update
-
-helm install metallb edu/metallb --namespace=metallb-system 
+ 
+helm install metallb iac/metallb \
+--namespace=metallb-system \
+--create-namespace 
 
