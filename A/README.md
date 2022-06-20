@@ -18,7 +18,7 @@
 - A.018: 쿠버네티스 Storage 성능 테스트 도구를 찾는 여정과 kDbench 소개
 - A.019: 가장 가성비 좋게 워커노드를 구성하는 법 (110 pods per node) 
 - A.021: 쿠버네티스 상의 앱 개발 과정을 혁신적으로 줄여주는 텔레프레즌스(telepresense)
-- A.022: HPA 버전(autoscale v2) 업데이트 및 앞으로의 변화
+- A.022: HPA 버전(autoscalinge/v2) 업데이트 및 앞으로의 변화
 - A.023: deprecated 버전을 확인해 주는 pluto와 변경해 주는 kubectl-convert
 - A.030: 쿠버네티스의 또 다른 오토스케일(CA, VPA)
 
