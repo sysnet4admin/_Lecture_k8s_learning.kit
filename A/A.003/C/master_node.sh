@@ -58,12 +58,6 @@ chmod 700 /usr/local/bin/rerepo-k8s-learning.kit
 sh $HOME/_Lecture_k8s_learning.kit/ch9/9.5/kustomize-installer.sh
 sh $HOME/_Lecture_k8s_learning.kit/ch9/9.6/get_helm.sh >/dev/null 2>&1
 
-# helm completion on bash-completion dir and run manually due to hem limitation. 
-cat <<EOF > /tmp/helm_completion.sh
-helm completion bash >/etc/bash_completion.d/helm
-exec bash
-EOF
-
 # install nfs-provisioner
 sh $HOME/_Lecture_k8s_learning.kit/ch5/5.6/nfs-exporter.sh dynamic-vol
 kubectl apply -f $HOME/_Lecture_k8s_learning.kit/ch5/5.6/nfs-subdir-external-provisioner
