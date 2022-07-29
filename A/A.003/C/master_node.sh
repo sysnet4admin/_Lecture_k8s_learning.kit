@@ -34,11 +34,6 @@ echo 'alias k=kubectl' >> ~/.bashrc
 echo "alias ka='kubectl apply -f'" >> ~/.bashrc
 echo 'complete -F __start_kubectl k' >> ~/.bashrc
 
-# helm completion on bash-completion dir & alias+ 
-helm completion bash > /etc/bash_completion.d/helm
-echo 'alias h=helm' >> ~/.bashrc
-echo 'complete -F __start_helm h' >> ~/.bashrc 
-
 # git clone k8s-code
 git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git
 mv /home/vagrant/_Lecture_k8s_learning.kit $HOME
@@ -57,6 +52,11 @@ chmod 700 /usr/local/bin/rerepo-k8s-learning.kit
 # install deploying tools 
 sh $HOME/_Lecture_k8s_learning.kit/ch9/9.5/kustomize-installer.sh
 sh $HOME/_Lecture_k8s_learning.kit/ch9/9.6/get_helm.sh >/dev/null 2>&1
+
+# helm completion on bash-completion dir & alias+ 
+helm completion bash > /etc/bash_completion.d/helm
+echo 'alias h=helm' >> ~/.bashrc
+echo 'complete -F __start_helm h' >> ~/.bashrc 
 
 # install nfs-provisioner
 sh $HOME/_Lecture_k8s_learning.kit/ch5/5.6/nfs-exporter.sh dynamic-vol
