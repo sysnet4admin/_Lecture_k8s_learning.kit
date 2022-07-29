@@ -28,13 +28,16 @@ kubectl create secret generic -n metallb-system memberlist --from-literal=secret
 # install bash-completion for kubectl 
 yum install bash-completion -y 
 
-# kubectl completion on bash-completion dir
+# kubectl completion on bash-completion dir & alias+
 kubectl completion bash >/etc/bash_completion.d/kubectl
-
-# alias kubectl to k 
 echo 'alias k=kubectl' >> ~/.bashrc
 echo "alias ka='kubectl apply -f'" >> ~/.bashrc
 echo 'complete -F __start_kubectl k' >> ~/.bashrc
+
+# helm completion on bash-completion dir & alias+ 
+helm completion bash > /etc/bash_completion.d/helm
+echo 'alias h=helm' >> ~/.bashrc
+echo 'complete -F __start_helm h' >> ~/.bashrc 
 
 # git clone k8s-code
 git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git

@@ -5,12 +5,6 @@ yum install epel-release -y
 yum install vim-enhanced -y
 yum install git -y
 
-# config ble.sh 
-# https://github.com/akinomyoga/ble.sh/blob/master/README.md
-git clone --recursive https://github.com/akinomyoga/ble.sh.git
-make -C ble.sh install PREFIX=~/.local
-echo 'source ~/.local/share/blesh/ble.sh' >> ~/.bashrc
-
 # install docker 
 yum install docker-ce-$2 docker-ce-cli-$2 containerd.io-$3 -y
 
