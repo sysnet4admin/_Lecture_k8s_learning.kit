@@ -2,7 +2,7 @@
 
 이름              | 버전     |   빈칸
 ----            | ----    | ----
-kubernetes      | v1.24.3 |
+kubernetes      | v1.24.2 |
 ContainerD      | 1.6.4  |
 MetalLB         | v0.10.2 |
 nfs-provisioner | 4.0.2   |
