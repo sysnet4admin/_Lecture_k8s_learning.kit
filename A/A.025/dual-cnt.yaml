@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dual-cnt
+  name: dual-cnt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dual-cnt
+  template:
+    metadata:
+      labels:
+        app: dual-cnt
+    spec:
+      containers:
+      - image: sysnet4admin/net-tools-ifn
+        name: net-tools-ifn 
+      - image: k8s.gcr.io/e2e-test-images/jessie-dnsutils:1.3
+        name: dnsutils
+        command: ["/bin/sh", "-c", "sleep 3600"]
+      nodeName: w3-k8s
