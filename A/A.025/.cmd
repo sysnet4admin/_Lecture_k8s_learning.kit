@@ -18,6 +18,13 @@ ctr -n k8s.io c ls | grep dns
 # compare between ctr's PID and ps's PID (i.e. child ps)
 ctr -n k8s.io t ls
 ps axf
+ps --ppid <PID> -o pid,ppid,cmd
+# install pstree 
+yum install psmisc -y
+pstree 
+pstree -p 1 
+pstree -ap 1 
+pstree -ap <PID>
 
 # check each of pid by lsns -p
 lsns -p <main pause>
