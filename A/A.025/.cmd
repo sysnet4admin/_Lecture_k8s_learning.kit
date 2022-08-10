@@ -5,11 +5,12 @@ k apply -f dual-cnt.yaml
 k describe po dual-cnt-dc66f778c-4zzv6 | grep "Container ID:"
 
 # connect w3-k8s 
-ssh or diret
+ssh or direct connect
 
 ## check namespace 
 ctr ns ls
 ctr -n k8s.io i ls 
+ctr -n k8s.io i ls | grep pause 
 
 ctr -n k8s.io c ls
 ctr -n k8s.io c ls | grep sys
