@@ -13,7 +13,7 @@ ctr -n k8s.io i ls
 ctr -n k8s.io i ls | grep pause 
 
 ctr -n k8s.io c ls
-ctr -n k8s.io c ls | grep sys
+ctr -n k8s.io c ls | grep net
 ctr -n k8s.io c ls | grep dns
 
 # compare between ctr's PID and ps's PID (i.e. child ps)
@@ -35,7 +35,9 @@ lsns -p <child ps>
 lsns -p <child ps>
 
 # connect both container to check ip addr is same 
+ctr -n k8s.io c ls | grep net
 ctr -n k8s.io task exec -t --exec-id <name> <TASK ID> /bin/bash
+ctr -n k8s.io c ls | grep dns
 ctr -n k8s.io task exec -t --exec-id <name> <TASK ID> /bin/bash
 
 # from w3-k8s to check ip address which is cotainer's network range. 
