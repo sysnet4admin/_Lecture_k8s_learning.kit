@@ -23,6 +23,8 @@ ps --ppid <PID> -o pid,ppid,cmd
 # install pstree 
 yum install psmisc -y
 pstree 
+pstree 1 
+pstree -a <PID>
 pstree -p 1 
 pstree -ap 1 
 pstree -ap <PID>
