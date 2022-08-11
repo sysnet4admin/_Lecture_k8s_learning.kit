@@ -30,9 +30,17 @@ pstree -ap 1
 pstree -ap <PID>
 
 # check each of pid by lsns -p
-lsns -p <main pause>
-lsns -p <child ps>
-lsns -p <child ps>
+pstree <PID>
+lsns -p 1
+ls -l /proc/ns/1 
+ls -l /proc/ns/<init's PID>
+ls -l /proc/ns/<containerd-shim PID> # same as init's PID
+ls -l /proc/ns/<pause PID>
+ls -l /proc/ns/<child PID>
+ls -l /proc/ns/<child PID>
+# lsns -p <main pause>
+# lsns -p <child ps>
+# lsns -p <child ps>
 
 # connect both container to check ip addr is same 
 ctr -n k8s.io c ls | grep net
