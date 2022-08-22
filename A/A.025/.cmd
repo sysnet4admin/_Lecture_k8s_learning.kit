@@ -19,6 +19,7 @@ ctr -n k8s.io c ls | grep dns
 # compare between ctr's PID and ps's PID (i.e. child ps)
 ctr -n k8s.io t ls
 ps axf
+ps axfj 
 ps --ppid <PID> -o pid,ppid,cmd
 # install pstree 
 yum install psmisc -y
