@@ -1,4 +1,5 @@
-# deploy nginx deploy and single pod 
+# 1.kubectl patch 
+# deploy nginx deployment  
 k create deploy nginx --image=nginx 
 
 # change replica numbers 
@@ -40,4 +41,18 @@ kubectl patch deployment nginx  --type='json' -p='[{"op": "add", "path": "/spec/
 
 # op: operations = remove 
 kubectl patch deployment nginx  --type='json' -p='[{"op": "remove", "path": "/spec/replicas", "value":2}]'
+
+# 2.kubectl replace 
+# deploy nginx nginx --image=nginx 
+k create deploy nginx --image=nginx 
+
+# failure due to not enough information 
+kubectl replace -f fail-replace-chagne-image.yaml
+
+# success due to full content in 
+kubectl replace -f succ-replace-chagne-image.yaml
+
+# thus...
+k get deploy nginx -o yaml | sed 's|\(image: nginx\)|\(image: httpd\)|' | kubectl replace -f -
+k get deploy nginx -o json | jq '.spec.template.spec.containers[0].image = "httpd"' | kubectl replace -f -
 
