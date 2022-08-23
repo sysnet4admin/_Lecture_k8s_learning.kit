@@ -52,7 +52,20 @@ kubectl replace -f fail-replace-chagne-image.yaml
 # success due to full content in 
 kubectl replace -f succ-replace-chagne-image.yaml
 
-# thus...
-k get deploy nginx -o yaml | sed 's|\(image: nginx\)|\(image: httpd\)|' | kubectl replace -f -
+# partly success with warning annotation  
+kubectl applyf -f succ-replace-chagne-image.yaml
+
+# how about this case which already deployed 
+# k get deploy nginx -o yaml | sed 's|\(image: nginx\)|image: httpd|' | kubectl apply -f -
+# Warning: resource deployments/nginx is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+# deployment.apps/nginx configured
+# k get deploy nginx -o json | jq '.spec.template.spec.containers[0].image = "httpd"' | kubectl apply -f -
+# Warning: resource deployments/nginx is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+# deployment.apps/nginx configured
+
+# thus 
+k get deploy nginx -o yaml | sed 's|\(image: nginx\)|image: httpd|' | kubectl replace -f -
 k get deploy nginx -o json | jq '.spec.template.spec.containers[0].image = "httpd"' | kubectl replace -f -
+
+
 
