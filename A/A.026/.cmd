@@ -1,4 +1,10 @@
-# 1.kubectl patch 
+# 1-1.kubectl apply -f (partly failure)
+k apply -f prometheus-operator.yaml
+
+# 1-2.kubectl create -f (success) 
+k create -f prometheus-operator.yaml
+
+# 2-1.kubectl patch 
 # deploy nginx deployment  
 k create deploy nginx --image=nginx 
 
@@ -42,7 +48,7 @@ kubectl patch deployment nginx  --type='json' -p='[{"op": "add", "path": "/spec/
 # op: operations = remove 
 kubectl patch deployment nginx  --type='json' -p='[{"op": "remove", "path": "/spec/replicas", "value":2}]'
 
-# 2.kubectl replace 
+# 2-2.kubectl replace 
 # deploy nginx nginx --image=nginx 
 k create deploy nginx --image=nginx 
 
