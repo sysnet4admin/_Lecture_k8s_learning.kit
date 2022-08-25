@@ -22,5 +22,6 @@
 - A.023: deprecated 버전을 확인해 주는 pluto와 변경해 주는 kubectl-convert
 - A.024: 컨트롤플레인과 마스터 노드의 차이 
 - A.025: pause 컨테이너 
+- A.026: create vs apply, patch vs replace 비교 
 - A.031: kubemigrator
 - A.032: 쿠버네티스의 또 다른 오토스케일(CA, VPA)
