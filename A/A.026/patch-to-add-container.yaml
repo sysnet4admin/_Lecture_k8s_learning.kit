@@ -1,7 +1,0 @@
-spec:
-  template:
-    spec:
-      containers:
-      - image: redis
-        imagePullPolicy: Always
-        name: web-cache

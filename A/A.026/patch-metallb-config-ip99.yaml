@@ -1,7 +1,0 @@
-data:
-  config: |
-    address-pools:
-    - name: metallb-new-ip-range
-      protocol: layer2
-      addresses:
-      - 192.168.1.11-192.168.1.99
