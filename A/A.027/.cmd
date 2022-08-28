@@ -3,13 +3,13 @@
 k create deploy nginx --image=nginx 
 
 # failure due to not enough information 
-kubectl replace -f fail-replace-chagne-image.yaml
+kubectl replace -f fail-replace-change-image.yaml
 
 # success due to full content in 
-kubectl replace -f succ-replace-chagne-image.yaml
+kubectl replace -f succ-replace-change-image.yaml
 
 # partly success with warning annotation  
-kubectl applyf -f succ-replace-chagne-image.yaml
+kubectl applyf -f succ-replace-change-image.yaml
 
 # how about this case which already deployed 
 # k get deploy nginx -o yaml | sed 's|\(image: nginx\)|image: httpd|' | kubectl apply -f -
