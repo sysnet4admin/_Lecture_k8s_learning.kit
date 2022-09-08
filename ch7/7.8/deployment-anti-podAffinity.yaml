@@ -18,12 +18,12 @@ spec:
       - image: nginx
         name: nginx
       affinity:
-        podAffinity:
+        podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchExpressions:
               - key: affinity
-                operator: NotIn
+                operator: In
                 values:
                 - leader
             # If you want to change topologyKey, 
