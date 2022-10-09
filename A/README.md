@@ -24,5 +24,6 @@
 - A.025: pause 컨테이너 
 - A.026: imperative(명령적인) vs. declarative(선언적인) 방법 
 - A.027: kubectl [ replace | patch ]의 용법
+- A.028: kubectl explain 용법
 - A.031: kubemigrator
 - A.032: 쿠버네티스의 또 다른 오토스케일(CA, VPA)
