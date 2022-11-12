@@ -22,6 +22,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "#{cv[0]}-m" do |cfg|
       cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+      cfg.vm.box_version = "0.5.1"
       cfg.vm.provider "virtualbox" do |vb|
         vb.name = "#{cv[0]}-m(github_SysNet4Admin)"
         vb.cpus = 2
@@ -44,6 +45,7 @@ Vagrant.configure("2") do |config|
     (1..cv[3]).each do |i|
       config.vm.define "#{cv[0]}-w#{i}" do |cfg|
         cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+        cfg.vm.box_version = "0.5.1"
         cfg.vm.provider "virtualbox" do |vb|
           vb.name = "#{cv[0]}-w#{i}(github_SysNet4Admin)"
           vb.cpus = 1
@@ -67,6 +69,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "10cka-con" do |cfg|
     cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+    cfg.vm.box_version = "0.5.1"
     cfg.vm.provider "virtualbox" do |vb|
       vb.name = "10cka-con(github_SysNet4Admin)"
       vb.cpus = 1
