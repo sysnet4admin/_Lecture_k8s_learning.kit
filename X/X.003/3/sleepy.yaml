@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: sleepy
+  name: sleepy
+spec:
+  containers:
+  - image: sysnet4admin/sleepy
+    name: sleepy

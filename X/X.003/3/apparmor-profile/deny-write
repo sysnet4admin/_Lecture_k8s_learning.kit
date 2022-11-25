@@ -4,7 +4,6 @@ profile deny-write flags=(attach_disconnected) {
   #include <abstractions/base>
 
   file,
-
-  # Deny all file writes.
+  # Deny all path write
   deny /** w,
 }

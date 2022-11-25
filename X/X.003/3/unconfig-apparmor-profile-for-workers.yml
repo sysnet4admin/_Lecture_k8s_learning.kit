@@ -1,0 +1,12 @@
+---
+- hosts: Workers
+  gather_facts: no
+
+  tasks:
+  - name: Unload deny-write profile
+    shell: apparmor_parser -R /etc/apparmor.d/deny-write
+
+  - name: Delete apparmor profile on each node
+    file:
+      path: /etc/apparmor.d/deny-write
+      state: absent
