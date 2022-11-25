@@ -5,7 +5,7 @@
   tasks:
   - name: Copy apparmor profile for each worker node
     copy:
-      src: /root/apparmor-profile/deny-write
+      src: apparmor-profile/deny-write
       dest: /etc/apparmor.d/
 
   - name: Load deny-write profile
