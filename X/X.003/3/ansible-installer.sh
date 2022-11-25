@@ -3,6 +3,8 @@
 # install ansible 
 apt-get install ansible=2.9.6+dfsg-1 -y
 apt-get sshpass -y 
+rm -rf ~/.ssh
+sleep 3 
 
 # setup ansible hosts 
 cat <<EOF > /etc/ansible/hosts
