@@ -13,15 +13,16 @@ istioctl install --set profile=demo -y
 kubectl create ns bookinfo 
 kubectl label namespace bookinfo istio-injection=enabled 
 
-kubectl apply -f ~/_Lecture_k8s_learning.kit/A/A.011/01.istio/sample/bookinfo
+kubectl apply -f ~/_Lecture_k8s_learning.kit/A/A.011/01.istio/samples/bookinfo
 
 kubectl get svc istio-ingressgateway -n istio-system
 
 # install DashBoard 
-kubectl apply -f ~/_Lecture_k8s_learning.kit/A/A.011/01.istio/sample/addons
+kubectl apply -f ~/_Lecture_k8s_learning.kit/A/A.011/01.istio/samples/addons
 
 # basic command like below but I changed to LoadBalancer Thus...
 # istioctl dashboard kiali --address 192.168.1.20&
+# actually istioctl dashboard kiali --address 0.0.0.0& << determine by ports 
 kubectl get svc -n istio-system 
 # 192.168.1.20:20001
 
