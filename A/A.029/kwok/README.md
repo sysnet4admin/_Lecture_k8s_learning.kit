@@ -1,4 +1,4 @@
-# demo-kwok(KUBERNETES WITHOUT KUBELET)
+# DEMO: kwok-cluster (KUBERNETES WITHOUT KUBELET)
 
 ## 사용법
 ```bash
