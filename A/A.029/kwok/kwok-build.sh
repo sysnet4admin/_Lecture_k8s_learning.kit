@@ -13,8 +13,10 @@ apt-get install -y \
         git \
         golang 
 
-# git clone the source 
-git clone https://github.com/sysnet4admin/_Lecture_k8s_starter.kit.git
+# git clone k8s-code
+git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git
+mv /home/vagrant/_Lecture_k8s_learning.kit $HOME
+find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
 
 # KWOK!!! Variables preparation #
 ## KWOK repository
