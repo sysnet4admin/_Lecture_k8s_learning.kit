@@ -12,3 +12,4 @@ spec:
   containers:
   - image: sysnet4admin/sleepy
     name: aa-sleepy
+  nodeName: bk8s-w1
