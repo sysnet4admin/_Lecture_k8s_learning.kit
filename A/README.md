@@ -24,13 +24,8 @@
 - A.025: pause 컨테이너 
 - A.026: imperative(명령적인) vs. declarative(선언적인) 방법 
 - A.027: kubectl [ replace | patch ]의 용법
-<<<<<<< HEAD
-- A.028: kubectl explain 용법
-- A.029: KWOK(Kubernetes WithOut Kubelet)
-
-=======
 - A.028: 워크로드(Workloads)와 애플리케이션(Applications)에 대한 용어 구분
-- A.029: kubectl explain 용법
->>>>>>> 2557a2438fd96a90f1192cf749d5f193adde697c
+- A.029: KWOK(Kubernetes WithOut Kubelet)
+=======
 - A.031: kubemigrator
 - A.032: 쿠버네티스의 또 다른 오토스케일(CA, VPA)
