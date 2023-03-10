@@ -38,7 +38,7 @@ echo 'alias k=kubectl' >> ~/.bashrc
 echo 'complete -F __start_kubectl k' >> ~/.bashrc
 
 # install minikube binaries
-curl -LO https://storage.googleapis.com/minikube/releases/v1.26.1/minikube-linux-amd64
+curl -LO https://storage.googleapis.com/minikube/releases/v1.25.2/minikube-linux-amd64
 install minikube-linux-amd64 /usr/local/bin/minikube
 
 # install packages for minikube 
