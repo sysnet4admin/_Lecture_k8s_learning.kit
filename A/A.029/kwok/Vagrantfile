@@ -12,13 +12,13 @@ Vagrant.configure("2") do |config|
     cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
     cfg.vm.provider "virtualbox" do |vb|
       vb.name = "kwok-cluster"
-      vb.cpus = 2
-      vb.memory = 2048 
+      vb.cpus = 1
+      vb.memory = 1024
       vb.customize ["modifyvm", :id, "--groups", "/k8s-demo-set(github_SysNet4Admin)"]
     end
     cfg.vm.host_name = "kwok-cluster"
-    cfg.vm.network "private_network", ip: "192.168.1.201"
-    cfg.vm.network "forwarded_port", guest: 22, host: 60201, auto_correct: true, id: "ssh"
+    cfg.vm.network "private_network", ip: "192.168.1.202"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60202, auto_correct: true, id: "ssh"
     cfg.vm.synced_folder "../data", "/vagrant", disabled: true 
     cfg.vm.provision "shell", path: "kwok-build.sh", args: [ k8s_V, docker_V, ctrd_V ]
   end
