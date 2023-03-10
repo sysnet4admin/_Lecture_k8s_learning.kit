@@ -45,4 +45,7 @@ install minikube-linux-amd64 /usr/local/bin/minikube
 yum -y install conntrack # network 
 
 # startup minikube
-/usr/local/bin/minikube start --driver=none
+## default 
+# /usr/local/bin/minikube start --driver=none
+## deploy m1 + w2 
+/usr/local/bin/minikube start --force --driver=docker --nodes 2
