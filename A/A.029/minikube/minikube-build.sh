@@ -48,4 +48,4 @@ yum -y install conntrack # network
 ## default 
 # /usr/local/bin/minikube start --driver=none
 ## deploy m1 + w2 
-/usr/local/bin/minikube start --force --driver=docker --nodes 2
+/usr/local/bin/minikube start --force --driver=docker --nodes 3
