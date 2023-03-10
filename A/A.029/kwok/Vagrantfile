@@ -1,0 +1,25 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# each of components to install 
+k8s_V = '1.26.00-00'           # Kubernetes (applying TBD)
+docker_V = '5:23.0.1-1~ubuntu.22.04~jammy' # Docker  
+ctrd_V = '1.6.18-1'   # Containerd 
+## /configuration variables ##
+
+Vagrant.configure("2") do |config|
+  config.vm.define "kwok-cluster" do |cfg|
+    cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+    cfg.vm.provider "virtualbox" do |vb|
+      vb.name = "kwok-cluster"
+      vb.cpus = 2
+      vb.memory = 2048 
+      vb.customize ["modifyvm", :id, "--groups", "/k8s-demo-set(github_SysNet4Admin)"]
+    end
+    cfg.vm.host_name = "kwok-cluster"
+    cfg.vm.network "private_network", ip: "192.168.1.230"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60230, auto_correct: true, id: "ssh"
+    cfg.vm.synced_folder "../data", "/vagrant", disabled: true 
+    cfg.vm.provision "shell", path: "kwok-build.sh", args: [ k8s_V, docker_V, ctrd_V ]
+  end
+end
