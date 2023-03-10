@@ -14,7 +14,7 @@ Bringing machine 'kwok-cluster' up with 'virtualbox' provider...
     kwok-cluster: Adapter 2: hostonly
 ```
 진행이 모두 완료된 이후에 
-127.0.0.1:60230 으로 접속하면 됨  
+127.0.0.1:60201 으로 접속하면 됨  
 
 ```bash 
 root@kwok-cluster:~# k get node
