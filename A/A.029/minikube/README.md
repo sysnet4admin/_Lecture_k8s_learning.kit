@@ -1,4 +1,4 @@
-# demo-kwok(KUBERNETES WITHOUT KUBELET)
+# DEMO: minikube-cluster
 
 ## 사용법
 ```bash
