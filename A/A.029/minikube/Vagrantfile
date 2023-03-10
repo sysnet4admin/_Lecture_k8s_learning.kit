@@ -1,0 +1,25 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# each of components to install 
+k8s_V = '1.23.6'           # Kubernetes
+docker_V = '20.10.17-3.el7' # Docker  
+ctrd_V = '1.6.7-3.1.el7'   # Containerd 
+## /configuration variables ##
+
+Vagrant.configure("2") do |config|
+  config.vm.define "minikube-cluster" do |cfg|
+    cfg.vm.box = "sysnet4admin/CentOS-k8s"
+    cfg.vm.provider "virtualbox" do |vb|
+      vb.name = "minikube-cluster"
+      vb.cpus = 2
+      vb.memory = 2048
+      vb.customize ["modifyvm", :id, "--groups", "/k8s-demo-set(github_SysNet4Admin)"]
+    end
+    cfg.vm.host_name = "minikube-cluster"
+    cfg.vm.network "private_network", ip: "192.168.1.201"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60201, auto_correct: true, id: "ssh"
+    cfg.vm.synced_folder "../data", "/vagrant", disabled: true 
+    cfg.vm.provision "shell", path: "minikube-build.sh", args: [ k8s_V, docker_V, ctrd_V ]
+  end
+end
