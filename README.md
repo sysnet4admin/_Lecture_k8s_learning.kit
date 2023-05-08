@@ -1,6 +1,6 @@
 ## kubernetes learning kit / 그림으로 배우는 쿠버네티스
 
-<a href="https://www.inflearn.com/course/쿠버네티스-쉽게시작?inst=cf657a9d">
+<a href="https://www.inflearn.com/course/그림으로-배우는-쿠버네티스?inst=f3d96ed5">
 <img src="https://user-images.githubusercontent.com/29163931/129343011-19787c05-8a78-447b-aa00-c98e21645df0.png" width="400">
 </a>
 
