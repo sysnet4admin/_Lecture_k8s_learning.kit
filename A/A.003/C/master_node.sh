@@ -69,3 +69,9 @@ cd $HOME/_Lecture_k8s_learning.kit/ch9/9.7/metrics-server/ ; kubectl apply -k .
 # create dev1, dev2 namespaces
 kubectl create ns dev1
 kubectl create ns dev2
+
+# extended k8s certifications all
+git clone https://github.com/yuyicai/update-kube-cert.git
+cd update-kube-cert
+chmod 755 update-kubeadm-cert.sh
+./update-kubeadm-cert.sh all
