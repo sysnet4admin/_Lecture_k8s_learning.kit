@@ -49,8 +49,9 @@ find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
 EOF
 chmod 700 /usr/local/bin/rerepo-k8s-learning.kit
 
-# extended k8s certifications all 
-git clone https://github.com/yuyicai/update-kube-cert.git
-cd update-kube-cert
-chmod 755 update-kubeadm-cert.sh
-./update-kubeadm-cert.sh all
+# extended k8s certifications all
+git clone https://github.com/yuyicai/update-kube-cert.git /tmp/update-kube-cert
+chmod 755 /tmp/update-kube-cert/update-kubeadm-cert.sh
+/tmp/update-kube-cert/update-kubeadm-cert.sh all
+rm -rf /tmp/update-kube-cert
+
