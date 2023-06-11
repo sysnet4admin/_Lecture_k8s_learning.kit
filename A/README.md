@@ -27,4 +27,4 @@
 - A.028: 워크로드(Workloads)와 애플리케이션(Applications)에 대한 용어 구분
 - A.029: Minikube와 KWOK(Kubernetes WithOut Kubelet) 비교
 - =======
-- A.030: 쿠버네티스 구성 요소 별로 허용되는 버전의 차이 
+- A.030: 쿠버네티스 인증서가 1년인 이유와 조치 방법 
