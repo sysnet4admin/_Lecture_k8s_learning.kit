@@ -1,0 +1,59 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+## configuration variables ##
+# max number of worker nodes
+N = 3
+# each of components to install
+k8s_V = '1.24.7-00'           # Kubernetes
+docker_V = '5:20.10.20~3-0~ubuntu-jammy' # Docker
+ctrd_V = '1.6.8-1'   # Containerd
+## /configuration variables ##
+
+Vagrant.configure("2") do |config|
+
+  #=============#
+  # Master Node #
+  #=============#
+
+    config.vm.define "m-k8s-#{k8s_V[0..5]}" do |cfg|
+      cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+      cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "m-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
+        vb.cpus = 2
+        vb.memory = 2048
+        vb.customize ["modifyvm", :id, "--groups", "/k8s-U#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
+      end
+      cfg.vm.host_name = "m-k8s"
+      cfg.vm.network "private_network", ip: "192.168.1.10"
+      cfg.vm.network "forwarded_port", guest: 22, host: 60010, auto_correct: true, id: "ssh"
+      cfg.vm.synced_folder "../data", "/vagrant", disabled: true
+      cfg.vm.provision "shell", path: "k8s_env_build.sh", args: N
+      cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, docker_V, ctrd_V, "M"]
+      cfg.vm.provision "shell", path: "master_node.sh"
+    end
+
+  #==============#
+  # Worker Nodes #
+  #==============#
+
+  (1..N).each do |i|
+    config.vm.define "w#{i}-k8s-#{k8s_V[0..5]}" do |cfg|
+      cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+      cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "w#{i}-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
+        vb.cpus = 1
+        vb.memory = 2048
+        vb.customize ["modifyvm", :id, "--groups", "/k8s-U#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
+      end
+      cfg.vm.host_name = "w#{i}-k8s"
+      cfg.vm.network "private_network", ip: "192.168.1.10#{i}"
+      cfg.vm.network "forwarded_port", guest: 22, host: "6010#{i}", auto_correct: true, id: "ssh"
+      cfg.vm.synced_folder "../data", "/vagrant", disabled: true
+      cfg.vm.provision "shell", path: "k8s_env_build.sh", args: N
+      cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, docker_V, ctrd_V, "W" ]
+      cfg.vm.provision "shell", path: "work_nodes.sh"
+    end
+  end
+
+end

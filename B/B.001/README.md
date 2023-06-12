@@ -1,18 +1,10 @@
-# How to install and run kubernetes by kubespray 
+### 실습 랩 All-in-one 
+실습을 하기 위해서 필요한 패키지를 종합해 놓음. 
+따라서 수시로 업데이트 될 수 있습니다.  
+자세한 내용은 개별 디렉터리(**C**|CentOS, **U**|Ubuntu)에서 확인 가능합니다. 
 
-### Provisioning VMs(m3+w9) by vagrant (require 24GiB or above Memories) 
-``` bash 
-$ vagrant up 
+#### 특이점 
+helm 자동 완성 기능을 사용하길 원한다면, 다음의 명령을 수행해야 합니다.  
+```bash
+sh /tmp/helm_completion.sh
 ```
-
-### Deploy kubernetes cluster by kubesprary 
-1. connect to m11-k8s 
-2. run this command on m11-k8s
-```bash 
-$ sh auto_pass.sh
-$ ansible-playbook kubespray/cluster.yml -i ansible_hosts.ini
-```
-
-Note: 
- - If you need to add or remove for the hosts, please modify ansible_hosts.ini manually.
- - If you want to change kubernetes version, please change kube_version on `group_vars/all` 
