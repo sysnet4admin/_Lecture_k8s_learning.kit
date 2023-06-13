@@ -42,7 +42,7 @@ chmod 755 /tmp/nfs-exporter.sh
 rm /tmp/nfs-exporter.sh  
 
 # nfs-provsioner installer 
-kubectl apply -f  $EXTRA_PKGS/nfs-provisioner-4.0.18.yaml
+kubectl apply -f  $EXTRA_PKGS/nfs-provisioner-4.0.2.yaml
 
 # storageclass installer & set default storageclass
 kubectl apply -f $EXTRA_PKGS/storageclass.yaml 
