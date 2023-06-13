@@ -37,7 +37,7 @@ find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
 cat <<EOF > /usr/local/bin/rerepo-k8s_learning.kit
 #!/usr/bin/env bash
 rm -rf $HOME/_Lecture_k8s_learning.kit 
-git clone https://github.com/seongjumoon/_Lecture_k8s_learning.kit.git $HOME/_Lecture_k8s_learning.kit
+git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git $HOME/_Lecture_k8s_learning.kit
 find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
 EOF
 chmod 700 /usr/local/bin/rerepo-k8s_learning.kit
