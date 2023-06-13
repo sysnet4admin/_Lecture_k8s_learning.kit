@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
         vb.name = "cp-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
         vb.cpus = 2
         vb.memory = 2048
-        vb.customize ["modifyvm", :id, "--groups", "/Grafana-k8s-C#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
+        vb.customize ["modifyvm", :id, "--groups", "/k8s-C#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
       end
       cfg.vm.host_name = "cp-k8s"
       cfg.vm.network "private_network", ip: "192.168.1.10"
@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
         vb.name = "w#{i}-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
         vb.cpus = 1
         vb.memory = 2048
-        vb.customize ["modifyvm", :id, "--groups", "/Grafana-k8s-C#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
+        vb.customize ["modifyvm", :id, "--groups", "/k8s-C#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
       end
       cfg.vm.host_name = "w#{i}-k8s"
       cfg.vm.network "private_network", ip: "192.168.1.10#{i}"
