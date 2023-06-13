@@ -35,8 +35,11 @@ kubectl apply -f $EXTRA_PKGS/metallb-native-v0.13.10.yaml
 # metrics server v0.6.1 - insecure mode 
 kubectl apply -f $EXTRA_PKGS/metrics-server-0.6.3.yaml
 
-# NFS dir configuration
-curl -s $EXTRA_PKGS/nfs-exporter.sh dynamic-vol | bash 
+# NFS dir configuration with vairable 
+curl -L $EXTRA_PKGS/nfs-exporter.sh -o /tmp/nfs-exporter.sh
+chmod 755 /tmp/nfs-exporter.sh
+/tmp/nfs-exporter.sh dynamic-vol
+rm /tmp/nfs-exporter.sh  
 
 # nfs-provsioner installer 
 kubectl apply -f  $EXTRA_PKGS/nfs-provisioner-4.0.18.yaml
