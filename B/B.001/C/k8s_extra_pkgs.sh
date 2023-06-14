@@ -32,8 +32,8 @@ kubectl apply -f $EXTRA_PKGS/metallb-native-v0.13.10.yaml
 # config metallb ip range and it cannot deploy now due to CRD cannot create yet 
 (sleep 600 && kubectl apply -f $EXTRA_PKGS/metallb-iprange.yaml)&
 
-# metrics server v0.6.1 - insecure mode 
-kubectl apply -f $EXTRA_PKGS/metrics-server-0.6.3.yaml
+# metrics server v0.6.3 - insecure mode 
+kubectl apply -f $EXTRA_PKGS/metrics-server-notls-0.6.3.yaml
 
 # NFS dir configuration with vairable 
 curl -L $EXTRA_PKGS/nfs-exporter.sh -o /tmp/nfs-exporter.sh
