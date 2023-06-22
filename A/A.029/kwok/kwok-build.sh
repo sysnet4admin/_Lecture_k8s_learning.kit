@@ -4,7 +4,7 @@
 export DEBIAN_FRONTEND=noninteractive
 
 # prerequirement # 
-apt get update 
+apt-get update 
 ## installation 
 apt-get install -y \
         ca-certificates \
