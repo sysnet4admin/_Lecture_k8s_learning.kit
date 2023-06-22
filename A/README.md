@@ -26,5 +26,4 @@
 - A.027: kubectl [ replace | patch ]의 용법
 - A.028: 워크로드(Workloads)와 애플리케이션(Applications)에 대한 용어 구분
 - A.029: Minikube와 KWOK(Kubernetes WithOut Kubelet) 비교
-- =======
 - A.030: 쿠버네티스 인증서가 1년인 이유와 조치 방법 
