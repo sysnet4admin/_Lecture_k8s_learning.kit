@@ -21,7 +21,7 @@ find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
 
 # KWOK!!! Variables preparation #
 ## KWOK repository
-# KWOK_REPO=kubernetes-sigs/kwok
+KWOK_REPO=kubernetes-sigs/kwok
 ## Get latest
 # KWOK_LATEST_RELEASE=$(curl "https://api.github.com/repos/${KWOK_REPO}/releases/latest" | jq -r '.tag_name')
 ### Fixed version 
@@ -72,7 +72,11 @@ kubectl config use-context kwok-demo
 kubectl apply -f https://raw.githubusercontent.com/sysnet4admin/_Lecture_k8s_learning.kit/main/A/A.029/9-bulk-nodes-w-taints.yaml
 
 # install helm 
-sh $HOME/_Lecture_k8s_learning.kit/ch9/9.6/get_helm.sh >/dev/null 2>&1
+export DESIRED_VERSION="v3.12.0"
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+rm $HOME/get-helm3 
 
 # helm completion on bash-completion dir & alias+ 
 helm completion bash > /etc/bash_completion.d/helm
