@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nodeaffinity-preferred
+  name: nodeaffinity-preferred
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodeaffinity-preferred
+  template:
+    metadata:
+      labels:
+        app: nodeaffinity-preferred
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: gpupool
+                operator: In
+                values:
+                - Nvidia
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: accelerator
+                operator: In
+                values:
+                - Tesla-H100
