@@ -84,6 +84,6 @@ echo 'alias h=helm' >> ~/.bashrc
 echo 'complete -F __start_helm h' >> ~/.bashrc 
 
 # add repo  
-helm repo add edu https://k8s-edu.github.io/helm-charts
+helm repo add edu https://k8s-edu.github.io/helm-charts/k8s
 helm repo update
 
