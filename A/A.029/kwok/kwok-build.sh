@@ -21,9 +21,11 @@ find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
 
 # KWOK!!! Variables preparation #
 ## KWOK repository
-KWOK_REPO=kubernetes-sigs/kwok
+# KWOK_REPO=kubernetes-sigs/kwok
 ## Get latest
-KWOK_LATEST_RELEASE=$(curl "https://api.github.com/repos/${KWOK_REPO}/releases/latest" | jq -r '.tag_name')
+# KWOK_LATEST_RELEASE=$(curl "https://api.github.com/repos/${KWOK_REPO}/releases/latest" | jq -r '.tag_name')
+### Fixed version 
+KWOK_LATEST_RELEASE="v0.3.0"
 
 # Install kwokctl #
 wget -O kwokctl -c "https://github.com/${KWOK_REPO}/releases/download/${KWOK_LATEST_RELEASE}/kwokctl-$(go env GOOS)-$(go env GOARCH)"
