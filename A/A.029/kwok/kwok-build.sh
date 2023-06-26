@@ -71,3 +71,15 @@ kubectl config use-context kwok-demo
 # Add 9 nodes for kwok 
 kubectl apply -f https://raw.githubusercontent.com/sysnet4admin/_Lecture_k8s_learning.kit/main/A/A.029/9-bulk-nodes-w-taints.yaml
 
+# install helm 
+sh $HOME/_Lecture_k8s_learning.kit/ch9/9.6/get_helm.sh >/dev/null 2>&1
+
+# helm completion on bash-completion dir & alias+ 
+helm completion bash > /etc/bash_completion.d/helm
+echo 'alias h=helm' >> ~/.bashrc
+echo 'complete -F __start_helm h' >> ~/.bashrc 
+
+# add repo  
+helm repo add edu https://k8s-edu.github.io/helm-charts
+helm repo update
+
