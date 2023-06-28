@@ -76,14 +76,14 @@ export DESIRED_VERSION="v3.12.0"
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
-rm $HOME/get-helm3 
+rm /home/vagrant/get-helm3 
 
 # helm completion on bash-completion dir & alias+ 
 helm completion bash > /etc/bash_completion.d/helm
 echo 'alias h=helm' >> ~/.bashrc
 echo 'complete -F __start_helm h' >> ~/.bashrc 
 
-# add repo  
+# add & update repo
 helm repo add edu https://k8s-edu.github.io/helm-charts/k8s
 helm repo update
 
