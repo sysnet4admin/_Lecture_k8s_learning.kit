@@ -76,7 +76,7 @@ export DESIRED_VERSION="v3.12.0"
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
-rm /home/vagrant/get-helm3 
+rm get_helm.sh 
 
 # helm completion on bash-completion dir & alias+ 
 helm completion bash > /etc/bash_completion.d/helm
