@@ -47,7 +47,7 @@ Vagrant.configure("2") do |config|
         cfg.vm.provider "virtualbox" do |vb|
           vb.name = "#{cv[0]}-w#{i}(github_SysNet4Admin)"
           vb.cpus = 1
-          vb.memory = 512
+          vb.memory = 1024
           vb.customize ["modifyvm", :id, "--groups", "/cka-cluster(github_SysNet4Admin)"]
         end
         cfg.vm.host_name = "#{cv[0]}-w#{i}"
