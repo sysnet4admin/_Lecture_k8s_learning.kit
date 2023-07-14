@@ -2,7 +2,7 @@
 
 # Create config.yaml 
 cat <<EOF > /tmp/kubeadm-config.yaml
-apiVersion: kubeadm.k8s.io/v1beta2
+apiVersion: kubeadm.k8s.io/v1beta3
 kind: InitConfiguration
 bootstrapTokens:
 - token: "123456.1234567890123456"
@@ -12,7 +12,7 @@ localAPIEndpoint:
   advertiseAddress: 192.168.1.$1
   bindPort: 6443
 ---
-apiVersion: kubeadm.k8s.io/v1beta2
+apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration
 clusterName: cluster-$2
 networking:
@@ -27,16 +27,15 @@ EOF
 # init kubernetes from --config due to clusterName
 kubeadm init --config=/tmp/kubeadm-config.yaml --upload-certs
 
-# config for master node only 
+# config for controlplane node only 
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
 
-# raw_address for gitcontent
-raw_git="raw.githubusercontent.com/sysnet4admin/IaC/master/manifests" 
-
-# config for kubernetes's network 
-kubectl apply -f https://$raw_git/172.16_net_calico_v1.yaml
+# CNI raw address
+CNI_ADDR="https://raw.githubusercontent.com/sysnet4admin/IaC/master/k8s/CNI"
+# config for kubernetes's network
+kubectl apply -f $CNI_ADDR/172.16_net_calico_v3.26.0.yaml
 
 # install etctctl 
 curl -L  https://github.com/sysnet4admin/BB/raw/main/etcdctl/v3.4.15/etcdctl -o /usr/local/bin/etcdctl

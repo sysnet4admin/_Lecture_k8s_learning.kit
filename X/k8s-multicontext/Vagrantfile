@@ -7,9 +7,9 @@ cl_val = [["bk8s", 110, 11,2],
           ["hk8s", 120, 12,1],
           ["wk8s", 130, 13,1]]
 # each of components to install 
-k8s_V = '1.23.1-00'            # Kubernetes 
-docker_V = '5:20.10.12~3-0~ubuntu-focal' # Docker  
-ctrd_V = '1.4.12-1'    # Containerd 
+k8s_V = '1.27.1-00'            # Kubernetes 
+ctrd_V   = '1.6.21-1'                    # Containerd
+docker_V = '5:24.0.4-1~ubuntu.22.04~jammy' # Docker
 ## /configuration variables ###
 
 Vagrant.configure("2") do |config|
@@ -20,22 +20,21 @@ Vagrant.configure("2") do |config|
   # master node #
   #=============#
 
-    config.vm.define "#{cv[0]}-m" do |cfg|
+    config.vm.define "#{cv[0]}-cp" do |cfg|
       cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
-      cfg.vm.box_version = "0.5.1"
       cfg.vm.provider "virtualbox" do |vb|
-        vb.name = "#{cv[0]}-m(github_SysNet4Admin)"
+        vb.name = "#{cv[0]}-cp(github_SysNet4Admin)"
         vb.cpus = 2
-        vb.memory = 1758 # a little consumed more 
+        vb.memory = 1770 # a little consumed more 
         vb.customize ["modifyvm", :id, "--groups", "/cka-cluster(github_SysNet4Admin)"]
       end
-      cfg.vm.host_name = "#{cv[0]}-m"
+      cfg.vm.host_name = "#{cv[0]}-cp"
       cfg.vm.network "private_network", ip: "192.168.1.#{cv[1]}"
       cfg.vm.network "forwarded_port", guest: 22, host: "60#{cv[1]}", auto_correct: true, id: "ssh"
       cfg.vm.synced_folder "../data", "/vagrant", disabled: true 
       cfg.vm.provision "shell", path: "k8s_env_build.sh", args: [ cv[0], cv[1], cv[2], cv[3] ]
-      cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, docker_V, ctrd_V ]
-      cfg.vm.provision "shell", path: "master_node.sh", args: [ cv[1], cv[0] ]
+      cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, docker_V, ctrd_V, "CP" ]
+      cfg.vm.provision "shell", path: "controlplane_node.sh", args: [ cv[1], cv[0] ]
     end
   
   #=============#
@@ -45,11 +44,10 @@ Vagrant.configure("2") do |config|
     (1..cv[3]).each do |i|
       config.vm.define "#{cv[0]}-w#{i}" do |cfg|
         cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
-        cfg.vm.box_version = "0.5.1"
         cfg.vm.provider "virtualbox" do |vb|
           vb.name = "#{cv[0]}-w#{i}(github_SysNet4Admin)"
           vb.cpus = 1
-          vb.memory = 1024
+          vb.memory = 512
           vb.customize ["modifyvm", :id, "--groups", "/cka-cluster(github_SysNet4Admin)"]
         end
         cfg.vm.host_name = "#{cv[0]}-w#{i}"
@@ -57,8 +55,8 @@ Vagrant.configure("2") do |config|
         cfg.vm.network "forwarded_port", guest: 22, host: "60#{cv[2]}#{i}", auto_correct: true, id: "ssh"
         cfg.vm.synced_folder "../data", "/vagrant", disabled: true
         cfg.vm.provision "shell", path: "k8s_env_build.sh", args: [ cv[0], cv[1], cv[2], cv[3] ]
-        cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, docker_V, ctrd_V ]
-        cfg.vm.provision "shell", path: "work_nodes.sh", args: [ cv[1], "#{cv[2]}#{i}" ]
+        cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, docker_V, ctrd_V, "W" ]
+        cfg.vm.provision "shell", path: "worker_nodes.sh", args: [ cv[1], "#{cv[2]}#{i}" ]
       end
     end
   end
@@ -69,7 +67,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "10cka-con" do |cfg|
     cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
-    cfg.vm.box_version = "0.5.1"
     cfg.vm.provider "virtualbox" do |vb|
       vb.name = "10cka-con(github_SysNet4Admin)"
       vb.cpus = 1

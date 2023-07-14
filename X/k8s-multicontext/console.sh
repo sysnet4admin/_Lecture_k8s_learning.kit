@@ -1,23 +1,28 @@
 #!/usr/bin/env bash
 
+# Avoid 'dpkg-reconfigure: unable to re-open stdin: No file or directory'
+export DEBIAN_FRONTEND=noninteractive
+
 # root_home_k8s_config 
 va_k8s_cfg="/root/.kube/config" 
 
 # install util packages 
-apt install sshpass
+apt-get install sshpass
 
 # add kubernetes repo
-apt update && apt install apt-transport-https curl
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-cat <<EOF | tee /etc/apt/sources.list.d/kubernetes.list
-deb https://apt.kubernetes.io/ kubernetes-xenial main
-EOF
+apt-get update && apt-get install apt-transport-https curl
+# add kubernetes repo ONLY for 22.04
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes.gpg
+echo \
+  "deb [signed-by=/etc/apt/keyrings/kubernetes.gpg] \
+  https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 # update repo info 
-apt update 
+apt-get update 
 
 # install kubectl
-apt install kubectl=$1 
+apt-get install kubectl=$1 
 
 # kubectl completion on bash-completion dir due to completion already installed 
 kubectl completion bash >/etc/bash_completion.d/kubectl
