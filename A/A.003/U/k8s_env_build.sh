@@ -10,10 +10,12 @@ sed -i.bak -r 's/(.+swap.+)/#\1/' /etc/fstab
 
 # add kubernetes repo
 apt-get update && apt-get install apt-transport-https ca-certificates curl
-curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg \
-            https://packages.cloud.google.com/apt/doc/apt-key.gpg
-echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] \
-      https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+# add kubernetes repo ONLY for 22.04
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes.gpg
+echo \
+  "deb [signed-by=/etc/apt/keyrings/kubernetes.gpg] \
+  https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 
 # add docker-ce repo
