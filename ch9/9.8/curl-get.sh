@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-COUNTER = 0
 while true
 do
   COUNTER=$((COUNTER + 1))
