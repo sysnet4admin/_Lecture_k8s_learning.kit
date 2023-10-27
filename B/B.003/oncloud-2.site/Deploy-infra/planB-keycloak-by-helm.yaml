@@ -1,0 +1,485 @@
+---
+# Source: keycloak/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: keycloak
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/version: 22.0.4
+    helm.sh/chart: keycloak-17.1.1
+    app.kubernetes.io/component: keycloak
+automountServiceAccountToken: true
+---
+# Source: keycloak/charts/postgresql/templates/secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: keycloak-postgresql
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/version: 16.0.0
+    helm.sh/chart: postgresql-13.1.5
+type: Opaque
+data:
+  postgres-password: "eWFZVXZ2QTVTSg=="
+  password: "ZHlya1J2NmF6cA=="
+  # We don't auto-generate LDAP password when it's not provided as we do for other passwords
+---
+# Source: keycloak/templates/secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: keycloak
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/version: 22.0.4
+    helm.sh/chart: keycloak-17.1.1
+    app.kubernetes.io/component: keycloak
+type: Opaque
+data:
+  admin-password: "YWRtaW4="
+---
+# Source: keycloak/templates/configmap-env-vars.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-env-vars
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/version: 22.0.4
+    helm.sh/chart: keycloak-17.1.1
+    app.kubernetes.io/component: keycloak
+data:
+  KEYCLOAK_ADMIN: "admin"
+  KEYCLOAK_HTTP_PORT: "8080"
+  KEYCLOAK_PROXY: "edge"
+  KEYCLOAK_ENABLE_STATISTICS: "false"
+  KEYCLOAK_DATABASE_HOST: "keycloak-postgresql"
+  KEYCLOAK_DATABASE_PORT: "5432"
+  KEYCLOAK_DATABASE_NAME: "bitnami_keycloak"
+  KEYCLOAK_DATABASE_USER: "bn_keycloak"
+  KEYCLOAK_PRODUCTION:  "true"
+  KEYCLOAK_ENABLE_HTTPS: "false"
+  KEYCLOAK_CACHE_TYPE: "ispn"
+  KEYCLOAK_CACHE_STACK: "kubernetes"
+  JAVA_OPTS_APPEND: "-Djgroups.dns.query=keycloak-headless.default.svc.cluster.local"
+  KEYCLOAK_LOG_OUTPUT: "default"
+  KC_LOG_LEVEL: "INFO"
+---
+# Source: keycloak/charts/postgresql/templates/primary/svc-headless.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak-postgresql-hl
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/version: 16.0.0
+    helm.sh/chart: postgresql-13.1.5
+    app.kubernetes.io/component: primary
+  annotations:
+    # Use this annotation in addition to the actual publishNotReadyAddresses
+    # field below because the annotation will stop being respected soon but the
+    # field is broken in some versions of Kubernetes:
+    # https://github.com/kubernetes/kubernetes/issues/58662
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  type: ClusterIP
+  clusterIP: None
+  # We want all pods in the StatefulSet to have their addresses published for
+  # the sake of the other Postgresql pods even before they're ready, since they
+  # have to be able to talk to each other in order to become ready.
+  publishNotReadyAddresses: true
+  ports:
+    - name: tcp-postgresql
+      port: 5432
+      targetPort: tcp-postgresql
+  selector:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/component: primary
+---
+# Source: keycloak/charts/postgresql/templates/primary/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak-postgresql
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/version: 16.0.0
+    helm.sh/chart: postgresql-13.1.5
+    app.kubernetes.io/component: primary
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+    - name: tcp-postgresql
+      port: 5432
+      targetPort: tcp-postgresql
+      nodePort: null
+  selector:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/component: primary
+---
+# Source: keycloak/templates/headless-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak-headless
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/version: 22.0.4
+    helm.sh/chart: keycloak-17.1.1
+    app.kubernetes.io/component: keycloak
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/component: keycloak
+---
+# Source: keycloak/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/version: 22.0.4
+    helm.sh/chart: keycloak-17.1.1
+    app.kubernetes.io/component: keycloak
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+      nodePort: null
+  selector:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/component: keycloak
+---
+# Source: keycloak/charts/postgresql/templates/primary/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: keycloak-postgresql
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/version: 16.0.0
+    helm.sh/chart: postgresql-13.1.5
+    app.kubernetes.io/component: primary
+spec:
+  replicas: 1
+  serviceName: keycloak-postgresql-hl
+  updateStrategy:
+    rollingUpdate: {}
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: keycloak
+      app.kubernetes.io/name: postgresql
+      app.kubernetes.io/component: primary
+  template:
+    metadata:
+      name: keycloak-postgresql
+      labels:
+        app.kubernetes.io/instance: keycloak
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: postgresql
+        app.kubernetes.io/version: 16.0.0
+        helm.sh/chart: postgresql-13.1.5
+        app.kubernetes.io/component: primary
+    spec:
+      serviceAccountName: default
+      
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: keycloak
+                    app.kubernetes.io/name: postgresql
+                    app.kubernetes.io/component: primary
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+      hostNetwork: false
+      hostIPC: false
+      containers:
+        - name: postgresql
+          image: docker.io/bitnami/postgresql:16.0.0-debian-11-r13
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            runAsGroup: 0
+            runAsNonRoot: true
+            runAsUser: 1001
+            seccompProfile:
+              type: RuntimeDefault
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: POSTGRESQL_PORT_NUMBER
+              value: "5432"
+            - name: POSTGRESQL_VOLUME_DIR
+              value: "/bitnami/postgresql"
+            - name: PGDATA
+              value: "/bitnami/postgresql/data"
+            # Authentication
+            - name: POSTGRES_USER
+              value: "bn_keycloak"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-postgresql
+                  key: password
+            - name: POSTGRES_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-postgresql
+                  key: postgres-password
+            - name: POSTGRES_DATABASE
+              value: "bitnami_keycloak"
+            # Replication
+            # Initdb
+            # Standby
+            # LDAP
+            - name: POSTGRESQL_ENABLE_LDAP
+              value: "no"
+            # TLS
+            - name: POSTGRESQL_ENABLE_TLS
+              value: "no"
+            # Audit
+            - name: POSTGRESQL_LOG_HOSTNAME
+              value: "false"
+            - name: POSTGRESQL_LOG_CONNECTIONS
+              value: "false"
+            - name: POSTGRESQL_LOG_DISCONNECTIONS
+              value: "false"
+            - name: POSTGRESQL_PGAUDIT_LOG_CATALOG
+              value: "off"
+            # Others
+            - name: POSTGRESQL_CLIENT_MIN_MESSAGES
+              value: "error"
+            - name: POSTGRESQL_SHARED_PRELOAD_LIBRARIES
+              value: "pgaudit"
+          ports:
+            - name: tcp-postgresql
+              containerPort: 5432
+          livenessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - exec pg_isready -U "bn_keycloak" -d "dbname=bitnami_keycloak" -h 127.0.0.1 -p 5432
+          readinessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - -e
+                - |
+                  exec pg_isready -U "bn_keycloak" -d "dbname=bitnami_keycloak" -h 127.0.0.1 -p 5432
+                  [ -f /opt/bitnami/postgresql/tmp/.initialized ] || [ -f /bitnami/postgresql/.initialized ]
+          resources:
+            limits: {}
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          volumeMounts:
+            - name: dshm
+              mountPath: /dev/shm
+            - name: data
+              mountPath: /bitnami/postgresql
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "8Gi"
+---
+# Source: keycloak/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: keycloak
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/version: 22.0.4
+    helm.sh/chart: keycloak-17.1.1
+    app.kubernetes.io/component: keycloak
+spec:
+  replicas: 1
+  podManagementPolicy: Parallel
+  serviceName: keycloak-headless
+  updateStrategy:
+    rollingUpdate: {}
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: keycloak
+      app.kubernetes.io/name: keycloak
+      app.kubernetes.io/component: keycloak
+  template:
+    metadata:
+      annotations:
+        checksum/configmap-env-vars: 526c72f88905181ebb419ad3af74c87f3c3591b9d57b3f93f002098a87fccc71
+        checksum/secrets: e2db7db092df16c42efb1446e53c4af06a385aa1af450792ab61151d2c3d8a53
+      labels:
+        app.kubernetes.io/instance: keycloak
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: keycloak
+        app.kubernetes.io/version: 22.0.4
+        helm.sh/chart: keycloak-17.1.1
+        app.kubernetes.io/component: keycloak
+    spec:
+      serviceAccountName: keycloak
+      
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: keycloak
+                    app.kubernetes.io/name: keycloak
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+      enableServiceLinks: true
+      initContainers:
+      containers:
+        - name: keycloak
+          image: docker.io/bitnami/keycloak:22.0.4-debian-11-r3
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+          env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak
+                  key: admin-password
+            - name: KEYCLOAK_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-postgresql
+                  key: password
+            - name: KEYCLOAK_HTTP_RELATIVE_PATH
+              value: "/"
+          envFrom:
+            - configMapRef:
+                name: keycloak-env-vars
+          resources:
+            limits: {}
+            requests: {}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: infinispan
+              containerPort: 7800
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 300
+            periodSeconds: 1
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+            httpGet:
+              path: /realms/master
+              port: http
+          volumeMounts:
+      volumes:
