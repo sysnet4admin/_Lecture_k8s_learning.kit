@@ -16,7 +16,6 @@ echo "Enable containerregistry"
 gcloud services enable container.googleapis.com containerregistry.googleapis.com
 echo "---"
 
-
 # Deploy GKE cluster for keycloak
 echo "Create GKE cluster $CLUSTER_VERSION"
 gcloud container clusters create $KUBE_CLUSTER \
@@ -24,7 +23,6 @@ gcloud container clusters create $KUBE_CLUSTER \
 --zone=${GCP_ZONE} \
 --no-enable-autorepair \
 --no-enable-autoupgrade \
---no-enable-ip-alias \
 --location-policy=BALANCED \
 --enable-identity-service \
 --cluster-version="${CLUSTER_VERSION}" \
@@ -41,10 +39,10 @@ echo "---"
 # Deploy keycloak 
 # notice: helm version should be 3.8.0 at least 
 echo "Deploy keycloak to GKE"
-echo "wait 60 seconds for stable GKE" ; sleep 60 
+echo "wait 120 seconds for stable GKE" ; sleep 120
 helm install keycloak oci://registry-1.docker.io/bitnamicharts/keycloak \
 --set auth.adminUser=admin \
 --set auth.adminPassword=admin \
 --set production=true \
---set proxy=edge
-
+--set proxy=edge \
+--version 17.1.1
