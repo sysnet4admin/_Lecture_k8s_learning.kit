@@ -11,7 +11,7 @@ gcloud compute addresses create hj-keycloak-oncloud-1-static-ip \
   --ip-version IPV4
 echo "---"
 
-# enable containerregistry
+# enable container & containerregistry API
 echo "Enable container & containerregistry API"
 gcloud services enable container.googleapis.com containerregistry.googleapis.com
 echo "---"
