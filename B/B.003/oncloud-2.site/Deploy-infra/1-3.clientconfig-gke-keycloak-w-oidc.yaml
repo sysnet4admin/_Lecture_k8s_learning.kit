@@ -8,7 +8,7 @@ spec:
   - name: oidc
     oidc:
       # should change clientSecret after deploying keycloak
-      clientSecret: iCkW0BdGPj0u08hJtjFX9vGiJTemePl7
+      clientSecret: Ay640idvu4XFZSkWYFmLsLk3NdzuOfDI
       clientID: k8s-auth 
       cloudConsoleRedirectURI: https://console.cloud.google.com/kubernetes/oidc
       extraParams: resource=token-groups-claim

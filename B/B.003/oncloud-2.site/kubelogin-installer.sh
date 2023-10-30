@@ -2,7 +2,7 @@
 
 # declare variable.
 DOMAIN_NAME=oncloud-2
-CLIENT_SECRET=iCkW0BdGPj0u08hJtjFX9vGiJTemePl7
+CLIENT_SECRET=Ay640idvu4XFZSkWYFmLsLk3NdzuOfDI
 
 #  keycloak-login-config 
 rm -rf ~/.keycloak ; mkdir ~/.keycloak
