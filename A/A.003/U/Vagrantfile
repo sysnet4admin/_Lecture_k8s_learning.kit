@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
       cfg.vm.synced_folder "../data", "/vagrant", disabled: true
       cfg.vm.provision "shell", path: "k8s_env_build.sh", args: N
       cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, docker_V, ctrd_V, "M"]
-      cfg.vm.provision "shell", path: "master_node.sh"
+      cfg.vm.provision "shell", path: "master_node.sh", args: "#{k8s_V[0..5]}" # temp: when v1.24.x apply, redirect to gcr.io but not in v1.24.17 / only ubuntu issue 
     end
 
   #==============#
