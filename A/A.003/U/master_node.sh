@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-# init kubernetes (w/ containerd)
+# init kubernetes (w/ containerd) + image-repo: registry.k8s.io due to v1.24.17 not exit(or gcr.io issue) 
 kubeadm init --token 123456.1234567890123456 --token-ttl 0 \
              --pod-network-cidr=172.16.0.0/16 --apiserver-advertise-address=192.168.1.10 \
-             --cri-socket=unix:///run/containerd/containerd.sock
+             --cri-socket=unix:///run/containerd/containerd.sock \
+             --image-repository=registry.k8s.io
 
 # config for master node only 
 mkdir -p $HOME/.kube
