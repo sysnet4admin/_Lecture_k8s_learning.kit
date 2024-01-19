@@ -1,13 +1,13 @@
 # Create ConfigMaps
 
-k create cm trauerweide --from-literal tree=trauerweide
+controlplane $ k create cm trauerweide --from-literal tree=trauerweide
 
-k apply -f /root/cm.yaml
+controlplane $ k apply -f /root/cm.yaml
 
 ---
 # Access ConfigMaps in Pod
 
-$cat pod1.yaml 
+controlplane $ cat pod1.yaml 
 apiVersion: v1
 kind: Pod
 metadata:
