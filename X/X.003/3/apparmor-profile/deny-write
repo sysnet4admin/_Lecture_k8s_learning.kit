@@ -1,9 +1,0 @@
-#include <tunables/global>
-
-profile deny-write flags=(attach_disconnected) {
-  #include <abstractions/base>
-
-  file,
-  # Deny all path write
-  deny /** w,
-}
