@@ -1,0 +1,12 @@
+---
+- hosts: Workers
+  gather_facts: no
+
+  tasks:
+  - name: Copy apparmor profile for each worker node
+    copy:
+      src: apparmor-profile/deny-write
+      dest: /etc/apparmor.d/
+
+  - name: Load deny-write profile
+    shell: apparmor_parser -r /etc/apparmor.d/deny-write

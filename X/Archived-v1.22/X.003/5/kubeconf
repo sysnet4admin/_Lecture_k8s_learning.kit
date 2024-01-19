@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Config
+
+clusters:
+- cluster:
+    certificate-authority: /etc/kubernetes/admission/ext-cert.pem  
+    server: https://ext-svc:8080/img-validation                   
+  name: img-validation 
+
+contexts:
+- context:
+    cluster: img-validation 
+    user: api-admin 
+  name: img-validation 
+current-context: img-validation
+preferences: {}
+
+users:
+- name: api-server
+  user:
+    client-certificate: /etc/kubernetes/admission/apiserver-client-cert.pem     
+    client-key:  /etc/kubernetes/admission/apiserver-client-key.pem             

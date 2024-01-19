@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: aa-sleepy
+  name: aa-sleepy
+  annotations:
+    # Tell Kubernetes to apply the AppArmor profile "k8s-apparmor-example-deny-write".
+    # Note that this is ignored if the Kubernetes node is not running version 1.4 or greater.
+    container.apparmor.security.beta.kubernetes.io/aa-sleepy: localhost/deny-write
+spec:
+  containers:
+  - image: sysnet4admin/sleepy
+    name: aa-sleepy
+  nodeName: bk8s-w1
