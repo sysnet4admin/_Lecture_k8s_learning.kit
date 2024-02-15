@@ -4,7 +4,7 @@
 # PATH=$PATH:/usr/local/bin
 
 # main scripfiles dir 
-SCRIPTSDIR=$HOME/_Lecture_k8s_learning.kit/B/B.001/extra-k8s-pkgs
+SCRIPTSDIR=$HOME/_Lecture_k8s_learning.kit/B/B.001/U/v1.29/extra-k8s-pkgs
 
 # helm 3.9.1 installer
 sh $SCRIPTSDIR/get-helm-3.9.1.sh
