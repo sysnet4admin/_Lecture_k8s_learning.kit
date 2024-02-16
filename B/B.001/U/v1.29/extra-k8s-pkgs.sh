@@ -7,9 +7,9 @@
 SCRIPTSDIR=$HOME/_Lecture_k8s_learning.kit/B/B.001/U/v1.29/extra-k8s-pkgs
 
 # helm 3.9.1 installer
-sh $SCRIPTSDIR/get-helm-3.9.1.sh
+bash $SCRIPTSDIR/get-helm-3.9.1.sh
 # repo edu add 
-sh $SCRIPTSDIR/helm-repo-add.sh 
+bash $SCRIPTSDIR/helm-repo-add.sh 
 # helm completion on bash-completion dir & alias+ 
 helm completion bash > /etc/bash_completion.d/helm
 echo 'alias h=helm' >> ~/.bashrc
@@ -33,7 +33,7 @@ kubectl apply -f $SCRIPTSDIR/metallb-native-v0.13.7.yaml
 kubectl apply -f  $SCRIPTSDIR/metrics-server-0.6.1.yaml
 
 # NFS dir configuration
-sh $SCRIPTSDIR/nfs-exporter.sh dynamic-vol
+bash $SCRIPTSDIR/nfs-exporter.sh dynamic-vol
 
 # nfs-provsioner installer 
 kubectl apply -f  $SCRIPTSDIR/nfs-provisioner.yaml

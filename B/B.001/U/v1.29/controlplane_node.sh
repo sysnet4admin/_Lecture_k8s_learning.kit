@@ -13,9 +13,9 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 # raw_address for gitcontent
 raw_git="raw.githubusercontent.com/sysnet4admin/IaC/master/manifests"
 
-# config for kubernetes's network
-#! kubectl apply -f https://$raw_git/172.16_net_calico_v3.25.0.yaml
-kubectl apply -f https://$raw_git/172.16_net_calico_v1.yaml
+# CNI raw address & config for kubernetes's network 
+CNI_ADDR="https://raw.githubusercontent.com/sysnet4admin/IaC/master/k8s/CNI"
+kubectl apply -f $CNI_ADDR/172.16_net_calico_v3.26.0.yaml
 
 # kubectl completion on bash-completion dir
 kubectl completion bash >/etc/bash_completion.d/kubectl
