@@ -10,9 +10,6 @@ mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
 
-# raw_address for gitcontent
-raw_git="raw.githubusercontent.com/sysnet4admin/IaC/master/manifests"
-
 # CNI raw address & config for kubernetes's network 
 CNI_ADDR="https://raw.githubusercontent.com/sysnet4admin/IaC/master/k8s/CNI"
 kubectl apply -f $CNI_ADDR/172.16_net_calico_v3.26.0.yaml
