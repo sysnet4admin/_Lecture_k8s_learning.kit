@@ -22,19 +22,19 @@ echo 'alias k=kubectl' >> ~/.bashrc
 echo "alias ka='kubectl apply -f'" >> ~/.bashrc
 echo 'complete -F __start_kubectl k' >> ~/.bashrc
 
-# git clone cicd-code
-git clone https://github.com/sungmincs/_Lecture_cicd_learning.kit
-mv /home/vagrant/_Lecture_cicd_learning.kit $HOME
-find $HOME/_Lecture_cicd_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
+# git clone k8s-adv-code
+git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git
+mv /home/vagrant/_Lecture_k8s_learning.kit $HOME
+find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
 
-# make rerepo-cicd-learning.kit and put permission
-cat <<EOF > /usr/local/bin/rerepo-cicd-learning.kit
+# make rerepo-k8s-learning.kit and put permission
+cat <<EOF > /usr/local/bin/rerepo-k8s-learning.kit
 #!/usr/bin/env bash
-rm -rf $HOME/_Lecture_cicd_learning.kit 
-git clone https://github.com/sungmincs/_Lecture_cicd_learning.kit $HOME/_Lecture_cicd_learning.kit
-find $HOME/_Lecture_cicd_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
+rm -rf $HOME/_Lecture_k8s_learning.kit 
+git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git $HOME/_Lecture_k8s_learning.kit
+find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
 EOF
-chmod 700 /usr/local/bin/rerepo-cicd-learning.kit
+chmod 700 /usr/local/bin/rerepo-k8s-learning.kit
 
 # extended k8s certifications all
 git clone https://github.com/yuyicai/update-kube-cert.git /tmp/update-kube-cert
