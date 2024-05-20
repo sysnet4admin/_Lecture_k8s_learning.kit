@@ -1,26 +1,33 @@
 #!/usr/bin/env bash
 
-# install util packages 
-yum install epel-release -y
-yum install vim-enhanced -y
-yum install git -y
+# avoid 'dpkg-reconfigure: unable to re-open stdin: No file or directory'
+export DEBIAN_FRONTEND=noninteractive
 
-# install docker 
-yum install docker-ce-$2 docker-ce-cli-$2 containerd.io-$3 -y
+# update package list 
+apt-get update 
+
+# install NFS 
+if [ $3 = 'CP' ]; then
+  apt-get install nfs-server nfs-common -y 
+elif [ $3 = 'W' ]; then
+  apt-get install nfs-common -y 
+fi
 
 # install kubernetes
 # both kubelet and kubectl will install by dependency
 # but aim to latest version. so fixed version by manually
-yum install kubelet-$1 kubectl-$1 kubeadm-$1 -y 
+apt-get install -y kubelet=$1 kubectl=$1 kubeadm=$1 containerd.io=$2
 
-# Ready to install for k8s 
-systemctl enable --now docker
-systemctl enable --now kubelet
+# containerd configure to default and cgroup managed by systemd 
+containerd config default > /etc/containerd/config.toml
+sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
 
-# docker daemon config for systemd from cgroupfs & restart 
-cat <<EOF > /etc/docker/daemon.json
-{
-  "exec-opts": ["native.cgroupdriver=systemd"]
-}
+# avoid WARN&ERRO(default endpoints) when crictl run  
+cat <<EOF > /etc/crictl.yaml
+runtime-endpoint: unix:///run/containerd/containerd.sock
+image-endpoint: unix:///run/containerd/containerd.sock
 EOF
-systemctl daemon-reload && systemctl restart docker
+
+# ready to install for k8s 
+systemctl restart containerd ; systemctl enable containerd
+systemctl enable --now kubelet
