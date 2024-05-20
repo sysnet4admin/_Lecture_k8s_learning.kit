@@ -1,46 +1,40 @@
 #!/usr/bin/env bash
 
-# vim configuration 
-echo 'alias vi=vim' >> /etc/profile
+# avoid 'dpkg-reconfigure: unable to re-open stdin: No file or directory'
+export DEBIAN_FRONTEND=noninteractive
 
 # swapoff -a to disable swapping
 swapoff -a
-# sed to comment the swap partition in /etc/fstab
-sed -i.bak -r 's/(.+ swap .+)/#\1/' /etc/fstab
+# sed to comment the swap partition in /etc/fstab (Rmv blank)
+sed -i.bak -r 's/(.+swap.+)/#\1/' /etc/fstab
 
-# kubernetes repo
-gg_pkg="http://mirrors.aliyun.com/kubernetes/yum" # Due to shorten addr for key
-cat <<EOF > /etc/yum.repos.d/kubernetes.repo
-[kubernetes]
-name=Kubernetes
-baseurl=${gg_pkg}/repos/kubernetes-el7-x86_64
-enabled=1
-gpgcheck=0
-repo_gpgcheck=0
-gpgkey=${gg_pkg}/doc/yum-key.gpg ${gg_pkg}/doc/rpm-package-key.gpg
-EOF
+# add kubernetes repo 
+curl \
+  -fsSL https://pkgs.k8s.io/core:/stable:/v$2/deb/Release.key \
+  | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo \
+  "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] \
+  https://pkgs.k8s.io/core:/stable:/v$2/deb/ /" \
+  | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-# add docker-ce repo
-yum install yum-utils -y 
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+# add docker-ce repo with containerd
+curl -fsSL \
+  https://download.docker.com/linux/ubuntu/gpg \
+  -o /etc/apt/keyrings/docker.asc
+echo \
+  "deb [arch=$(dpkg --print-architecture) \
+  signed-by=/etc/apt/keyrings/docker.asc] \
+  https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+  | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# Set SELinux in permissive mode (effectively disabling it)
-setenforce 0
-sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
-
-# RHEL/CentOS 7 have reported traffic issues being routed incorrectly due to iptables bypassed
-cat <<EOF >  /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
-EOF
+# packets traversing the bridge are processed by iptables for filtering
+echo 1 > /proc/sys/net/ipv4/ip_forward
+# enable br_filter for iptables 
 modprobe br_netfilter
 
 # local small dns & vagrant cannot parse and delivery shell code.
-echo "192.168.1.10 m-k8s" >> /etc/hosts
+echo "127.0.0.1 localhost" > /etc/hosts # localhost name will use by calico-node
+echo "192.168.1.10 cp-k8s" >> /etc/hosts
 for (( i=1; i<=$1; i++  )); do echo "192.168.1.10$i w$i-k8s" >> /etc/hosts; done
 
-# config DNS  
-cat <<EOF > /etc/resolv.conf
-nameserver 1.1.1.1 #cloudflare DNS
-nameserver 8.8.8.8 #Google DNS
-EOF
