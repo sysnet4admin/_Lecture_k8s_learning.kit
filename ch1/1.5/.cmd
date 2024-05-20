@@ -54,3 +54,10 @@ cp ./tabby-v1.0.207/config.yaml $env:APPDATA/tabby
 
 ## MacOS 
 cp ./tabby-v1.0.207/config.yaml ~/Library/Application\ Support/tabby
+
+# Make a cluster 
+## Control Plane node 
+./ADD_controlplane_node.sh 
+
+## Worker nodes 
+./ADD_worker_nodes.sh

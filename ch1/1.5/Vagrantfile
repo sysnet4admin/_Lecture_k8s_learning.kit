@@ -29,8 +29,9 @@ Vagrant.configure("2") do |config|
       cfg.vm.synced_folder "../data", "/vagrant", disabled: true
       cfg.vm.provision "shell", path: "k8s_env_build.sh", args: [ N, k8s_V[0..3] ]
       cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, ctrd_V, "CP"]
-  #    cfg.vm.provision "shell", path: "controlplane_node.sh"
       cfg.vm.provision "shell", path: "k_cfg_n_git_clone.sh" # add kubectl config & git clone source
+      cfg.vm.provision "file",  source: "ADD_controlplane_node.sh", destination: "/tmp/ADD_controlplane_node.sh"
+      cfg.vm.provision "shell", inline: "mv /tmp/ADD_controlplane_node.sh /root/ADD_controlplane_node.sh"
     end
 
   #==============#
@@ -52,7 +53,8 @@ Vagrant.configure("2") do |config|
       cfg.vm.synced_folder "../data", "/vagrant", disabled: true
       cfg.vm.provision "shell", path: "k8s_env_build.sh", args: [ N, k8s_V[0..3] ]
       cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, ctrd_V, "W" ]
-  #    cfg.vm.provision "shell", path: "worker_nodes.sh"
+      cfg.vm.provision "file",  source: "ADD_worker_nodes.sh", destination: "/tmp/ADD_worker_nodes.sh"
+      cfg.vm.provision "shell", inline: "mv /tmp/ADD_worker_nodes.sh /root/ADD_worker_nodes.sh"
     end
   end
 
