@@ -158,7 +158,7 @@ spec:
           emptyDir: {}
       serviceAccountName: kubernetes-dashboard
       nodeSelector:
-        "kubernetes.io/hostname": m-k8s
+        "kubernetes.io/hostname": cp-k8s
       # Comment the following tolerations if Dashboard must not be deployed on master
       tolerations:
         - key: node-role.kubernetes.io/master
@@ -226,7 +226,7 @@ spec:
             runAsGroup: 2001
       serviceAccountName: kubernetes-dashboard
       nodeSelector:
-        "kubernetes.io/hostname": m-k8s
+        "kubernetes.io/hostname": cp-k8s
       # Comment the following tolerations if Dashboard must not be deployed on master
       tolerations:
         - key: node-role.kubernetes.io/master
