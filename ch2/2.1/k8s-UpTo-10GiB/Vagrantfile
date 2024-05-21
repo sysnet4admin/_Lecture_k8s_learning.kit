@@ -30,6 +30,7 @@ Vagrant.configure("2") do |config|
       cfg.vm.provision "shell", path: "k8s_env_build.sh", args: [ N, k8s_V[0..3] ]
       cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, ctrd_V, "CP"]
       cfg.vm.provision "shell", path: "controlplane_node.sh"
+      cfg.vm.provision "shell", path: "extra_k8s_pkgs.sh"
     end
 
   #==============#
