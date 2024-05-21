@@ -15,7 +15,7 @@
 ###
 # Not Source from https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 # Source from https://raw.githubusercontent.com/kubernetes/dashboard/master/charts/recommended.yaml
-# there are so many changement from v3.0.0 and helm is only supported after v3.0.0 officially. 
+# There are so many changement from v3.0.0 and helm is only supported after v3.0.0 officially. 
 #
 apiVersion: v1
 kind: Namespace
