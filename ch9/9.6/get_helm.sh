@@ -25,7 +25,7 @@
 : ${HELM_INSTALL_DIR:="/usr/local/bin"}
 : ${GPG_PUBRING:="pubring.kbx"}
 # custome by sysnet4admin 
-: ${DESIRED_VERSION:="v3.6.3"}
+: ${DESIRED_VERSION:="v3.14.0"}
 
 HAS_CURL="$(type "curl" &> /dev/null && echo true || echo false)"
 HAS_WGET="$(type "wget" &> /dev/null && echo true || echo false)"
