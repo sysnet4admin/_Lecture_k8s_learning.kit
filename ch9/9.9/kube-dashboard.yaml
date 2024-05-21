@@ -1,8 +1,22 @@
-# Main_Source_From  
-# - https://raw.githubusercontent.com/kubernetes/dashboard/v2.3.1/aio/deploy/recommended.yaml
-# Port changement refer From
-# - https://github.com/kubernetes/dashboard/blob/63c9c84769130601ec2c05ef4d96887c563c0186/src/app/backend/dashboard.go#L48
-
+# Copyright 2017 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+###
+# Not Source from https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+# Source from https://raw.githubusercontent.com/kubernetes/dashboard/master/charts/recommended.yaml
+# there are so many changement from v3.0.0 and helm is only supported after v3.0.0 officially. 
+#
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -19,7 +33,10 @@ metadata:
   namespace: kubernetes-dashboard
 
 ---
-
+# change port from 443 to 80 
+# change targetPort from 8443 to 9090
+# change type from none to LoadBalancer
+#
 kind: Service
 apiVersion: v1
 metadata:
@@ -81,7 +98,8 @@ metadata:
   namespace: kubernetes-dashboard
 
 ---
-
+# delete kubernetes-dashboard role and bind to cluster-admin 
+#
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -96,7 +114,10 @@ subjects:
     namespace: kubernetes-dashboard
 
 ---
-
+# change port type from HTTPS to HTTP
+# change ports from 8443 to 9090
+# add args 
+#
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -115,9 +136,12 @@ spec:
       labels:
         k8s-app: kubernetes-dashboard
     spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: kubernetes-dashboard
-          image: kubernetesui/dashboard:v2.3.1
+          image: kubernetesui/dashboard:v2.7.0
           imagePullPolicy: Always
           ports:
             - containerPort: 9090
@@ -158,8 +182,8 @@ spec:
           emptyDir: {}
       serviceAccountName: kubernetes-dashboard
       nodeSelector:
-        "kubernetes.io/hostname": cp-k8s
-      # Comment the following tolerations if Dashboard must not be deployed on master
+        "kubernetes.io/os": linux
+      # Comment the following tolerations if Dashboard must not be deployed on control plane nodes
       tolerations:
         - key: node-role.kubernetes.io/control-plane
           effect: NoSchedule
@@ -199,13 +223,13 @@ spec:
     metadata:
       labels:
         k8s-app: dashboard-metrics-scraper
-      annotations:
-      # custom by sysnet4admin due to warning 
-      # seccomp.security.alpha.kubernetes.io/pod: 'runtime/default'
     spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: dashboard-metrics-scraper
-          image: kubernetesui/metrics-scraper:v1.0.6
+          image: kubernetesui/metrics-scraper:v1.0.9
           ports:
             - containerPort: 8000
               protocol: TCP
@@ -226,8 +250,8 @@ spec:
             runAsGroup: 2001
       serviceAccountName: kubernetes-dashboard
       nodeSelector:
-        "kubernetes.io/hostname": cp-k8s
-      # Comment the following tolerations if Dashboard must not be deployed on master
+        "kubernetes.io/os": linux
+      # Comment the following tolerations if Dashboard must not be deployed on control plane nodes
       tolerations:
         - key: node-role.kubernetes.io/control-plane
           effect: NoSchedule
