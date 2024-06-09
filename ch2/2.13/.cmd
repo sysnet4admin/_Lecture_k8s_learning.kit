@@ -1,12 +1,15 @@
-k run nginx --image=nginx 
-k get pod
-k create deployment nginx --image=nginx 
-k scale deployment nginx --replicas=3 
-k get pods 
+k run nginx --image=nginx -o yaml 
 k delete pod nginx 
-k delete deployment nginx 
 
-k apply -f ~/_Lecture_k8s_learning.kit/ch2/2.3/apy-nginx.yaml 
-k exec apy-nginx-<replica>-<HASH> -it -- /bin/bash  
-k edit > replicas=1
-k delete deployment apy-nginx 
+k run nginx --image=nginx -o yaml --dry-run=client
+k run nginx --image=nginx -o yaml --dry-run=client > po-nginx.yaml 
+cat po-nginx.yaml 
+k apply -f po-nginx.yaml 
+k get pod 
+k delete pod nginx 
+
+k create deployment nginx --image=nginx -o yaml --dry-run=client > deploy-nginx.yaml
+cat deploy-nginx.yam
+vi > replicas=3
+k apply -f deploy-nginx.yaml 
+k delete -f deploy-nginx.yaml  

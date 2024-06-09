@@ -1,15 +1,11 @@
-k run nginx --image=nginx -o yaml 
-k delete pod nginx 
+k apply -f ~/_Lecture_k8s_learning.kit/ch2/2.5/evt-desc.yaml 
 
-k run nginx --image=nginx -o yaml --dry-run=client
-k run nginx --image=nginx -o yaml --dry-run=client > po-nginx.yaml 
-cat po-nginx.yaml 
-k apply -f po-nginx.yaml 
-k get pod 
-k delete pod nginx 
+k get events 
+k describe < po | deploy | others> < Name >
 
-k create deployment nginx --image=nginx -o yaml --dry-run=client > deploy-nginx.yaml
-cat deploy-nginx.yam
-vi > replicas=3
-k apply -f deploy-nginx.yaml 
-k delete -f deploy-nginx.yaml  
+k apply -f ~/_Lecture_k8s_learning.kit/ch2/2.5/logs.yaml 
+
+k logs < Name >
+
+k delete -f evt-desc.yaml 
+k delete -f logs.yaml 
