@@ -1,0 +1,995 @@
+Bringing machine 'cp-k8s-1.30.0' up with 'virtualbox' provider...
+Bringing machine 'w1-k8s-1.30.0' up with 'virtualbox' provider...
+Bringing machine 'w2-k8s-1.30.0' up with 'virtualbox' provider...
+Bringing machine 'w3-k8s-1.30.0' up with 'virtualbox' provider...
+==> cp-k8s-1.30.0: Importing base box 'sysnet4admin/Ubuntu-k8s'...
+[KProgress: 10%[KProgress: 20%[KProgress: 40%[KProgress: 50%[KProgress: 90%[K==> cp-k8s-1.30.0: Matching MAC address for NAT networking...
+==> cp-k8s-1.30.0: Checking if box 'sysnet4admin/Ubuntu-k8s' version '0.8.4' is up to date...
+==> cp-k8s-1.30.0: Setting the name of the VM: cp-k8s-1.30.0(github_SysNet4Admin)
+==> cp-k8s-1.30.0: Clearing any previously set network interfaces...
+==> cp-k8s-1.30.0: Preparing network interfaces based on configuration...
+    cp-k8s-1.30.0: Adapter 1: nat
+    cp-k8s-1.30.0: Adapter 2: hostonly
+==> cp-k8s-1.30.0: Forwarding ports...
+    cp-k8s-1.30.0: 22 (guest) => 60010 (host) (adapter 1)
+==> cp-k8s-1.30.0: Running 'pre-boot' VM customizations...
+==> cp-k8s-1.30.0: Booting VM...
+==> cp-k8s-1.30.0: Waiting for machine to boot. This may take a few minutes...
+    cp-k8s-1.30.0: SSH address: 127.0.0.1:60010
+    cp-k8s-1.30.0: SSH username: vagrant
+    cp-k8s-1.30.0: SSH auth method: private key
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: Vagrant insecure key detected. Vagrant will automatically replace
+    cp-k8s-1.30.0: this with a newly generated keypair for better security.
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: Inserting generated public key within guest...
+    cp-k8s-1.30.0: Removing insecure key from the guest if it's present...
+    cp-k8s-1.30.0: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> cp-k8s-1.30.0: Machine booted and ready!
+==> cp-k8s-1.30.0: Checking for guest additions in VM...
+    cp-k8s-1.30.0: The guest additions on this VM do not match the installed version of
+    cp-k8s-1.30.0: VirtualBox! In most cases this is fine, but in rare cases it can
+    cp-k8s-1.30.0: prevent things such as shared folders from working properly. If you see
+    cp-k8s-1.30.0: shared folder errors, please make sure the guest additions within the
+    cp-k8s-1.30.0: virtual machine match the version of VirtualBox you have installed on
+    cp-k8s-1.30.0: your host and reload your VM.
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: Guest Additions Version: 6.0.0 r127566
+    cp-k8s-1.30.0: VirtualBox Version: 7.0
+==> cp-k8s-1.30.0: Setting hostname...
+==> cp-k8s-1.30.0: Configuring and enabling network interfaces...
+==> cp-k8s-1.30.0: Running provisioner: shell...
+    cp-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-n17shm.sh
+    cp-k8s-1.30.0: deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg]   https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+==> cp-k8s-1.30.0: Running provisioner: shell...
+    cp-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-89r0vm.sh
+    cp-k8s-1.30.0: Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.8 kB]
+    cp-k8s-1.30.0: Get:2 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [32.5 kB]
+    cp-k8s-1.30.0: Get:3 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  InRelease [1,186 B]
+    cp-k8s-1.30.0: Get:4 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  Packages [3,957 B]
+    cp-k8s-1.30.0: Hit:5 http://kr.archive.ubuntu.com/ubuntu jammy InRelease
+    cp-k8s-1.30.0: Get:6 http://kr.archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+    cp-k8s-1.30.0: Get:7 http://kr.archive.ubuntu.com/ubuntu jammy-backports InRelease [109 kB]
+    cp-k8s-1.30.0: Get:8 http://kr.archive.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+    cp-k8s-1.30.0: Get:9 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [1,678 kB]
+    cp-k8s-1.30.0: Get:10 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [311 kB]
+    cp-k8s-1.30.0: Get:11 http://kr.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [1,923 kB]
+    cp-k8s-1.30.0: Get:12 http://kr.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [327 kB]
+    cp-k8s-1.30.0: Get:13 http://kr.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1,074 kB]
+    cp-k8s-1.30.0: Get:14 http://kr.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [246 kB]
+    cp-k8s-1.30.0: Get:15 http://kr.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [42.7 kB]
+    cp-k8s-1.30.0: Get:16 http://kr.archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [10.4 kB]
+    cp-k8s-1.30.0: Get:17 http://kr.archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [67.1 kB]
+    cp-k8s-1.30.0: Get:18 http://kr.archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.0 kB]
+    cp-k8s-1.30.0: Get:19 http://kr.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [27.2 kB]
+    cp-k8s-1.30.0: Get:20 http://kr.archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.2 kB]
+    cp-k8s-1.30.0: Get:21 http://kr.archive.ubuntu.com/ubuntu jammy-security/main amd64 Packages [1,467 kB]
+    cp-k8s-1.30.0: Get:22 http://kr.archive.ubuntu.com/ubuntu jammy-security/main Translation-en [252 kB]
+    cp-k8s-1.30.0: Get:23 http://kr.archive.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [1,866 kB]
+    cp-k8s-1.30.0: Get:24 http://kr.archive.ubuntu.com/ubuntu jammy-security/restricted Translation-en [317 kB]
+    cp-k8s-1.30.0: Get:25 http://kr.archive.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [852 kB]
+    cp-k8s-1.30.0: Get:26 http://kr.archive.ubuntu.com/ubuntu jammy-security/universe Translation-en [164 kB]
+    cp-k8s-1.30.0: Get:27 http://kr.archive.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [37.2 kB]
+    cp-k8s-1.30.0: Get:28 http://kr.archive.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [7,588 B]
+    cp-k8s-1.30.0: Fetched 11.1 MB in 5s (2,048 kB/s)
+    cp-k8s-1.30.0: Reading package lists...
+    cp-k8s-1.30.0: Reading package lists...
+    cp-k8s-1.30.0: Building dependency tree...
+    cp-k8s-1.30.0: Reading state information...
+    cp-k8s-1.30.0: The following additional packages will be installed:
+    cp-k8s-1.30.0:   keyutils libnfsidmap1 rpcbind
+    cp-k8s-1.30.0: Suggested packages:
+    cp-k8s-1.30.0:   open-iscsi watchdog
+    cp-k8s-1.30.0: The following NEW packages will be installed:
+    cp-k8s-1.30.0:   keyutils libnfsidmap1 nfs-common nfs-kernel-server rpcbind
+    cp-k8s-1.30.0: 0 upgraded, 5 newly installed, 0 to remove and 174 not upgraded.
+    cp-k8s-1.30.0: Need to get 521 kB of archives.
+    cp-k8s-1.30.0: After this operation, 1,973 kB of additional disk space will be used.
+    cp-k8s-1.30.0: Get:1 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnfsidmap1 amd64 1:2.6.1-1ubuntu1.2 [42.9 kB]
+    cp-k8s-1.30.0: Get:2 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 rpcbind amd64 1.2.6-2build1 [46.6 kB]
+    cp-k8s-1.30.0: Get:3 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 keyutils amd64 1.6.1-2ubuntu3 [50.4 kB]
+    cp-k8s-1.30.0: Get:4 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 nfs-common amd64 1:2.6.1-1ubuntu1.2 [241 kB]
+    cp-k8s-1.30.0: Get:5 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 nfs-kernel-server amd64 1:2.6.1-1ubuntu1.2 [140 kB]
+    cp-k8s-1.30.0: Fetched 521 kB in 3s (201 kB/s)
+    cp-k8s-1.30.0: Selecting previously unselected package libnfsidmap1:amd64.
+    cp-k8s-1.30.0: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64858 files and directories currently installed.)
+    cp-k8s-1.30.0: Preparing to unpack .../libnfsidmap1_1%3a2.6.1-1ubuntu1.2_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking libnfsidmap1:amd64 (1:2.6.1-1ubuntu1.2) ...
+    cp-k8s-1.30.0: Selecting previously unselected package rpcbind.
+    cp-k8s-1.30.0: Preparing to unpack .../rpcbind_1.2.6-2build1_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking rpcbind (1.2.6-2build1) ...
+    cp-k8s-1.30.0: Selecting previously unselected package keyutils.
+    cp-k8s-1.30.0: Preparing to unpack .../keyutils_1.6.1-2ubuntu3_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking keyutils (1.6.1-2ubuntu3) ...
+    cp-k8s-1.30.0: Selecting previously unselected package nfs-common.
+    cp-k8s-1.30.0: Preparing to unpack .../nfs-common_1%3a2.6.1-1ubuntu1.2_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking nfs-common (1:2.6.1-1ubuntu1.2) ...
+    cp-k8s-1.30.0: Selecting previously unselected package nfs-kernel-server.
+    cp-k8s-1.30.0: Preparing to unpack .../nfs-kernel-server_1%3a2.6.1-1ubuntu1.2_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking nfs-kernel-server (1:2.6.1-1ubuntu1.2) ...
+    cp-k8s-1.30.0: Setting up libnfsidmap1:amd64 (1:2.6.1-1ubuntu1.2) ...
+    cp-k8s-1.30.0: Setting up rpcbind (1.2.6-2build1) ...
+    cp-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/rpcbind.service → /lib/systemd/system/rpcbind.service.
+    cp-k8s-1.30.0: Created symlink /etc/systemd/system/sockets.target.wants/rpcbind.socket → /lib/systemd/system/rpcbind.socket.
+    cp-k8s-1.30.0: Setting up keyutils (1.6.1-2ubuntu3) ...
+    cp-k8s-1.30.0: Setting up nfs-common (1:2.6.1-1ubuntu1.2) ...
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: Creating config file /etc/idmapd.conf with new version
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: Creating config file /etc/nfs.conf with new version
+    cp-k8s-1.30.0: Adding system user `statd' (UID 115) ...
+    cp-k8s-1.30.0: Adding new user `statd' (UID 115) with group `nogroup' ...
+    cp-k8s-1.30.0: Not creating home directory `/var/lib/nfs'.
+    cp-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+    cp-k8s-1.30.0: Created symlink /etc/systemd/system/remote-fs.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+    cp-k8s-1.30.0: auth-rpcgss-module.service is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: nfs-idmapd.service is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: nfs-utils.service is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: proc-fs-nfsd.mount is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: rpc-gssd.service is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: rpc-statd-notify.service is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: rpc-statd.service is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: rpc-svcgssd.service is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: rpc_pipefs.target is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: var-lib-nfs-rpc_pipefs.mount is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: Setting up nfs-kernel-server (1:2.6.1-1ubuntu1.2) ...
+    cp-k8s-1.30.0: Created symlink /etc/systemd/system/nfs-client.target.wants/nfs-blkmap.service → /lib/systemd/system/nfs-blkmap.service.
+    cp-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service → /lib/systemd/system/nfs-server.service.
+    cp-k8s-1.30.0: nfs-mountd.service is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: nfsdcld.service is a disabled or a static unit, not starting it.
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: Creating config file /etc/exports with new version
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: Creating config file /etc/default/nfs-kernel-server with new version
+    cp-k8s-1.30.0: Processing triggers for man-db (2.10.2-1) ...
+    cp-k8s-1.30.0: Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+    cp-k8s-1.30.0: Reading package lists...
+    cp-k8s-1.30.0: Building dependency tree...
+    cp-k8s-1.30.0: Reading state information...
+    cp-k8s-1.30.0: The following additional packages will be installed:
+    cp-k8s-1.30.0:   conntrack cri-tools ebtables kubernetes-cni socat
+    cp-k8s-1.30.0: Suggested packages:
+    cp-k8s-1.30.0:   nftables
+    cp-k8s-1.30.0: The following NEW packages will be installed:
+    cp-k8s-1.30.0:   conntrack containerd.io cri-tools ebtables kubeadm kubectl kubelet
+    cp-k8s-1.30.0:   kubernetes-cni socat
+    cp-k8s-1.30.0: 0 upgraded, 9 newly installed, 0 to remove and 174 not upgraded.
+    cp-k8s-1.30.0: Need to get 124 MB of archives.
+    cp-k8s-1.30.0: After this operation, 461 MB of additional disk space will be used.
+    cp-k8s-1.30.0: Get:1 https://download.docker.com/linux/ubuntu jammy/stable amd64 containerd.io amd64 1.6.31-1 [29.8 MB]
+    cp-k8s-1.30.0: Get:2 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  cri-tools 1.30.0-1.1 [21.3 MB]
+    cp-k8s-1.30.0: Get:5 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 conntrack amd64 1:1.4.6-2build2 [33.5 kB]
+    cp-k8s-1.30.0: Get:8 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 ebtables amd64 2.0.11-4build2 [84.9 kB]
+    cp-k8s-1.30.0: Get:9 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 socat amd64 1.7.4.1-3ubuntu4 [349 kB]
+    cp-k8s-1.30.0: Get:3 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubeadm 1.30.0-1.1 [10.4 MB]
+    cp-k8s-1.30.0: Get:4 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubectl 1.30.0-1.1 [10.8 MB]
+    cp-k8s-1.30.0: Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubernetes-cni 1.4.0-1.1 [32.9 MB]
+    cp-k8s-1.30.0: Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubelet 1.30.0-1.1 [18.1 MB]
+    cp-k8s-1.30.0: Fetched 124 MB in 8s (14.6 MB/s)
+    cp-k8s-1.30.0: Selecting previously unselected package conntrack.
+    cp-k8s-1.30.0: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 65028 files and directories currently installed.)
+    cp-k8s-1.30.0: Preparing to unpack .../0-conntrack_1%3a1.4.6-2build2_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking conntrack (1:1.4.6-2build2) ...
+    cp-k8s-1.30.0: Selecting previously unselected package containerd.io.
+    cp-k8s-1.30.0: Preparing to unpack .../1-containerd.io_1.6.31-1_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking containerd.io (1.6.31-1) ...
+    cp-k8s-1.30.0: Selecting previously unselected package cri-tools.
+    cp-k8s-1.30.0: Preparing to unpack .../2-cri-tools_1.30.0-1.1_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking cri-tools (1.30.0-1.1) ...
+    cp-k8s-1.30.0: Selecting previously unselected package ebtables.
+    cp-k8s-1.30.0: Preparing to unpack .../3-ebtables_2.0.11-4build2_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking ebtables (2.0.11-4build2) ...
+    cp-k8s-1.30.0: Selecting previously unselected package kubeadm.
+    cp-k8s-1.30.0: Preparing to unpack .../4-kubeadm_1.30.0-1.1_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking kubeadm (1.30.0-1.1) ...
+    cp-k8s-1.30.0: Selecting previously unselected package kubectl.
+    cp-k8s-1.30.0: Preparing to unpack .../5-kubectl_1.30.0-1.1_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking kubectl (1.30.0-1.1) ...
+    cp-k8s-1.30.0: Selecting previously unselected package kubernetes-cni.
+    cp-k8s-1.30.0: Preparing to unpack .../6-kubernetes-cni_1.4.0-1.1_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking kubernetes-cni (1.4.0-1.1) ...
+    cp-k8s-1.30.0: Selecting previously unselected package socat.
+    cp-k8s-1.30.0: Preparing to unpack .../7-socat_1.7.4.1-3ubuntu4_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking socat (1.7.4.1-3ubuntu4) ...
+    cp-k8s-1.30.0: Selecting previously unselected package kubelet.
+    cp-k8s-1.30.0: Preparing to unpack .../8-kubelet_1.30.0-1.1_amd64.deb ...
+    cp-k8s-1.30.0: Unpacking kubelet (1.30.0-1.1) ...
+    cp-k8s-1.30.0: Setting up conntrack (1:1.4.6-2build2) ...
+    cp-k8s-1.30.0: Setting up kubectl (1.30.0-1.1) ...
+    cp-k8s-1.30.0: Setting up ebtables (2.0.11-4build2) ...
+    cp-k8s-1.30.0: Setting up socat (1.7.4.1-3ubuntu4) ...
+    cp-k8s-1.30.0: Setting up containerd.io (1.6.31-1) ...
+    cp-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+    cp-k8s-1.30.0: Setting up cri-tools (1.30.0-1.1) ...
+    cp-k8s-1.30.0: Setting up kubernetes-cni (1.4.0-1.1) ...
+    cp-k8s-1.30.0: Setting up kubeadm (1.30.0-1.1) ...
+    cp-k8s-1.30.0: Setting up kubelet (1.30.0-1.1) ...
+    cp-k8s-1.30.0: Processing triggers for man-db (2.10.2-1) ...
+==> cp-k8s-1.30.0: Running provisioner: shell...
+    cp-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-qx9r1r.sh
+    cp-k8s-1.30.0: [init] Using Kubernetes version: v1.30.1
+    cp-k8s-1.30.0: [preflight] Running pre-flight checks
+    cp-k8s-1.30.0: [preflight] Pulling images required for setting up a Kubernetes cluster
+    cp-k8s-1.30.0: [preflight] This might take a minute or two, depending on the speed of your internet connection
+    cp-k8s-1.30.0: [preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+    cp-k8s-1.30.0: W0520 10:07:53.595473    2719 checks.go:844] detected that the sandbox image "registry.k8s.io/pause:3.6" of the container runtime is inconsistent with that used by kubeadm.It is recommended to use "registry.k8s.io/pause:3.9" as the CRI sandbox image.
+    cp-k8s-1.30.0: [certs] Using certificateDir folder "/etc/kubernetes/pki"
+    cp-k8s-1.30.0: [certs] Generating "ca" certificate and key
+    cp-k8s-1.30.0: [certs] Generating "apiserver" certificate and key
+    cp-k8s-1.30.0: [certs] apiserver serving cert is signed for DNS names [cp-k8s kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.1.10]
+    cp-k8s-1.30.0: [certs] Generating "apiserver-kubelet-client" certificate and key
+    cp-k8s-1.30.0: [certs] Generating "front-proxy-ca" certificate and key
+    cp-k8s-1.30.0: [certs] Generating "front-proxy-client" certificate and key
+    cp-k8s-1.30.0: [certs] Generating "etcd/ca" certificate and key
+    cp-k8s-1.30.0: [certs] Generating "etcd/server" certificate and key
+    cp-k8s-1.30.0: [certs] etcd/server serving cert is signed for DNS names [cp-k8s localhost] and IPs [192.168.1.10 127.0.0.1 ::1]
+    cp-k8s-1.30.0: [certs] Generating "etcd/peer" certificate and key
+    cp-k8s-1.30.0: [certs] etcd/peer serving cert is signed for DNS names [cp-k8s localhost] and IPs [192.168.1.10 127.0.0.1 ::1]
+    cp-k8s-1.30.0: [certs] Generating "etcd/healthcheck-client" certificate and key
+    cp-k8s-1.30.0: [certs] Generating "apiserver-etcd-client" certificate and key
+    cp-k8s-1.30.0: [certs] Generating "sa" key and public key
+    cp-k8s-1.30.0: [kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+    cp-k8s-1.30.0: [kubeconfig] Writing "admin.conf" kubeconfig file
+    cp-k8s-1.30.0: [kubeconfig] Writing "super-admin.conf" kubeconfig file
+    cp-k8s-1.30.0: [kubeconfig] Writing "kubelet.conf" kubeconfig file
+    cp-k8s-1.30.0: [kubeconfig] Writing "controller-manager.conf" kubeconfig file
+    cp-k8s-1.30.0: [kubeconfig] Writing "scheduler.conf" kubeconfig file
+    cp-k8s-1.30.0: [etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+    cp-k8s-1.30.0: [control-plane] Using manifest folder "/etc/kubernetes/manifests"
+    cp-k8s-1.30.0: [control-plane] Creating static Pod manifest for "kube-apiserver"
+    cp-k8s-1.30.0: [control-plane] Creating static Pod manifest for "kube-controller-manager"
+    cp-k8s-1.30.0: [control-plane] Creating static Pod manifest for "kube-scheduler"
+    cp-k8s-1.30.0: [kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+    cp-k8s-1.30.0: [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+    cp-k8s-1.30.0: [kubelet-start] Starting the kubelet
+    cp-k8s-1.30.0: [wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests"
+    cp-k8s-1.30.0: [kubelet-check] Waiting for a healthy kubelet. This can take up to 4m0s
+    cp-k8s-1.30.0: [kubelet-check] The kubelet is healthy after 1.001221411s
+    cp-k8s-1.30.0: [api-check] Waiting for a healthy API server. This can take up to 4m0s
+    cp-k8s-1.30.0: [api-check] The API server is healthy after 8.003628887s
+    cp-k8s-1.30.0: [upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+    cp-k8s-1.30.0: [kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+    cp-k8s-1.30.0: [upload-certs] Skipping phase. Please see --upload-certs
+    cp-k8s-1.30.0: [mark-control-plane] Marking the node cp-k8s as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+    cp-k8s-1.30.0: [mark-control-plane] Marking the node cp-k8s as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]
+    cp-k8s-1.30.0: [bootstrap-token] Using token: 123456.1234567890123456
+    cp-k8s-1.30.0: [bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+    cp-k8s-1.30.0: [bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+    cp-k8s-1.30.0: [bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+    cp-k8s-1.30.0: [bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+    cp-k8s-1.30.0: [bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+    cp-k8s-1.30.0: [bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+    cp-k8s-1.30.0: [kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+    cp-k8s-1.30.0: [addons] Applied essential addon: CoreDNS
+    cp-k8s-1.30.0: [addons] Applied essential addon: kube-proxy
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: Your Kubernetes control-plane has initialized successfully!
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: To start using your cluster, you need to run the following as a regular user:
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0:   mkdir -p $HOME/.kube
+    cp-k8s-1.30.0:   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    cp-k8s-1.30.0:   sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: Alternatively, if you are the root user, you can run:
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0:   export KUBECONFIG=/etc/kubernetes/admin.conf
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: You should now deploy a pod network to the cluster.
+    cp-k8s-1.30.0: Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+    cp-k8s-1.30.0:   https://kubernetes.io/docs/concepts/cluster-administration/addons/
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: Then you can join any number of worker nodes by running the following on each as root:
+    cp-k8s-1.30.0: 
+    cp-k8s-1.30.0: kubeadm join 192.168.1.10:6443 --token 123456.1234567890123456 \
+    cp-k8s-1.30.0: 	--discovery-token-ca-cert-hash sha256:a68ecd519f0c87ac114dc77a63e982f0f54f5c52d3edb4b027dede27406c440e
+    cp-k8s-1.30.0: poddisruptionbudget.policy/calico-kube-controllers created
+    cp-k8s-1.30.0: serviceaccount/calico-kube-controllers created
+    cp-k8s-1.30.0: serviceaccount/calico-node created
+    cp-k8s-1.30.0: serviceaccount/calico-cni-plugin created
+    cp-k8s-1.30.0: configmap/calico-config created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/bgpfilters.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/bgppeers.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/blockaffinities.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/caliconodestatuses.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/clusterinformations.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/globalnetworkpolicies.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/globalnetworksets.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/hostendpoints.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/ipamblocks.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/ipamconfigs.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/ipamhandles.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/ippools.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/ipreservations.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/kubecontrollersconfigurations.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/networkpolicies.crd.projectcalico.org created
+    cp-k8s-1.30.0: customresourcedefinition.apiextensions.k8s.io/networksets.crd.projectcalico.org created
+    cp-k8s-1.30.0: clusterrole.rbac.authorization.k8s.io/calico-kube-controllers created
+    cp-k8s-1.30.0: clusterrole.rbac.authorization.k8s.io/calico-node created
+    cp-k8s-1.30.0: clusterrole.rbac.authorization.k8s.io/calico-cni-plugin created
+    cp-k8s-1.30.0: clusterrolebinding.rbac.authorization.k8s.io/calico-kube-controllers created
+    cp-k8s-1.30.0: clusterrolebinding.rbac.authorization.k8s.io/calico-node created
+    cp-k8s-1.30.0: clusterrolebinding.rbac.authorization.k8s.io/calico-cni-plugin created
+    cp-k8s-1.30.0: daemonset.apps/calico-node created
+    cp-k8s-1.30.0: deployment.apps/calico-kube-controllers created
+    cp-k8s-1.30.0: Cloning into '_Lecture_k8s_starter.kit'...
+    cp-k8s-1.30.0: Cloning into '/tmp/update-kube-cert'...
+    cp-k8s-1.30.0: CERTIFICATE                                       EXPIRES
+    cp-k8s-1.30.0: /etc/kubernetes/controller-manager.config         May 20 01:08:40 2025 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/scheduler.config                  May 20 01:08:40 2025 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/admin.config                      May 20 01:08:39 2025 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/super-admin.config                May 20 01:08:39 2025 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/ca.crt                        May 18 01:08:36 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/apiserver.crt                 May 20 01:08:36 2025 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/apiserver-kubelet-client.crt  May 20 01:08:37 2025 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/front-proxy-ca.crt            May 18 01:08:37 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/front-proxy-client.crt        May 20 01:08:37 2025 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/etcd/ca.crt                   May 18 01:08:37 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/etcd/server.crt               May 20 01:08:38 2025 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/etcd/peer.crt                 May 20 01:08:38 2025 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/etcd/healthcheck-client.crt   May 20 01:08:38 2025 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/apiserver-etcd-client.crt     May 20 01:08:38 2025 GMT
+    cp-k8s-1.30.0: [2024-05-20T10:08:54.84+0900][INFO] backup /etc/kubernetes to /etc/kubernetes.old-20240520
+    cp-k8s-1.30.0: [2024-05-20T10:08:54.84+0900][INFO] [32mupdating...[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:54.89+0900][INFO] [32mupdated [34m/etc/kubernetes/pki/etcd/server.conf[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:54.93+0900][INFO] [32mupdated [34m/etc/kubernetes/pki/etcd/peer.conf[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:54.97+0900][INFO] [32mupdated [34m/etc/kubernetes/pki/etcd/healthcheck-client.conf[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.00+0900][INFO] [32mupdated [34m/etc/kubernetes/pki/apiserver-etcd-client.conf[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.26+0900][INFO] restarted etcd with containerd
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.30+0900][INFO] [32mupdated [34m/etc/kubernetes/pki/apiserver.crt[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.33+0900][INFO] [32mupdated [34m/etc/kubernetes/pki/apiserver-kubelet-client.crt[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.38+0900][INFO] [32mupdated [34m/etc/kubernetes/controller-manager.conf[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.43+0900][INFO] [32mupdated [34m/etc/kubernetes/scheduler.conf[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.47+0900][INFO] [32mupdated [34m/etc/kubernetes/admin.conf[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.48+0900][INFO] backup /root/.kube/config to /root/.kube/config.old-20240520
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.49+0900][INFO] copy the admin.conf to /root/.kube/config
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.49+0900][INFO] does not need to update kubelet.conf
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.54+0900][INFO] [32mupdated [34m/etc/kubernetes/super-admin.conf[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.57+0900][INFO] [32mupdated [34m/etc/kubernetes/pki/front-proxy-client.crt[0m
+    cp-k8s-1.30.0: [2024-05-20T10:08:55.90+0900][INFO] restarted apiserver with containerd
+    cp-k8s-1.30.0: [2024-05-20T10:08:56.16+0900][INFO] restarted controller-manager with containerd
+    cp-k8s-1.30.0: [2024-05-20T10:08:56.37+0900][INFO] restarted scheduler with containerd
+    cp-k8s-1.30.0: [2024-05-20T10:08:56.42+0900][INFO] restarted kubelet
+    cp-k8s-1.30.0: [2024-05-20T10:08:56.42+0900][INFO] [32mdone!!![0m
+    cp-k8s-1.30.0: CERTIFICATE                                       EXPIRES
+    cp-k8s-1.30.0: /etc/kubernetes/controller-manager.config         May 18 01:08:55 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/scheduler.config                  May 18 01:08:55 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/admin.config                      May 18 01:08:55 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/super-admin.config                May 18 01:08:55 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/ca.crt                        May 18 01:08:36 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/apiserver.crt                 May 18 01:08:55 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/apiserver-kubelet-client.crt  May 18 01:08:55 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/front-proxy-ca.crt            May 18 01:08:37 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/front-proxy-client.crt        May 18 01:08:55 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/etcd/ca.crt                   May 18 01:08:37 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/etcd/server.crt               May 18 01:08:54 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/etcd/peer.crt                 May 18 01:08:54 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/etcd/healthcheck-client.crt   May 18 01:08:54 2034 GMT
+    cp-k8s-1.30.0: /etc/kubernetes/pki/apiserver-etcd-client.crt     May 18 01:08:54 2034 GMT
+    cp-k8s-1.30.0: Wait 10 seconds for restarting the Control-Plane Node...
+==> w1-k8s-1.30.0: Importing base box 'sysnet4admin/Ubuntu-k8s'...
+[KProgress: 10%[KProgress: 20%[KProgress: 30%[KProgress: 40%[KProgress: 60%[KProgress: 90%[K==> w1-k8s-1.30.0: Matching MAC address for NAT networking...
+==> w1-k8s-1.30.0: Checking if box 'sysnet4admin/Ubuntu-k8s' version '0.8.4' is up to date...
+==> w1-k8s-1.30.0: Setting the name of the VM: w1-k8s-1.30.0(github_SysNet4Admin)
+==> w1-k8s-1.30.0: Clearing any previously set network interfaces...
+==> w1-k8s-1.30.0: Preparing network interfaces based on configuration...
+    w1-k8s-1.30.0: Adapter 1: nat
+    w1-k8s-1.30.0: Adapter 2: hostonly
+==> w1-k8s-1.30.0: Forwarding ports...
+    w1-k8s-1.30.0: 22 (guest) => 60101 (host) (adapter 1)
+==> w1-k8s-1.30.0: Running 'pre-boot' VM customizations...
+==> w1-k8s-1.30.0: Booting VM...
+==> w1-k8s-1.30.0: Waiting for machine to boot. This may take a few minutes...
+    w1-k8s-1.30.0: SSH address: 127.0.0.1:60101
+    w1-k8s-1.30.0: SSH username: vagrant
+    w1-k8s-1.30.0: SSH auth method: private key
+    w1-k8s-1.30.0: 
+    w1-k8s-1.30.0: Vagrant insecure key detected. Vagrant will automatically replace
+    w1-k8s-1.30.0: this with a newly generated keypair for better security.
+    w1-k8s-1.30.0: 
+    w1-k8s-1.30.0: Inserting generated public key within guest...
+    w1-k8s-1.30.0: Removing insecure key from the guest if it's present...
+    w1-k8s-1.30.0: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> w1-k8s-1.30.0: Machine booted and ready!
+==> w1-k8s-1.30.0: Checking for guest additions in VM...
+    w1-k8s-1.30.0: The guest additions on this VM do not match the installed version of
+    w1-k8s-1.30.0: VirtualBox! In most cases this is fine, but in rare cases it can
+    w1-k8s-1.30.0: prevent things such as shared folders from working properly. If you see
+    w1-k8s-1.30.0: shared folder errors, please make sure the guest additions within the
+    w1-k8s-1.30.0: virtual machine match the version of VirtualBox you have installed on
+    w1-k8s-1.30.0: your host and reload your VM.
+    w1-k8s-1.30.0: 
+    w1-k8s-1.30.0: Guest Additions Version: 6.0.0 r127566
+    w1-k8s-1.30.0: VirtualBox Version: 7.0
+==> w1-k8s-1.30.0: Setting hostname...
+==> w1-k8s-1.30.0: Configuring and enabling network interfaces...
+==> w1-k8s-1.30.0: Running provisioner: shell...
+    w1-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-h2x2dc.sh
+    w1-k8s-1.30.0: deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg]   https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+==> w1-k8s-1.30.0: Running provisioner: shell...
+    w1-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-xw9knq.sh
+    w1-k8s-1.30.0: Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.8 kB]
+    w1-k8s-1.30.0: Get:2 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [32.5 kB]
+    w1-k8s-1.30.0: Get:3 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  InRelease [1,186 B]
+    w1-k8s-1.30.0: Get:4 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  Packages [3,957 B]
+    w1-k8s-1.30.0: Hit:5 http://kr.archive.ubuntu.com/ubuntu jammy InRelease
+    w1-k8s-1.30.0: Get:6 http://kr.archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+    w1-k8s-1.30.0: Get:7 http://kr.archive.ubuntu.com/ubuntu jammy-backports InRelease [109 kB]
+    w1-k8s-1.30.0: Get:8 http://kr.archive.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+    w1-k8s-1.30.0: Get:9 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [1,678 kB]
+    w1-k8s-1.30.0: Get:10 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [311 kB]
+    w1-k8s-1.30.0: Get:11 http://kr.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [1,923 kB]
+    w1-k8s-1.30.0: Get:12 http://kr.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [327 kB]
+    w1-k8s-1.30.0: Get:13 http://kr.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1,074 kB]
+    w1-k8s-1.30.0: Get:14 http://kr.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [246 kB]
+    w1-k8s-1.30.0: Get:15 http://kr.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [42.7 kB]
+    w1-k8s-1.30.0: Get:16 http://kr.archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [10.4 kB]
+    w1-k8s-1.30.0: Get:17 http://kr.archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [67.1 kB]
+    w1-k8s-1.30.0: Get:18 http://kr.archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.0 kB]
+    w1-k8s-1.30.0: Get:19 http://kr.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [27.2 kB]
+    w1-k8s-1.30.0: Get:20 http://kr.archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.2 kB]
+    w1-k8s-1.30.0: Get:21 http://kr.archive.ubuntu.com/ubuntu jammy-security/main amd64 Packages [1,467 kB]
+    w1-k8s-1.30.0: Get:22 http://kr.archive.ubuntu.com/ubuntu jammy-security/main Translation-en [252 kB]
+    w1-k8s-1.30.0: Get:23 http://kr.archive.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [1,866 kB]
+    w1-k8s-1.30.0: Get:24 http://kr.archive.ubuntu.com/ubuntu jammy-security/restricted Translation-en [317 kB]
+    w1-k8s-1.30.0: Get:25 http://kr.archive.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [852 kB]
+    w1-k8s-1.30.0: Get:26 http://kr.archive.ubuntu.com/ubuntu jammy-security/universe Translation-en [164 kB]
+    w1-k8s-1.30.0: Get:27 http://kr.archive.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [37.2 kB]
+    w1-k8s-1.30.0: Get:28 http://kr.archive.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [7,588 B]
+    w1-k8s-1.30.0: Fetched 11.1 MB in 6s (1,978 kB/s)
+    w1-k8s-1.30.0: Reading package lists...
+    w1-k8s-1.30.0: Reading package lists...
+    w1-k8s-1.30.0: Building dependency tree...
+    w1-k8s-1.30.0: Reading state information...
+    w1-k8s-1.30.0: The following additional packages will be installed:
+    w1-k8s-1.30.0:   keyutils libnfsidmap1 rpcbind
+    w1-k8s-1.30.0: Suggested packages:
+    w1-k8s-1.30.0:   open-iscsi watchdog
+    w1-k8s-1.30.0: The following NEW packages will be installed:
+    w1-k8s-1.30.0:   keyutils libnfsidmap1 nfs-common rpcbind
+    w1-k8s-1.30.0: 0 upgraded, 4 newly installed, 0 to remove and 174 not upgraded.
+    w1-k8s-1.30.0: Need to get 381 kB of archives.
+    w1-k8s-1.30.0: After this operation, 1,447 kB of additional disk space will be used.
+    w1-k8s-1.30.0: Get:1 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnfsidmap1 amd64 1:2.6.1-1ubuntu1.2 [42.9 kB]
+    w1-k8s-1.30.0: Get:2 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 rpcbind amd64 1.2.6-2build1 [46.6 kB]
+    w1-k8s-1.30.0: Get:3 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 keyutils amd64 1.6.1-2ubuntu3 [50.4 kB]
+    w1-k8s-1.30.0: Get:4 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 nfs-common amd64 1:2.6.1-1ubuntu1.2 [241 kB]
+    w1-k8s-1.30.0: Fetched 381 kB in 2s (179 kB/s)
+    w1-k8s-1.30.0: Selecting previously unselected package libnfsidmap1:amd64.
+    w1-k8s-1.30.0: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64858 files and directories currently installed.)
+    w1-k8s-1.30.0: Preparing to unpack .../libnfsidmap1_1%3a2.6.1-1ubuntu1.2_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking libnfsidmap1:amd64 (1:2.6.1-1ubuntu1.2) ...
+    w1-k8s-1.30.0: Selecting previously unselected package rpcbind.
+    w1-k8s-1.30.0: Preparing to unpack .../rpcbind_1.2.6-2build1_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking rpcbind (1.2.6-2build1) ...
+    w1-k8s-1.30.0: Selecting previously unselected package keyutils.
+    w1-k8s-1.30.0: Preparing to unpack .../keyutils_1.6.1-2ubuntu3_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking keyutils (1.6.1-2ubuntu3) ...
+    w1-k8s-1.30.0: Selecting previously unselected package nfs-common.
+    w1-k8s-1.30.0: Preparing to unpack .../nfs-common_1%3a2.6.1-1ubuntu1.2_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking nfs-common (1:2.6.1-1ubuntu1.2) ...
+    w1-k8s-1.30.0: Setting up libnfsidmap1:amd64 (1:2.6.1-1ubuntu1.2) ...
+    w1-k8s-1.30.0: Setting up rpcbind (1.2.6-2build1) ...
+    w1-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/rpcbind.service → /lib/systemd/system/rpcbind.service.
+    w1-k8s-1.30.0: Created symlink /etc/systemd/system/sockets.target.wants/rpcbind.socket → /lib/systemd/system/rpcbind.socket.
+    w1-k8s-1.30.0: Setting up keyutils (1.6.1-2ubuntu3) ...
+    w1-k8s-1.30.0: Setting up nfs-common (1:2.6.1-1ubuntu1.2) ...
+    w1-k8s-1.30.0: 
+    w1-k8s-1.30.0: Creating config file /etc/idmapd.conf with new version
+    w1-k8s-1.30.0: 
+    w1-k8s-1.30.0: Creating config file /etc/nfs.conf with new version
+    w1-k8s-1.30.0: Adding system user `statd' (UID 115) ...
+    w1-k8s-1.30.0: Adding new user `statd' (UID 115) with group `nogroup' ...
+    w1-k8s-1.30.0: Not creating home directory `/var/lib/nfs'.
+    w1-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+    w1-k8s-1.30.0: Created symlink /etc/systemd/system/remote-fs.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+    w1-k8s-1.30.0: auth-rpcgss-module.service is a disabled or a static unit, not starting it.
+    w1-k8s-1.30.0: nfs-idmapd.service is a disabled or a static unit, not starting it.
+    w1-k8s-1.30.0: nfs-utils.service is a disabled or a static unit, not starting it.
+    w1-k8s-1.30.0: proc-fs-nfsd.mount is a disabled or a static unit, not starting it.
+    w1-k8s-1.30.0: rpc-gssd.service is a disabled or a static unit, not starting it.
+    w1-k8s-1.30.0: rpc-statd-notify.service is a disabled or a static unit, not starting it.
+    w1-k8s-1.30.0: rpc-statd.service is a disabled or a static unit, not starting it.
+    w1-k8s-1.30.0: rpc-svcgssd.service is a disabled or a static unit, not starting it.
+    w1-k8s-1.30.0: rpc_pipefs.target is a disabled or a static unit, not starting it.
+    w1-k8s-1.30.0: var-lib-nfs-rpc_pipefs.mount is a disabled or a static unit, not starting it.
+    w1-k8s-1.30.0: Processing triggers for man-db (2.10.2-1) ...
+    w1-k8s-1.30.0: Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+    w1-k8s-1.30.0: Reading package lists...
+    w1-k8s-1.30.0: Building dependency tree...
+    w1-k8s-1.30.0: Reading state information...
+    w1-k8s-1.30.0: The following additional packages will be installed:
+    w1-k8s-1.30.0:   conntrack cri-tools ebtables kubernetes-cni socat
+    w1-k8s-1.30.0: Suggested packages:
+    w1-k8s-1.30.0:   nftables
+    w1-k8s-1.30.0: The following NEW packages will be installed:
+    w1-k8s-1.30.0:   conntrack containerd.io cri-tools ebtables kubeadm kubectl kubelet
+    w1-k8s-1.30.0:   kubernetes-cni socat
+    w1-k8s-1.30.0: 0 upgraded, 9 newly installed, 0 to remove and 174 not upgraded.
+    w1-k8s-1.30.0: Need to get 124 MB of archives.
+    w1-k8s-1.30.0: After this operation, 461 MB of additional disk space will be used.
+    w1-k8s-1.30.0: Get:1 https://download.docker.com/linux/ubuntu jammy/stable amd64 containerd.io amd64 1.6.31-1 [29.8 MB]
+    w1-k8s-1.30.0: Get:2 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  cri-tools 1.30.0-1.1 [21.3 MB]
+    w1-k8s-1.30.0: Get:6 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 conntrack amd64 1:1.4.6-2build2 [33.5 kB]
+    w1-k8s-1.30.0: Get:8 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 ebtables amd64 2.0.11-4build2 [84.9 kB]
+    w1-k8s-1.30.0: Get:9 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 socat amd64 1.7.4.1-3ubuntu4 [349 kB]
+    w1-k8s-1.30.0: Get:3 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubeadm 1.30.0-1.1 [10.4 MB]
+    w1-k8s-1.30.0: Get:4 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubectl 1.30.0-1.1 [10.8 MB]
+    w1-k8s-1.30.0: Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubernetes-cni 1.4.0-1.1 [32.9 MB]
+    w1-k8s-1.30.0: Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubelet 1.30.0-1.1 [18.1 MB]
+    w1-k8s-1.30.0: Fetched 124 MB in 8s (15.1 MB/s)
+    w1-k8s-1.30.0: Selecting previously unselected package conntrack.
+    w1-k8s-1.30.0: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64989 files and directories currently installed.)
+    w1-k8s-1.30.0: Preparing to unpack .../0-conntrack_1%3a1.4.6-2build2_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking conntrack (1:1.4.6-2build2) ...
+    w1-k8s-1.30.0: Selecting previously unselected package containerd.io.
+    w1-k8s-1.30.0: Preparing to unpack .../1-containerd.io_1.6.31-1_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking containerd.io (1.6.31-1) ...
+    w1-k8s-1.30.0: Selecting previously unselected package cri-tools.
+    w1-k8s-1.30.0: Preparing to unpack .../2-cri-tools_1.30.0-1.1_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking cri-tools (1.30.0-1.1) ...
+    w1-k8s-1.30.0: Selecting previously unselected package ebtables.
+    w1-k8s-1.30.0: Preparing to unpack .../3-ebtables_2.0.11-4build2_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking ebtables (2.0.11-4build2) ...
+    w1-k8s-1.30.0: Selecting previously unselected package kubeadm.
+    w1-k8s-1.30.0: Preparing to unpack .../4-kubeadm_1.30.0-1.1_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking kubeadm (1.30.0-1.1) ...
+    w1-k8s-1.30.0: Selecting previously unselected package kubectl.
+    w1-k8s-1.30.0: Preparing to unpack .../5-kubectl_1.30.0-1.1_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking kubectl (1.30.0-1.1) ...
+    w1-k8s-1.30.0: Selecting previously unselected package kubernetes-cni.
+    w1-k8s-1.30.0: Preparing to unpack .../6-kubernetes-cni_1.4.0-1.1_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking kubernetes-cni (1.4.0-1.1) ...
+    w1-k8s-1.30.0: Selecting previously unselected package socat.
+    w1-k8s-1.30.0: Preparing to unpack .../7-socat_1.7.4.1-3ubuntu4_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking socat (1.7.4.1-3ubuntu4) ...
+    w1-k8s-1.30.0: Selecting previously unselected package kubelet.
+    w1-k8s-1.30.0: Preparing to unpack .../8-kubelet_1.30.0-1.1_amd64.deb ...
+    w1-k8s-1.30.0: Unpacking kubelet (1.30.0-1.1) ...
+    w1-k8s-1.30.0: Setting up conntrack (1:1.4.6-2build2) ...
+    w1-k8s-1.30.0: Setting up kubectl (1.30.0-1.1) ...
+    w1-k8s-1.30.0: Setting up ebtables (2.0.11-4build2) ...
+    w1-k8s-1.30.0: Setting up socat (1.7.4.1-3ubuntu4) ...
+    w1-k8s-1.30.0: Setting up containerd.io (1.6.31-1) ...
+    w1-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+    w1-k8s-1.30.0: Setting up cri-tools (1.30.0-1.1) ...
+    w1-k8s-1.30.0: Setting up kubernetes-cni (1.4.0-1.1) ...
+    w1-k8s-1.30.0: Setting up kubeadm (1.30.0-1.1) ...
+    w1-k8s-1.30.0: Setting up kubelet (1.30.0-1.1) ...
+    w1-k8s-1.30.0: Processing triggers for man-db (2.10.2-1) ...
+==> w1-k8s-1.30.0: Running provisioner: shell...
+    w1-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-2v3z3j.sh
+    w1-k8s-1.30.0: [preflight] Running pre-flight checks
+    w1-k8s-1.30.0: [preflight] Reading configuration from the cluster...
+    w1-k8s-1.30.0: [preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+    w1-k8s-1.30.0: [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+    w1-k8s-1.30.0: [kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+    w1-k8s-1.30.0: [kubelet-start] Starting the kubelet
+    w1-k8s-1.30.0: [kubelet-check] Waiting for a healthy kubelet. This can take up to 4m0s
+    w1-k8s-1.30.0: [kubelet-check] The kubelet is healthy after 1.001720827s
+    w1-k8s-1.30.0: [kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap
+    w1-k8s-1.30.0: 
+    w1-k8s-1.30.0: This node has joined the cluster:
+    w1-k8s-1.30.0: * Certificate signing request was sent to apiserver and a response was received.
+    w1-k8s-1.30.0: * The Kubelet was informed of the new secure connection details.
+    w1-k8s-1.30.0: 
+    w1-k8s-1.30.0: Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+    w1-k8s-1.30.0: 
+==> w2-k8s-1.30.0: Importing base box 'sysnet4admin/Ubuntu-k8s'...
+[KProgress: 10%[KProgress: 20%[KProgress: 40%[KProgress: 70%[KProgress: 90%[K==> w2-k8s-1.30.0: Matching MAC address for NAT networking...
+==> w2-k8s-1.30.0: Checking if box 'sysnet4admin/Ubuntu-k8s' version '0.8.4' is up to date...
+==> w2-k8s-1.30.0: Setting the name of the VM: w2-k8s-1.30.0(github_SysNet4Admin)
+==> w2-k8s-1.30.0: Clearing any previously set network interfaces...
+==> w2-k8s-1.30.0: Preparing network interfaces based on configuration...
+    w2-k8s-1.30.0: Adapter 1: nat
+    w2-k8s-1.30.0: Adapter 2: hostonly
+==> w2-k8s-1.30.0: Forwarding ports...
+    w2-k8s-1.30.0: 22 (guest) => 60102 (host) (adapter 1)
+==> w2-k8s-1.30.0: Running 'pre-boot' VM customizations...
+==> w2-k8s-1.30.0: Booting VM...
+==> w2-k8s-1.30.0: Waiting for machine to boot. This may take a few minutes...
+    w2-k8s-1.30.0: SSH address: 127.0.0.1:60102
+    w2-k8s-1.30.0: SSH username: vagrant
+    w2-k8s-1.30.0: SSH auth method: private key
+    w2-k8s-1.30.0: 
+    w2-k8s-1.30.0: Vagrant insecure key detected. Vagrant will automatically replace
+    w2-k8s-1.30.0: this with a newly generated keypair for better security.
+    w2-k8s-1.30.0: 
+    w2-k8s-1.30.0: Inserting generated public key within guest...
+    w2-k8s-1.30.0: Removing insecure key from the guest if it's present...
+    w2-k8s-1.30.0: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> w2-k8s-1.30.0: Machine booted and ready!
+==> w2-k8s-1.30.0: Checking for guest additions in VM...
+    w2-k8s-1.30.0: The guest additions on this VM do not match the installed version of
+    w2-k8s-1.30.0: VirtualBox! In most cases this is fine, but in rare cases it can
+    w2-k8s-1.30.0: prevent things such as shared folders from working properly. If you see
+    w2-k8s-1.30.0: shared folder errors, please make sure the guest additions within the
+    w2-k8s-1.30.0: virtual machine match the version of VirtualBox you have installed on
+    w2-k8s-1.30.0: your host and reload your VM.
+    w2-k8s-1.30.0: 
+    w2-k8s-1.30.0: Guest Additions Version: 6.0.0 r127566
+    w2-k8s-1.30.0: VirtualBox Version: 7.0
+==> w2-k8s-1.30.0: Setting hostname...
+==> w2-k8s-1.30.0: Configuring and enabling network interfaces...
+==> w2-k8s-1.30.0: Running provisioner: shell...
+    w2-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-yrso5h.sh
+    w2-k8s-1.30.0: deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg]   https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+==> w2-k8s-1.30.0: Running provisioner: shell...
+    w2-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-gsx0q6.sh
+    w2-k8s-1.30.0: Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.8 kB]
+    w2-k8s-1.30.0: Get:2 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [32.5 kB]
+    w2-k8s-1.30.0: Get:3 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  InRelease [1,186 B]
+    w2-k8s-1.30.0: Get:4 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  Packages [3,957 B]
+    w2-k8s-1.30.0: Hit:5 http://kr.archive.ubuntu.com/ubuntu jammy InRelease
+    w2-k8s-1.30.0: Get:6 http://kr.archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+    w2-k8s-1.30.0: Get:7 http://kr.archive.ubuntu.com/ubuntu jammy-backports InRelease [109 kB]
+    w2-k8s-1.30.0: Get:8 http://kr.archive.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+    w2-k8s-1.30.0: Get:9 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [1,678 kB]
+    w2-k8s-1.30.0: Get:10 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [311 kB]
+    w2-k8s-1.30.0: Get:11 http://kr.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [1,923 kB]
+    w2-k8s-1.30.0: Get:12 http://kr.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [327 kB]
+    w2-k8s-1.30.0: Get:13 http://kr.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1,074 kB]
+    w2-k8s-1.30.0: Get:14 http://kr.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [246 kB]
+    w2-k8s-1.30.0: Get:15 http://kr.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [42.7 kB]
+    w2-k8s-1.30.0: Get:16 http://kr.archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [10.4 kB]
+    w2-k8s-1.30.0: Get:17 http://kr.archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [67.1 kB]
+    w2-k8s-1.30.0: Get:18 http://kr.archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.0 kB]
+    w2-k8s-1.30.0: Get:19 http://kr.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [27.2 kB]
+    w2-k8s-1.30.0: Get:20 http://kr.archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.2 kB]
+    w2-k8s-1.30.0: Get:21 http://kr.archive.ubuntu.com/ubuntu jammy-security/main amd64 Packages [1,467 kB]
+    w2-k8s-1.30.0: Get:22 http://kr.archive.ubuntu.com/ubuntu jammy-security/main Translation-en [252 kB]
+    w2-k8s-1.30.0: Get:23 http://kr.archive.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [1,866 kB]
+    w2-k8s-1.30.0: Get:24 http://kr.archive.ubuntu.com/ubuntu jammy-security/restricted Translation-en [317 kB]
+    w2-k8s-1.30.0: Get:25 http://kr.archive.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [852 kB]
+    w2-k8s-1.30.0: Get:26 http://kr.archive.ubuntu.com/ubuntu jammy-security/universe Translation-en [164 kB]
+    w2-k8s-1.30.0: Get:27 http://kr.archive.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [37.2 kB]
+    w2-k8s-1.30.0: Get:28 http://kr.archive.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [7,588 B]
+    w2-k8s-1.30.0: Fetched 11.1 MB in 10s (1,120 kB/s)
+    w2-k8s-1.30.0: Reading package lists...
+    w2-k8s-1.30.0: Reading package lists...
+    w2-k8s-1.30.0: Building dependency tree...
+    w2-k8s-1.30.0: Reading state information...
+    w2-k8s-1.30.0: The following additional packages will be installed:
+    w2-k8s-1.30.0:   keyutils libnfsidmap1 rpcbind
+    w2-k8s-1.30.0: Suggested packages:
+    w2-k8s-1.30.0:   open-iscsi watchdog
+    w2-k8s-1.30.0: The following NEW packages will be installed:
+    w2-k8s-1.30.0:   keyutils libnfsidmap1 nfs-common rpcbind
+    w2-k8s-1.30.0: 0 upgraded, 4 newly installed, 0 to remove and 174 not upgraded.
+    w2-k8s-1.30.0: Need to get 381 kB of archives.
+    w2-k8s-1.30.0: After this operation, 1,447 kB of additional disk space will be used.
+    w2-k8s-1.30.0: Get:1 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnfsidmap1 amd64 1:2.6.1-1ubuntu1.2 [42.9 kB]
+    w2-k8s-1.30.0: Get:2 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 rpcbind amd64 1.2.6-2build1 [46.6 kB]
+    w2-k8s-1.30.0: Get:3 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 keyutils amd64 1.6.1-2ubuntu3 [50.4 kB]
+    w2-k8s-1.30.0: Get:4 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 nfs-common amd64 1:2.6.1-1ubuntu1.2 [241 kB]
+    w2-k8s-1.30.0: Fetched 381 kB in 2s (166 kB/s)
+    w2-k8s-1.30.0: Selecting previously unselected package libnfsidmap1:amd64.
+    w2-k8s-1.30.0: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64858 files and directories currently installed.)
+    w2-k8s-1.30.0: Preparing to unpack .../libnfsidmap1_1%3a2.6.1-1ubuntu1.2_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking libnfsidmap1:amd64 (1:2.6.1-1ubuntu1.2) ...
+    w2-k8s-1.30.0: Selecting previously unselected package rpcbind.
+    w2-k8s-1.30.0: Preparing to unpack .../rpcbind_1.2.6-2build1_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking rpcbind (1.2.6-2build1) ...
+    w2-k8s-1.30.0: Selecting previously unselected package keyutils.
+    w2-k8s-1.30.0: Preparing to unpack .../keyutils_1.6.1-2ubuntu3_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking keyutils (1.6.1-2ubuntu3) ...
+    w2-k8s-1.30.0: Selecting previously unselected package nfs-common.
+    w2-k8s-1.30.0: Preparing to unpack .../nfs-common_1%3a2.6.1-1ubuntu1.2_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking nfs-common (1:2.6.1-1ubuntu1.2) ...
+    w2-k8s-1.30.0: Setting up libnfsidmap1:amd64 (1:2.6.1-1ubuntu1.2) ...
+    w2-k8s-1.30.0: Setting up rpcbind (1.2.6-2build1) ...
+    w2-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/rpcbind.service → /lib/systemd/system/rpcbind.service.
+    w2-k8s-1.30.0: Created symlink /etc/systemd/system/sockets.target.wants/rpcbind.socket → /lib/systemd/system/rpcbind.socket.
+    w2-k8s-1.30.0: Setting up keyutils (1.6.1-2ubuntu3) ...
+    w2-k8s-1.30.0: Setting up nfs-common (1:2.6.1-1ubuntu1.2) ...
+    w2-k8s-1.30.0: 
+    w2-k8s-1.30.0: Creating config file /etc/idmapd.conf with new version
+    w2-k8s-1.30.0: 
+    w2-k8s-1.30.0: Creating config file /etc/nfs.conf with new version
+    w2-k8s-1.30.0: Adding system user `statd' (UID 115) ...
+    w2-k8s-1.30.0: Adding new user `statd' (UID 115) with group `nogroup' ...
+    w2-k8s-1.30.0: Not creating home directory `/var/lib/nfs'.
+    w2-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+    w2-k8s-1.30.0: Created symlink /etc/systemd/system/remote-fs.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+    w2-k8s-1.30.0: auth-rpcgss-module.service is a disabled or a static unit, not starting it.
+    w2-k8s-1.30.0: nfs-idmapd.service is a disabled or a static unit, not starting it.
+    w2-k8s-1.30.0: nfs-utils.service is a disabled or a static unit, not starting it.
+    w2-k8s-1.30.0: proc-fs-nfsd.mount is a disabled or a static unit, not starting it.
+    w2-k8s-1.30.0: rpc-gssd.service is a disabled or a static unit, not starting it.
+    w2-k8s-1.30.0: rpc-statd-notify.service is a disabled or a static unit, not starting it.
+    w2-k8s-1.30.0: rpc-statd.service is a disabled or a static unit, not starting it.
+    w2-k8s-1.30.0: rpc-svcgssd.service is a disabled or a static unit, not starting it.
+    w2-k8s-1.30.0: rpc_pipefs.target is a disabled or a static unit, not starting it.
+    w2-k8s-1.30.0: var-lib-nfs-rpc_pipefs.mount is a disabled or a static unit, not starting it.
+    w2-k8s-1.30.0: Processing triggers for man-db (2.10.2-1) ...
+    w2-k8s-1.30.0: Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+    w2-k8s-1.30.0: Reading package lists...
+    w2-k8s-1.30.0: Building dependency tree...
+    w2-k8s-1.30.0: Reading state information...
+    w2-k8s-1.30.0: The following additional packages will be installed:
+    w2-k8s-1.30.0:   conntrack cri-tools ebtables kubernetes-cni socat
+    w2-k8s-1.30.0: Suggested packages:
+    w2-k8s-1.30.0:   nftables
+    w2-k8s-1.30.0: The following NEW packages will be installed:
+    w2-k8s-1.30.0:   conntrack containerd.io cri-tools ebtables kubeadm kubectl kubelet
+    w2-k8s-1.30.0:   kubernetes-cni socat
+    w2-k8s-1.30.0: 0 upgraded, 9 newly installed, 0 to remove and 174 not upgraded.
+    w2-k8s-1.30.0: Need to get 124 MB of archives.
+    w2-k8s-1.30.0: After this operation, 461 MB of additional disk space will be used.
+    w2-k8s-1.30.0: Get:1 https://download.docker.com/linux/ubuntu jammy/stable amd64 containerd.io amd64 1.6.31-1 [29.8 MB]
+    w2-k8s-1.30.0: Get:4 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 conntrack amd64 1:1.4.6-2build2 [33.5 kB]
+    w2-k8s-1.30.0: Get:2 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  cri-tools 1.30.0-1.1 [21.3 MB]
+    w2-k8s-1.30.0: Get:8 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 ebtables amd64 2.0.11-4build2 [84.9 kB]
+    w2-k8s-1.30.0: Get:9 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 socat amd64 1.7.4.1-3ubuntu4 [349 kB]
+    w2-k8s-1.30.0: Get:3 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubeadm 1.30.0-1.1 [10.4 MB]
+    w2-k8s-1.30.0: Get:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubectl 1.30.0-1.1 [10.8 MB]
+    w2-k8s-1.30.0: Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubernetes-cni 1.4.0-1.1 [32.9 MB]
+    w2-k8s-1.30.0: Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubelet 1.30.0-1.1 [18.1 MB]
+    w2-k8s-1.30.0: Fetched 124 MB in 9s (13.6 MB/s)
+    w2-k8s-1.30.0: Selecting previously unselected package conntrack.
+    w2-k8s-1.30.0: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64989 files and directories currently installed.)
+    w2-k8s-1.30.0: Preparing to unpack .../0-conntrack_1%3a1.4.6-2build2_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking conntrack (1:1.4.6-2build2) ...
+    w2-k8s-1.30.0: Selecting previously unselected package containerd.io.
+    w2-k8s-1.30.0: Preparing to unpack .../1-containerd.io_1.6.31-1_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking containerd.io (1.6.31-1) ...
+    w2-k8s-1.30.0: Selecting previously unselected package cri-tools.
+    w2-k8s-1.30.0: Preparing to unpack .../2-cri-tools_1.30.0-1.1_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking cri-tools (1.30.0-1.1) ...
+    w2-k8s-1.30.0: Selecting previously unselected package ebtables.
+    w2-k8s-1.30.0: Preparing to unpack .../3-ebtables_2.0.11-4build2_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking ebtables (2.0.11-4build2) ...
+    w2-k8s-1.30.0: Selecting previously unselected package kubeadm.
+    w2-k8s-1.30.0: Preparing to unpack .../4-kubeadm_1.30.0-1.1_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking kubeadm (1.30.0-1.1) ...
+    w2-k8s-1.30.0: Selecting previously unselected package kubectl.
+    w2-k8s-1.30.0: Preparing to unpack .../5-kubectl_1.30.0-1.1_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking kubectl (1.30.0-1.1) ...
+    w2-k8s-1.30.0: Selecting previously unselected package kubernetes-cni.
+    w2-k8s-1.30.0: Preparing to unpack .../6-kubernetes-cni_1.4.0-1.1_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking kubernetes-cni (1.4.0-1.1) ...
+    w2-k8s-1.30.0: Selecting previously unselected package socat.
+    w2-k8s-1.30.0: Preparing to unpack .../7-socat_1.7.4.1-3ubuntu4_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking socat (1.7.4.1-3ubuntu4) ...
+    w2-k8s-1.30.0: Selecting previously unselected package kubelet.
+    w2-k8s-1.30.0: Preparing to unpack .../8-kubelet_1.30.0-1.1_amd64.deb ...
+    w2-k8s-1.30.0: Unpacking kubelet (1.30.0-1.1) ...
+    w2-k8s-1.30.0: Setting up conntrack (1:1.4.6-2build2) ...
+    w2-k8s-1.30.0: Setting up kubectl (1.30.0-1.1) ...
+    w2-k8s-1.30.0: Setting up ebtables (2.0.11-4build2) ...
+    w2-k8s-1.30.0: Setting up socat (1.7.4.1-3ubuntu4) ...
+    w2-k8s-1.30.0: Setting up containerd.io (1.6.31-1) ...
+    w2-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+    w2-k8s-1.30.0: Setting up cri-tools (1.30.0-1.1) ...
+    w2-k8s-1.30.0: Setting up kubernetes-cni (1.4.0-1.1) ...
+    w2-k8s-1.30.0: Setting up kubeadm (1.30.0-1.1) ...
+    w2-k8s-1.30.0: Setting up kubelet (1.30.0-1.1) ...
+    w2-k8s-1.30.0: Processing triggers for man-db (2.10.2-1) ...
+==> w2-k8s-1.30.0: Running provisioner: shell...
+    w2-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-v6h08i.sh
+    w2-k8s-1.30.0: [preflight] Running pre-flight checks
+    w2-k8s-1.30.0: [preflight] Reading configuration from the cluster...
+    w2-k8s-1.30.0: [preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+    w2-k8s-1.30.0: [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+    w2-k8s-1.30.0: [kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+    w2-k8s-1.30.0: [kubelet-start] Starting the kubelet
+    w2-k8s-1.30.0: [kubelet-check] Waiting for a healthy kubelet. This can take up to 4m0s
+    w2-k8s-1.30.0: [kubelet-check] The kubelet is healthy after 552.457936ms
+    w2-k8s-1.30.0: [kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap
+    w2-k8s-1.30.0: 
+    w2-k8s-1.30.0: This node has joined the cluster:
+    w2-k8s-1.30.0: * Certificate signing request was sent to apiserver and a response was received.
+    w2-k8s-1.30.0: * The Kubelet was informed of the new secure connection details.
+    w2-k8s-1.30.0: 
+    w2-k8s-1.30.0: Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+    w2-k8s-1.30.0: 
+==> w3-k8s-1.30.0: Importing base box 'sysnet4admin/Ubuntu-k8s'...
+[KProgress: 10%[KProgress: 20%[KProgress: 30%[KProgress: 40%[KProgress: 70%[KProgress: 90%[K==> w3-k8s-1.30.0: Matching MAC address for NAT networking...
+==> w3-k8s-1.30.0: Checking if box 'sysnet4admin/Ubuntu-k8s' version '0.8.4' is up to date...
+==> w3-k8s-1.30.0: Setting the name of the VM: w3-k8s-1.30.0(github_SysNet4Admin)
+==> w3-k8s-1.30.0: Clearing any previously set network interfaces...
+==> w3-k8s-1.30.0: Preparing network interfaces based on configuration...
+    w3-k8s-1.30.0: Adapter 1: nat
+    w3-k8s-1.30.0: Adapter 2: hostonly
+==> w3-k8s-1.30.0: Forwarding ports...
+    w3-k8s-1.30.0: 22 (guest) => 60103 (host) (adapter 1)
+==> w3-k8s-1.30.0: Running 'pre-boot' VM customizations...
+==> w3-k8s-1.30.0: Booting VM...
+==> w3-k8s-1.30.0: Waiting for machine to boot. This may take a few minutes...
+    w3-k8s-1.30.0: SSH address: 127.0.0.1:60103
+    w3-k8s-1.30.0: SSH username: vagrant
+    w3-k8s-1.30.0: SSH auth method: private key
+    w3-k8s-1.30.0: 
+    w3-k8s-1.30.0: Vagrant insecure key detected. Vagrant will automatically replace
+    w3-k8s-1.30.0: this with a newly generated keypair for better security.
+    w3-k8s-1.30.0: 
+    w3-k8s-1.30.0: Inserting generated public key within guest...
+    w3-k8s-1.30.0: Removing insecure key from the guest if it's present...
+    w3-k8s-1.30.0: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> w3-k8s-1.30.0: Machine booted and ready!
+==> w3-k8s-1.30.0: Checking for guest additions in VM...
+    w3-k8s-1.30.0: The guest additions on this VM do not match the installed version of
+    w3-k8s-1.30.0: VirtualBox! In most cases this is fine, but in rare cases it can
+    w3-k8s-1.30.0: prevent things such as shared folders from working properly. If you see
+    w3-k8s-1.30.0: shared folder errors, please make sure the guest additions within the
+    w3-k8s-1.30.0: virtual machine match the version of VirtualBox you have installed on
+    w3-k8s-1.30.0: your host and reload your VM.
+    w3-k8s-1.30.0: 
+    w3-k8s-1.30.0: Guest Additions Version: 6.0.0 r127566
+    w3-k8s-1.30.0: VirtualBox Version: 7.0
+==> w3-k8s-1.30.0: Setting hostname...
+==> w3-k8s-1.30.0: Configuring and enabling network interfaces...
+==> w3-k8s-1.30.0: Running provisioner: shell...
+    w3-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-us0wyv.sh
+    w3-k8s-1.30.0: deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg]   https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /
+==> w3-k8s-1.30.0: Running provisioner: shell...
+    w3-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-uwqm8t.sh
+    w3-k8s-1.30.0: Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.8 kB]
+    w3-k8s-1.30.0: Get:2 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [32.5 kB]
+    w3-k8s-1.30.0: Get:3 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  InRelease [1,186 B]
+    w3-k8s-1.30.0: Get:4 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  Packages [3,957 B]
+    w3-k8s-1.30.0: Hit:5 http://kr.archive.ubuntu.com/ubuntu jammy InRelease
+    w3-k8s-1.30.0: Get:6 http://kr.archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+    w3-k8s-1.30.0: Get:7 http://kr.archive.ubuntu.com/ubuntu jammy-backports InRelease [109 kB]
+    w3-k8s-1.30.0: Get:8 http://kr.archive.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+    w3-k8s-1.30.0: Get:9 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [1,678 kB]
+    w3-k8s-1.30.0: Get:10 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [311 kB]
+    w3-k8s-1.30.0: Get:11 http://kr.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [1,923 kB]
+    w3-k8s-1.30.0: Get:12 http://kr.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [327 kB]
+    w3-k8s-1.30.0: Get:13 http://kr.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1,074 kB]
+    w3-k8s-1.30.0: Get:14 http://kr.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [246 kB]
+    w3-k8s-1.30.0: Get:15 http://kr.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [42.7 kB]
+    w3-k8s-1.30.0: Get:16 http://kr.archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [10.4 kB]
+    w3-k8s-1.30.0: Get:17 http://kr.archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [67.1 kB]
+    w3-k8s-1.30.0: Get:18 http://kr.archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.0 kB]
+    w3-k8s-1.30.0: Get:19 http://kr.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [27.2 kB]
+    w3-k8s-1.30.0: Get:20 http://kr.archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.2 kB]
+    w3-k8s-1.30.0: Get:21 http://kr.archive.ubuntu.com/ubuntu jammy-security/main amd64 Packages [1,467 kB]
+    w3-k8s-1.30.0: Get:22 http://kr.archive.ubuntu.com/ubuntu jammy-security/main Translation-en [252 kB]
+    w3-k8s-1.30.0: Get:23 http://kr.archive.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [1,866 kB]
+    w3-k8s-1.30.0: Get:24 http://kr.archive.ubuntu.com/ubuntu jammy-security/restricted Translation-en [317 kB]
+    w3-k8s-1.30.0: Get:25 http://kr.archive.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [852 kB]
+    w3-k8s-1.30.0: Get:26 http://kr.archive.ubuntu.com/ubuntu jammy-security/universe Translation-en [164 kB]
+    w3-k8s-1.30.0: Get:27 http://kr.archive.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [37.2 kB]
+    w3-k8s-1.30.0: Get:28 http://kr.archive.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [7,588 B]
+    w3-k8s-1.30.0: Fetched 11.1 MB in 5s (2,044 kB/s)
+    w3-k8s-1.30.0: Reading package lists...
+    w3-k8s-1.30.0: Reading package lists...
+    w3-k8s-1.30.0: Building dependency tree...
+    w3-k8s-1.30.0: Reading state information...
+    w3-k8s-1.30.0: The following additional packages will be installed:
+    w3-k8s-1.30.0:   keyutils libnfsidmap1 rpcbind
+    w3-k8s-1.30.0: Suggested packages:
+    w3-k8s-1.30.0:   open-iscsi watchdog
+    w3-k8s-1.30.0: The following NEW packages will be installed:
+    w3-k8s-1.30.0:   keyutils libnfsidmap1 nfs-common rpcbind
+    w3-k8s-1.30.0: 0 upgraded, 4 newly installed, 0 to remove and 174 not upgraded.
+    w3-k8s-1.30.0: Need to get 381 kB of archives.
+    w3-k8s-1.30.0: After this operation, 1,447 kB of additional disk space will be used.
+    w3-k8s-1.30.0: Get:1 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnfsidmap1 amd64 1:2.6.1-1ubuntu1.2 [42.9 kB]
+    w3-k8s-1.30.0: Get:2 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 rpcbind amd64 1.2.6-2build1 [46.6 kB]
+    w3-k8s-1.30.0: Get:3 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 keyutils amd64 1.6.1-2ubuntu3 [50.4 kB]
+    w3-k8s-1.30.0: Get:4 http://kr.archive.ubuntu.com/ubuntu jammy-updates/main amd64 nfs-common amd64 1:2.6.1-1ubuntu1.2 [241 kB]
+    w3-k8s-1.30.0: Fetched 381 kB in 2s (222 kB/s)
+    w3-k8s-1.30.0: Selecting previously unselected package libnfsidmap1:amd64.
+    w3-k8s-1.30.0: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64858 files and directories currently installed.)
+    w3-k8s-1.30.0: Preparing to unpack .../libnfsidmap1_1%3a2.6.1-1ubuntu1.2_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking libnfsidmap1:amd64 (1:2.6.1-1ubuntu1.2) ...
+    w3-k8s-1.30.0: Selecting previously unselected package rpcbind.
+    w3-k8s-1.30.0: Preparing to unpack .../rpcbind_1.2.6-2build1_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking rpcbind (1.2.6-2build1) ...
+    w3-k8s-1.30.0: Selecting previously unselected package keyutils.
+    w3-k8s-1.30.0: Preparing to unpack .../keyutils_1.6.1-2ubuntu3_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking keyutils (1.6.1-2ubuntu3) ...
+    w3-k8s-1.30.0: Selecting previously unselected package nfs-common.
+    w3-k8s-1.30.0: Preparing to unpack .../nfs-common_1%3a2.6.1-1ubuntu1.2_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking nfs-common (1:2.6.1-1ubuntu1.2) ...
+    w3-k8s-1.30.0: Setting up libnfsidmap1:amd64 (1:2.6.1-1ubuntu1.2) ...
+    w3-k8s-1.30.0: Setting up rpcbind (1.2.6-2build1) ...
+    w3-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/rpcbind.service → /lib/systemd/system/rpcbind.service.
+    w3-k8s-1.30.0: Created symlink /etc/systemd/system/sockets.target.wants/rpcbind.socket → /lib/systemd/system/rpcbind.socket.
+    w3-k8s-1.30.0: Setting up keyutils (1.6.1-2ubuntu3) ...
+    w3-k8s-1.30.0: Setting up nfs-common (1:2.6.1-1ubuntu1.2) ...
+    w3-k8s-1.30.0: 
+    w3-k8s-1.30.0: Creating config file /etc/idmapd.conf with new version
+    w3-k8s-1.30.0: 
+    w3-k8s-1.30.0: Creating config file /etc/nfs.conf with new version
+    w3-k8s-1.30.0: Adding system user `statd' (UID 115) ...
+    w3-k8s-1.30.0: Adding new user `statd' (UID 115) with group `nogroup' ...
+    w3-k8s-1.30.0: Not creating home directory `/var/lib/nfs'.
+    w3-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+    w3-k8s-1.30.0: Created symlink /etc/systemd/system/remote-fs.target.wants/nfs-client.target → /lib/systemd/system/nfs-client.target.
+    w3-k8s-1.30.0: auth-rpcgss-module.service is a disabled or a static unit, not starting it.
+    w3-k8s-1.30.0: nfs-idmapd.service is a disabled or a static unit, not starting it.
+    w3-k8s-1.30.0: nfs-utils.service is a disabled or a static unit, not starting it.
+    w3-k8s-1.30.0: proc-fs-nfsd.mount is a disabled or a static unit, not starting it.
+    w3-k8s-1.30.0: rpc-gssd.service is a disabled or a static unit, not starting it.
+    w3-k8s-1.30.0: rpc-statd-notify.service is a disabled or a static unit, not starting it.
+    w3-k8s-1.30.0: rpc-statd.service is a disabled or a static unit, not starting it.
+    w3-k8s-1.30.0: rpc-svcgssd.service is a disabled or a static unit, not starting it.
+    w3-k8s-1.30.0: rpc_pipefs.target is a disabled or a static unit, not starting it.
+    w3-k8s-1.30.0: var-lib-nfs-rpc_pipefs.mount is a disabled or a static unit, not starting it.
+    w3-k8s-1.30.0: Processing triggers for man-db (2.10.2-1) ...
+    w3-k8s-1.30.0: Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+    w3-k8s-1.30.0: Reading package lists...
+    w3-k8s-1.30.0: Building dependency tree...
+    w3-k8s-1.30.0: Reading state information...
+    w3-k8s-1.30.0: The following additional packages will be installed:
+    w3-k8s-1.30.0:   conntrack cri-tools ebtables kubernetes-cni socat
+    w3-k8s-1.30.0: Suggested packages:
+    w3-k8s-1.30.0:   nftables
+    w3-k8s-1.30.0: The following NEW packages will be installed:
+    w3-k8s-1.30.0:   conntrack containerd.io cri-tools ebtables kubeadm kubectl kubelet
+    w3-k8s-1.30.0:   kubernetes-cni socat
+    w3-k8s-1.30.0: 0 upgraded, 9 newly installed, 0 to remove and 174 not upgraded.
+    w3-k8s-1.30.0: Need to get 124 MB of archives.
+    w3-k8s-1.30.0: After this operation, 461 MB of additional disk space will be used.
+    w3-k8s-1.30.0: Get:1 https://download.docker.com/linux/ubuntu jammy/stable amd64 containerd.io amd64 1.6.31-1 [29.8 MB]
+    w3-k8s-1.30.0: Get:2 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 conntrack amd64 1:1.4.6-2build2 [33.5 kB]
+    w3-k8s-1.30.0: Get:3 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  cri-tools 1.30.0-1.1 [21.3 MB]
+    w3-k8s-1.30.0: Get:5 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 ebtables amd64 2.0.11-4build2 [84.9 kB]
+    w3-k8s-1.30.0: Get:9 http://kr.archive.ubuntu.com/ubuntu jammy/main amd64 socat amd64 1.7.4.1-3ubuntu4 [349 kB]
+    w3-k8s-1.30.0: Get:4 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubeadm 1.30.0-1.1 [10.4 MB]
+    w3-k8s-1.30.0: Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubectl 1.30.0-1.1 [10.8 MB]
+    w3-k8s-1.30.0: Get:7 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubernetes-cni 1.4.0-1.1 [32.9 MB]
+    w3-k8s-1.30.0: Get:8 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.30/deb  kubelet 1.30.0-1.1 [18.1 MB]
+    w3-k8s-1.30.0: Fetched 124 MB in 15s (8,497 kB/s)
+    w3-k8s-1.30.0: Selecting previously unselected package conntrack.
+    w3-k8s-1.30.0: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64989 files and directories currently installed.)
+    w3-k8s-1.30.0: Preparing to unpack .../0-conntrack_1%3a1.4.6-2build2_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking conntrack (1:1.4.6-2build2) ...
+    w3-k8s-1.30.0: Selecting previously unselected package containerd.io.
+    w3-k8s-1.30.0: Preparing to unpack .../1-containerd.io_1.6.31-1_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking containerd.io (1.6.31-1) ...
+    w3-k8s-1.30.0: Selecting previously unselected package cri-tools.
+    w3-k8s-1.30.0: Preparing to unpack .../2-cri-tools_1.30.0-1.1_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking cri-tools (1.30.0-1.1) ...
+    w3-k8s-1.30.0: Selecting previously unselected package ebtables.
+    w3-k8s-1.30.0: Preparing to unpack .../3-ebtables_2.0.11-4build2_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking ebtables (2.0.11-4build2) ...
+    w3-k8s-1.30.0: Selecting previously unselected package kubeadm.
+    w3-k8s-1.30.0: Preparing to unpack .../4-kubeadm_1.30.0-1.1_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking kubeadm (1.30.0-1.1) ...
+    w3-k8s-1.30.0: Selecting previously unselected package kubectl.
+    w3-k8s-1.30.0: Preparing to unpack .../5-kubectl_1.30.0-1.1_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking kubectl (1.30.0-1.1) ...
+    w3-k8s-1.30.0: Selecting previously unselected package kubernetes-cni.
+    w3-k8s-1.30.0: Preparing to unpack .../6-kubernetes-cni_1.4.0-1.1_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking kubernetes-cni (1.4.0-1.1) ...
+    w3-k8s-1.30.0: Selecting previously unselected package socat.
+    w3-k8s-1.30.0: Preparing to unpack .../7-socat_1.7.4.1-3ubuntu4_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking socat (1.7.4.1-3ubuntu4) ...
+    w3-k8s-1.30.0: Selecting previously unselected package kubelet.
+    w3-k8s-1.30.0: Preparing to unpack .../8-kubelet_1.30.0-1.1_amd64.deb ...
+    w3-k8s-1.30.0: Unpacking kubelet (1.30.0-1.1) ...
+    w3-k8s-1.30.0: Setting up conntrack (1:1.4.6-2build2) ...
+    w3-k8s-1.30.0: Setting up kubectl (1.30.0-1.1) ...
+    w3-k8s-1.30.0: Setting up ebtables (2.0.11-4build2) ...
+    w3-k8s-1.30.0: Setting up socat (1.7.4.1-3ubuntu4) ...
+    w3-k8s-1.30.0: Setting up containerd.io (1.6.31-1) ...
+    w3-k8s-1.30.0: Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+    w3-k8s-1.30.0: Setting up cri-tools (1.30.0-1.1) ...
+    w3-k8s-1.30.0: Setting up kubernetes-cni (1.4.0-1.1) ...
+    w3-k8s-1.30.0: Setting up kubeadm (1.30.0-1.1) ...
+    w3-k8s-1.30.0: Setting up kubelet (1.30.0-1.1) ...
+    w3-k8s-1.30.0: Processing triggers for man-db (2.10.2-1) ...
+==> w3-k8s-1.30.0: Running provisioner: shell...
+    w3-k8s-1.30.0: Running: /var/folders/57/629sgzyn5wng9wyrwry2325m0000gn/T/vagrant-shell20240520-83038-ofqn43.sh
+    w3-k8s-1.30.0: [preflight] Running pre-flight checks
+    w3-k8s-1.30.0: [preflight] Reading configuration from the cluster...
+    w3-k8s-1.30.0: [preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+    w3-k8s-1.30.0: [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+    w3-k8s-1.30.0: [kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+    w3-k8s-1.30.0: [kubelet-start] Starting the kubelet
+    w3-k8s-1.30.0: [kubelet-check] Waiting for a healthy kubelet. This can take up to 4m0s
+    w3-k8s-1.30.0: [kubelet-check] The kubelet is healthy after 525.546104ms
+    w3-k8s-1.30.0: [kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap
+    w3-k8s-1.30.0: 
+    w3-k8s-1.30.0: This node has joined the cluster:
+    w3-k8s-1.30.0: * Certificate signing request was sent to apiserver and a response was received.
+    w3-k8s-1.30.0: * The Kubelet was informed of the new secure connection details.
+    w3-k8s-1.30.0: 
+    w3-k8s-1.30.0: Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+    w3-k8s-1.30.0: 

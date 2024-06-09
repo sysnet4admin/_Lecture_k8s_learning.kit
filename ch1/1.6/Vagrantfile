@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
         vb.name = "cp-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
         vb.cpus = 2
         vb.memory = 1792
-        vb.customize ["modifyvm", :id, "--groups", "/k8s-adv-U#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
+        vb.customize ["modifyvm", :id, "--groups", "/k8s-U#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
       end
       cfg.vm.host_name = "cp-k8s"
       cfg.vm.network "private_network", ip: "192.168.1.10"
@@ -29,9 +29,7 @@ Vagrant.configure("2") do |config|
       cfg.vm.synced_folder "../data", "/vagrant", disabled: true
       cfg.vm.provision "shell", path: "k8s_env_build.sh", args: [ N, k8s_V[0..3] ]
       cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, ctrd_V, "CP"]
-      cfg.vm.provision "shell", path: "k_cfg_n_git_clone.sh" # add kubectl config & git clone source
-      cfg.vm.provision "file",  source: "ADD_controlplane_node.sh", destination: "/tmp/ADD_controlplane_node.sh"
-      cfg.vm.provision "shell", inline: "mv /tmp/ADD_controlplane_node.sh /root/ADD_controlplane_node.sh"
+    #  cfg.vm.provision "shell", path: "controlplane_node.sh"
     end
 
   #==============#
@@ -45,7 +43,7 @@ Vagrant.configure("2") do |config|
         vb.name = "w#{i}-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
         vb.cpus = 1
         vb.memory = 1024
-        vb.customize ["modifyvm", :id, "--groups", "/k8s-adv-U#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
+        vb.customize ["modifyvm", :id, "--groups", "/k8s-U#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
       end
       cfg.vm.host_name = "w#{i}-k8s"
       cfg.vm.network "private_network", ip: "192.168.1.10#{i}"
@@ -53,8 +51,7 @@ Vagrant.configure("2") do |config|
       cfg.vm.synced_folder "../data", "/vagrant", disabled: true
       cfg.vm.provision "shell", path: "k8s_env_build.sh", args: [ N, k8s_V[0..3] ]
       cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, ctrd_V, "W" ]
-      cfg.vm.provision "file",  source: "ADD_worker_nodes.sh", destination: "/tmp/ADD_worker_nodes.sh"
-      cfg.vm.provision "shell", inline: "mv /tmp/ADD_worker_nodes.sh /root/ADD_worker_nodes.sh"
+    #  cfg.vm.provision "shell", path: "worker_nodes.sh"
     end
   end
 
