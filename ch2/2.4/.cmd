@@ -4,7 +4,7 @@
 ### https://formulae.brew.sh/cask/vmware-fusion
 ### brew install --cask vmware-fusion
 ### https://github.com/Homebrew/homebrew-cask/blob/master/Casks/v/vmware-fusion.rb
-### vmware-fusion v13.5.2
+### vmware-fusion v13.5.2 (MUST start up after installation complete)
 brew install --cask ./vmware-fusion-v13.5.2/vmware-fusion.rb
 
 ### brew install --cask vagrant-vmware-utility
@@ -27,6 +27,7 @@ sudo ./scripts/vf_net_create_vnet2
 ### check vmnet (optional)
 ls /Library/Preferences/VMware\ Fusion
 
+
 # vagrant (2/3)
 ## installation 
 ### MacOS 
@@ -41,7 +42,6 @@ vagrant plugin install vagrant-vmware-desktop
 
 ### check vagrant plugin list  
 gem list --remote vagrant- | grep -i vmware
-
 
 # READY TO RUN the `vagrant up` 
 
