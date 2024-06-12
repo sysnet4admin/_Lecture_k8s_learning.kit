@@ -9,5 +9,5 @@ helm install metallb edu/metallb \
      --set speaker.image.tag=v0.14.5
 
 echo "\nWait 30 seconds for helm CRDs deployed completely" ; sleep 30
-kubectl apply -f ~/_Lecture_k8s_learning.kit/ch9/9.6/installer-by-helm/metallb-crd/
+kubectl apply -f ~/_Lecture_k8s_learning.kit/ch9/9.6/installer-by-helm/metallb-crds/
 
