@@ -17,6 +17,6 @@ kustomize build
 kustomize build | kubectl apply -f -
 kubectl describe pods -n metallb-system | grep Image:
 
-cd ../metallb-crd/
+cd ../metallb-crds/
 kubectl apply -f .
 
