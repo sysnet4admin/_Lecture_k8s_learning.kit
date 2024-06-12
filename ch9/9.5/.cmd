@@ -1,8 +1,8 @@
 kubectl describe pods -n metallb-system | grep Image:
 cd _Lecture_k8s_learning.kit/ch9/9.5
 
-metallb-unintaller.sh
-kustomize-installer.sh
+metallb_unintaller.sh
+kustomize_installer.sh
 
 cd res/metallb-native 
 kustomize create --autodetect
