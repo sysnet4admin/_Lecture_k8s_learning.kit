@@ -1,7 +1,7 @@
 # helm 
 ~/_Lecture_k8s_learning.kit/ch9/9.6/get_helm.sh
 
-helm repo add edu https://k8s-edu.github.io/Lkv1_main/k8s-adv 
+helm repo add edu https://k8s-edu.github.io/Lkv1_main/helm-charts/k8s-adv/ 
 helm repo update 
 helm search repo
 
