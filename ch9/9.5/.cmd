@@ -1,18 +1,22 @@
 kubectl describe pods -n metallb-system | grep Image:
 cd _Lecture_k8s_learning.kit/ch9/9.5
 
-metallb-unintaller.sh
-kustomize-installer.sh
+metallb_unintaller.sh
+kustomize_installer.sh
 
-cd res
+cd res/metallb-native 
 kustomize create --autodetect
-# kustomize create --namespace=metallb-system --resources res/namespace.yaml,res/metallb.yaml,res/metallb-l2config.yaml,res/metallb-memberlist.yaml 
+# kustomize create --namespace=metallb-system --resources res/metallb-native/namespace.yaml,res/metallb-native/metallb-native-v0.14.4.yaml
 
-kustomize edit set image quay.io/metallb/speaker:v0.10.2
-kustomize edit set image quay.io/metallb/controller:v0.10.2
+kustomize edit set image quay.io/metallb/speaker:v0.14.5
+kustomize edit set image quay.io/metallb/controller:v0.14.5
 
 cat kustomization.yaml
 
 kustomize build
 kustomize build | kubectl apply -f -
 kubectl describe pods -n metallb-system | grep Image:
+
+cd ../metallb-crds/
+kubectl apply -f .
+

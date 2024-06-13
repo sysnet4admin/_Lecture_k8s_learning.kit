@@ -1,11 +1,29 @@
-k apply -f ~/_Lecture_k8s_learning.kit/ch2/2.5/evt-desc.yaml 
+# utm (1/2)
+## installation 
+### MacOS(arm64)
+### https://formulae.brew.sh/cask/utm
+### brew install --cask utm
+### https://github.com/Homebrew/homebrew-cask/blob/master/Casks/u/utm.rb
+### utm v4.5.2 
+brew install --cask ./utm-v4.5.2/utm.rb
 
-k get events 
-k describe < po | deploy | others> < Name >
+# tabby (2/2)
+## installation
+### MacOS 
+### https://formulae.brew.sh/cask/tabby
+### brew install --cask tabby
+### https://github.com/Homebrew/homebrew-cask/blob/master/Casks/tabby.rb
+### tabby v1.0.207
+brew install --cask ./tabby-v1.0.207/tabby.rb
 
-k apply -f ~/_Lecture_k8s_learning.kit/ch2/2.5/logs.yaml 
+## the location of configuration file 
+### https://github.com/Eugeny/tabby/wiki/Config-file
+### On Windows, %APPDATA%/Tabby
+### On macOS: ~/Library/Application Support/tabby
+### On Linux: ~/.config/tabby
 
-k logs < Name >
+## Windows 
+cp ./tabby-v1.0.207/config.yaml $env:APPDATA/tabby 
 
-k delete -f evt-desc.yaml 
-k delete -f logs.yaml 
+## MacOS 
+cp ./tabby-v1.0.207/config.yaml ~/Library/Application\ Support/tabby
