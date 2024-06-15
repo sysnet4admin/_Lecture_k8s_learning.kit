@@ -41,5 +41,5 @@ git clone https://github.com/yuyicai/update-kube-cert.git /tmp/update-kube-cert
 chmod 755 /tmp/update-kube-cert/update-kubeadm-cert.sh
 /tmp/update-kube-cert/update-kubeadm-cert.sh all --cri containerd
 rm -rf /tmp/update-kube-cert
-echo "Wait 10 seconds for restarting the Control-Plane Node..." ; sleep 10
+echo "Wait 30 seconds for restarting the Control-Plane Node..." ; sleep 30
 
