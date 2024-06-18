@@ -23,10 +23,10 @@
 ### 보강 강의 
 - A: 보강 수업(v1.22 ~ v1.24)
 - B: 보강 수업(v1.30 ~ )
-- X: 쿠버네티스 시험(CKA, CKAD, CKS) 설명 
+- X: 쿠버네티스 시험(CKA, CKAD, CKS, KCNA, KCSA) 설명 
 
 ***
-### Repo(레포)를 다시 내려받으신다면? 아래의 명령을 실행하세요 :) 
+### Repo(리포)를 다시 내려받으신다면? 아래의 명령을 실행하세요 :) 
 ```bash 
 [root@m-k8s ~]# rerepo-k8s-learning.kit
 Cloning into '/root/_Lecture_k8s_learning.kit'...
