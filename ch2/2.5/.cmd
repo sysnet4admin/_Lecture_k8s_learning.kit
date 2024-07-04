@@ -26,4 +26,4 @@ brew install --cask ./tabby-v1.0.207/tabby.rb
 cp ./tabby-v1.0.207/config.yaml $env:APPDATA/tabby 
 
 ## MacOS 
-cp ./tabby-v1.0.207/config.yaml ~/Library/Application\ Support/tabby
+cp ./tabby-v1.0.207/config.yaml ~/Library/Application\ Support/tabby/
