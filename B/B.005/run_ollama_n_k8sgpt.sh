@@ -14,7 +14,6 @@ prerequisite_check() {
   if ! hash fzf >/dev/null 2>&1; then echo "fzf is not installed"; exit_err; fi
 }
 
-# Repeat given char 80 or 90 times using shell function
 repeat(){
 	for i in {1..50}; do echo -n "$1"; done
 	echo ""
@@ -55,10 +54,16 @@ analyze_by_k8sgpt() {
   if [[ "$#" -eq 0 ]]; then
     # Default
     k8sgpt analyze --backend localai --explain  
-  else
-    echo -e "Run by this '${1}' language"
+  elif [[ "$#" -eq 1 ]]; then
+    echo "Run in '${1}' language"
     # Specific language  
     k8sgpt analyze --backend localai --explain --language "${1}"
+  elif [[ "$#" -eq 2 ]] && [[ "$2" = "-i" ]]; then
+    # Interactive mode 
+    k8sgpt analyze --backend localai --explain --language "${1}" --interactive
+  else 
+    echo 2>&1 "Error: You need to choose specific option(s)"
+    exit_err  
   fi 
 }
 
@@ -69,5 +74,5 @@ main() {
   analyze_by_k8sgpt "$@"
 }
 
-main "$@"  # Assuming this line is already at the end of the script
+main "$@"  # Run with all arguments 
 
