@@ -1,4 +1,4 @@
-nfs-exporter.sh dynamic-vol  
+nfs_exporter.sh dynamic-vol  
 cat /etc/exports
 
 k apply -f ~/_Lecture_k8s_learning.kit/ch5/5.6/nfs-subdir-external-provisioner

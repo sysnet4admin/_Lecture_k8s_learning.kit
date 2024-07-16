@@ -33,7 +33,7 @@ k get po -n metallb-system
 k apply -f ~/_Lecture_k8s_learning.kit/ch9/9.6/deploy-w-pvc-svc.yaml
 
 # nfs-provisioner by helm 
-## pre-requirement "5.6/nfs-exporter.sh dynamic-vol"
+## pre-requirement "5.6/nfs_exporter.sh dynamic-vol"
 
 k get pv,pvc
 k get storageclasses.storage.k8s.io

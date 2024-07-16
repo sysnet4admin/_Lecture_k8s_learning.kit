@@ -1,4 +1,4 @@
-nfs-exporter.sh pvc-vol  
+nfs_exporter.sh pvc-vol  
 cat /etc/exports
 
 k apply -f ~/_Lecture_k8s_learning.kit/ch5/5.5/persistentvolume-nfs.yaml
