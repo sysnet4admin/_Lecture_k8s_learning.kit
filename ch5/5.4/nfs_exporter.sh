@@ -21,7 +21,7 @@ fi
 
 if [[ ! -d $NFS_DIR ]]; then
   mkdir -p $NFS_DIR
-  chown 666 $NFS_DIR
+  chmod 666 $NFS_DIR
   echo "$NFS_DIR 192.168.1.0/24(rw,sync,no_root_squash)" >> /etc/exports
   if [[ $(systemctl is-enabled "$NFS_SVC_NAME") -eq "disabled" ]]; then
     systemctl enable $NFS_SVC_NAME
