@@ -10,9 +10,9 @@ else
   echo "This system is not CentOS as well as Ubuntu"
 fi 
 
-# main nfs-exporter
+# main nfs_exporter
 if [ $# -eq 0 ]; then
-  echo "usage: nfs-exporter.sh <name>"; exit 0
+  echo "usage: nfs_exporter.sh <name>"; exit 0
 fi
 
 if [[ ! -d /nfs_shared ]]; then
@@ -21,6 +21,7 @@ fi
 
 if [[ ! -d $NFS_DIR ]]; then
   mkdir -p $NFS_DIR
+  chown 666 $NFS_DIR
   echo "$NFS_DIR 192.168.1.0/24(rw,sync,no_root_squash)" >> /etc/exports
   if [[ $(systemctl is-enabled "$NFS_SVC_NAME") -eq "disabled" ]]; then
     systemctl enable $NFS_SVC_NAME
