@@ -50,7 +50,7 @@ brew install --cask ./tabby-v1.0.207/tabby.rb
 ### On Linux: ~/.config/tabby
 
 ## Windows 
-cp ./tabby-v1.0.207/config.yaml $env:APPDATA/tabby 
+cp ./tabby-v1.0.207/config.yaml $env:APPDATA/tabby/
 
 ## MacOS 
-cp ./tabby-v1.0.207/config.yaml ~/Library/Application\ Support/tabby
+cp ./tabby-v1.0.207/config.yaml ~/Library/Application\ Support/tabby/
