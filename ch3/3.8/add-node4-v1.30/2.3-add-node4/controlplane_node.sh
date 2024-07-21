@@ -1,31 +1,18 @@
 #!/usr/bin/env bash
 
-# init kubernetes 
+# init kubernetes (w/ containerd)
 kubeadm init --token 123456.1234567890123456 --token-ttl 0 \
---pod-network-cidr=172.16.0.0/16 --apiserver-advertise-address=192.168.1.10
+             --pod-network-cidr=172.16.0.0/16 --apiserver-advertise-address=192.168.1.10 \
+             --cri-socket=unix:///run/containerd/containerd.sock
 
 # config for master node only 
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
 
-# raw_address for gitcontent
-raw_git="raw.githubusercontent.com/sysnet4admin/IaC/master/manifests" 
-
-# config for kubernetes's network 
-kubectl apply -f https://$raw_git/172.16_net_calico_v1.yaml
-
-# config metallb for LoadBalancer service
-kubectl apply -f https://$raw_git/svc/metallb-0.9.6.yaml
-
-# create configmap for metallb (192.168.1.11 - 19)
-kubectl apply -f https://$raw_git/svc/metallb-l2config.yaml
-
-# create secret for metallb 
-kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-
-# install bash-completion for kubectl 
-yum install bash-completion -y 
+# CNI raw address & config for kubernetes's network 
+CNI_ADDR="https://raw.githubusercontent.com/sysnet4admin/IaC/main/k8s/CNI"
+kubectl apply -f $CNI_ADDR/172.16_net_calico_v3.26.0.yaml
 
 # kubectl completion on bash-completion dir
 kubectl completion bash >/etc/bash_completion.d/kubectl
@@ -35,7 +22,7 @@ echo 'alias k=kubectl' >> ~/.bashrc
 echo "alias ka='kubectl apply -f'" >> ~/.bashrc
 echo 'complete -F __start_kubectl k' >> ~/.bashrc
 
-# git clone k8s-code
+# git clone k8s-adv-code
 git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git
 mv /home/vagrant/_Lecture_k8s_learning.kit $HOME
 find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
@@ -48,3 +35,11 @@ git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git $HOME/_L
 find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
 EOF
 chmod 700 /usr/local/bin/rerepo-k8s-learning.kit
+
+# extended k8s certifications all
+git clone https://github.com/yuyicai/update-kube-cert.git /tmp/update-kube-cert
+chmod 755 /tmp/update-kube-cert/update-kubeadm-cert.sh
+/tmp/update-kube-cert/update-kubeadm-cert.sh all --cri containerd
+rm -rf /tmp/update-kube-cert
+echo "Wait 30 seconds for restarting the Control-Plane Node..." ; sleep 30
+
