@@ -9,6 +9,7 @@ cd llama.cpp
 # load gguf model on ollama platform
 cd ..
 mv 3.quantized-models/llama3-chinese:8b.gguf 4.ollama-create/FlagAlpha/
+cd 4.ollama-create/FlagAlpha/
 ollama create llama3-chinese:8b -f modelfile
 
 # Run “run_ollama_n_k8sgpt.sh” 
