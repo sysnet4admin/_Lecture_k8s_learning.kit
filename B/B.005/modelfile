@@ -1,12 +1,13 @@
 FROM llama3-chinese:8b.gguf
 
 TEMPLATE "{{ if .System }}<|start_header_id|>system<|end_header_id|>
+
 {{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
+
 {{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>
+
 {{ .Response }}<|eot_id|>"
-
 SYSTEM """A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. 好奇的用户与人工智能助手聊天。对于用户提出的问题，人工智能助手会给出详细而礼貌的回答。"""
-
 PARAMETER num_keep 24
 PARAMETER stop <|start_header_id|>
 PARAMETER stop <|end_header_id|>
