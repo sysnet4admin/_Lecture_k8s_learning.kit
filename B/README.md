@@ -5,6 +5,7 @@
 - B.004: K8sGPT(v0.3.26)의 활용 방안
 - B.005: ollama+k8sgpt 
 - B.006: -n(--namespace)의 위치 중요성 
+- B.007: PaC(Policy as Code) by CEL(Common Expression Language) w/ OPA,Kyverno
 
 - =======
 - B.011: 쿠버네티스 구성 요소 별로 허용되는 버전의 차이
