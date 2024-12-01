@@ -1,0 +1,10 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: CELConstraintTemplateNoHostPath
+metadata:
+  name: cel-constraintnohostpath 
+spec:
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        # Replicas is not matched due to testing purpose 
+        kinds: ["DaemonSet", "Deployment"]

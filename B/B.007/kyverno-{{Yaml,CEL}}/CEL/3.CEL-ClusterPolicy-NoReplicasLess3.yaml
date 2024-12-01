@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: celclusterpolicynoreplicasless3
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: CELClusterPolicyNoReplicasLess3
+    match:
+      any:
+      - resources:
+          kinds:
+          - Deployment 
+          operations:
+          - CREATE
+          - UPDATE
+    validate:
+      cel:
+        expressions:
+        - expression: "!has(object.spec.replicas) || 
+                       object.spec.replicas > 2"
+          message: "Replicas is not allowed less than 3"

@@ -1,0 +1,18 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: celconstrainttemplatenohostpath 
+spec:
+  crd:
+    spec:
+      names:
+        kind: CELConstraintTemplateNoHostPath 
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      code:
+        - engine: K8sNativeValidation
+          source:
+            validations:
+            - expression: "!has(object.spec.template.spec.volumes) || 
+                           object.spec.template.spec.volumes.all(volume, !has(volume.hostPath))"
+              message: "HostPath is not allowed for template of Pod"

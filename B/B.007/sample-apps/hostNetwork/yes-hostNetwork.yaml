@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: yes-hostnetwork
+spec:
+  hostNetwork: true
+  containers:
+    - name: nginx
+      image: nginx:1.27.2-alpine-slim

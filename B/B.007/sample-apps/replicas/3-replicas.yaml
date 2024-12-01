@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: 3-replicas
+  name: 3-replicas
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: 3-replicas
+  template:
+    metadata:
+      labels:
+        app: 3-replicas
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.27.2-alpine-slim

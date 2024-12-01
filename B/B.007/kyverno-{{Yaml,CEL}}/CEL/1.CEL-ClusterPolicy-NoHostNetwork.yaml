@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: celclusterpolicynohostnetwork
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: CELClusterPolicyNoHostNetwork
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          operations:
+          - CREATE
+          - UPDATE
+    validate:
+      cel:
+        expressions:
+        - expression: "!has(object.spec.hostNetwork) || 
+                       object.spec.hostNetwork != true"
+          message: "HostNetwork is not allowed for the Pod"

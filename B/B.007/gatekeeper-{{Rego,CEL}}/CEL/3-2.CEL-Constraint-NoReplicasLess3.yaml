@@ -1,0 +1,9 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: CELConstraintTemplateNoReplicasLess3
+metadata:
+  name: cel-constraintnoreplicasless3
+spec:
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment"]
