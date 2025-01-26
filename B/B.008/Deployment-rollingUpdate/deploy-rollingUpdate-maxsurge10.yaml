@@ -19,5 +19,5 @@ spec:
     spec:
       containers:
       - name: nginx-max10
-        image: nginx:1.26.2 
+        image: quay.io/nginx/nginx-unprivileged:1.26.2 
 
