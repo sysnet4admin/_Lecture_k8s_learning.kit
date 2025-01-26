@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: deploy-rollingUpdate-maxsurge80
-  name: deploy-rollingUpdate-maxsurge80
+    app: deploy-rollingupdate-maxsurge80
+  name: deploy-rollingupdate-maxsurge80
 spec:
   replicas: 10
   selector:
     matchLabels:
-      app: deploy-rollingUpdate-maxsurge80 
+      app: deploy-rollingupdate-maxsurge80 
   strategy:
     rollingUpdate:
       maxSurge: 80% 
   template:
     metadata:
       labels:
-        app: deploy-rollingUpdate-maxsurge80 
+        app: deploy-rollingupdate-maxsurge80 
     spec:
       containers:
       - name: nginx-max80

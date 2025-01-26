@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: deploy-default-rollingUpdate-maxsurge25
-  name: deploy-default-rollingUpdate-maxsurge25
+    app: deploy-default-rollingupdate-maxsurge25
+  name: deploy-default-rollingupdate-maxsurge25
 spec:
   replicas: 10
   selector:
     matchLabels:
-      app: deploy-default-rollingUpdate-maxsurge25 
+      app: deploy-default-rollingupdate-maxsurge25 
   template:
     metadata:
       labels:
-        app: deploy-default-rollingUpdate-maxsurge25 
+        app: deploy-default-rollingupdate-maxsurge25 
     spec:
       containers:
       - name: nginx-max25
