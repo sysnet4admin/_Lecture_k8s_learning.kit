@@ -6,7 +6,7 @@ metadata:
   name: po-imagepullpolicy-never
 spec:
   containers:
-  - image: nginx:stable-alpine-slim
+  - image: nginx
     imagePullPolicy: Never
     name: nginx
   nodeName: w3-k8s
