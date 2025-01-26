@@ -20,4 +20,6 @@ spec:
       containers:
       - name: nginx-max80
         image: quay.io/nginx/nginx-unprivileged:1.26.2 
+        ports:
+        - containerPort: 8080
 
