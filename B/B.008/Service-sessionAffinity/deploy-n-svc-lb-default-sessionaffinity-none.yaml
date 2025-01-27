@@ -17,6 +17,13 @@ spec:
      containers:
      - name: nginx
        image: sysnet4admin/chk-ip
+     topologySpreadConstraints:
+     - maxSkew: 1
+       topologyKey: kubernetes.io/os
+       whenUnsatisfiable: DoNotSchedule
+       labelSelector:
+         matchLabels:
+           app: chk-ip 
 ---
 apiVersion: v1
 kind: Service
