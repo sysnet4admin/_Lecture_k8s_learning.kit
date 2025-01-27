@@ -24,17 +24,4 @@ spec:
        labelSelector:
          matchLabels:
            app: chk-ip 
----
-apiVersion: v1
-kind: Service
-metadata:
- name: svc-lb-default-sessionaffinity-none
-spec:
- selector:
-   app: chk-ip
- ports:
-   - name: http
-     port: 80
-     targetPort: 80
- type: LoadBalancer
 
