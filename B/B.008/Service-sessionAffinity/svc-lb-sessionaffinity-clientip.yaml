@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: svc-lb-sessionaffinity-clientip
+spec:
+ selector:
+   app: chk-ip
+ ports:
+   - name: http
+     port: 80
+     targetPort: 80
+ sessionAffinity: ClientIP
+ type: LoadBalancer
+
