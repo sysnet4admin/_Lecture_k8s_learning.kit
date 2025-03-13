@@ -12,7 +12,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 # CNI raw address & config for kubernetes's network 
 CNI_ADDR="https://raw.githubusercontent.com/sysnet4admin/IaC/main/k8s/CNI"
-kubectl apply -f $CNI_ADDR/172.16_net_calico_v3.26.0.yaml
+kubectl apply -f $CNI_ADDR/calico-quay-v3.29.2.yaml
 
 # kubectl completion on bash-completion dir
 kubectl completion bash >/etc/bash_completion.d/kubectl

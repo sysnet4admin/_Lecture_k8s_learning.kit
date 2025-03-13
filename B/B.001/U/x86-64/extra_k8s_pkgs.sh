@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
 ##### Addtional configuration for All-in-one >> replace to extra-k8s-pkgs
-EXTRA_PKGS_ADDR="https://raw.githubusercontent.com/sysnet4admin/IaC/main/k8s/extra-pkgs/v1.30"
+EXTRA_PKGS_ADDR="https://raw.githubusercontent.com/sysnet4admin/IaC/main/k8s/extra-pkgs/v1.32"
 
-curl $EXTRA_PKGS_ADDR/get_helm_v3.14.0.sh | bash 
+curl $EXTRA_PKGS_ADDR/get_helm_v3.17.1.sh | bash 
 # helm completion on bash-completion dir & alias+
 helm completion bash > /etc/bash_completion.d/helm
 echo 'alias h=helm' >> ~/.bashrc
 echo 'complete -F __start_helm h' >> ~/.bashrc
 
-# metallb v0.14.4
-kubectl apply -f $EXTRA_PKGS_ADDR/metallb-native-v0.14.4.yaml
+# metallb v0.14.9
+kubectl apply -f $EXTRA_PKGS_ADDR/metallb-native-v0.14.9.yaml
 
 # split metallb CRD due to it cannot apply at once. 
 # it looks like Operator limitation
