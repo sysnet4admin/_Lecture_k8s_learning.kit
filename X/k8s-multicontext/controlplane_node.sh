@@ -32,10 +32,9 @@ mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
 
-# CNI raw address
-CNI_ADDR="https://raw.githubusercontent.com/sysnet4admin/IaC/master/k8s/CNI"
-# config for kubernetes's network
-kubectl apply -f $CNI_ADDR/172.16_net_calico_v3.26.0.yaml
+# CNI raw address & config for kubernetes's network
+CNI_ADDR="https://raw.githubusercontent.com/sysnet4admin/IaC/main/k8s/CNI"
+kubectl apply -f $CNI_ADDR/calico-quay-v3.29.2.yaml
 
 # install etctctl 
 curl -L  https://github.com/sysnet4admin/BB/raw/main/etcdctl/v3.4.15/etcdctl -o /usr/local/bin/etcdctl
