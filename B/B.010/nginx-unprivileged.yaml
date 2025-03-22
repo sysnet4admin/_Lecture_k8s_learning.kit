@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-unprivileged
+  name: nginx-unprivileged
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-unprivileged
+  template:
+    metadata:
+      labels:
+        app: nginx-unprivileged
+    spec:
+      containers:
+      - image: quay.io/nginx/nginx-unprivileged
+        name: nginx-unprivileged
+        ports:
+        - containerPort: 8080
