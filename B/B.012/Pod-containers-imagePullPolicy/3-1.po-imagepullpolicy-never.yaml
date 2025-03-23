@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: po-imagepullpolicy-never
+  name: po-imagepullpolicy-never
+spec:
+  containers:
+  - image: nginx
+    imagePullPolicy: Never
+    name: nginx
+  nodeName: w3-k8s
+

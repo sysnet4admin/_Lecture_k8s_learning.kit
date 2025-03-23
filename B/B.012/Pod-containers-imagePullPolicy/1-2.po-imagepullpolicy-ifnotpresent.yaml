@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: po-imagepullpolicy-ifnotpresent
+  name: po-imagepullpolicy-ifnotpresent
+spec:
+  containers:
+  - image: sysnet4admin/kubecon-eu
+    imagePullPolicy: IfNotPresent 
+    name: nginx
+  nodeName: w2-k8s
+

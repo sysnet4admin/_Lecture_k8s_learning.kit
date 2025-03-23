@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: po-imagepullpolicy-default-always
+  name: po-imagepullpolicy-default-always
+spec:
+  containers:
+  - image: sysnet4admin/kubecon-eu
+    name: nginx
+  nodeName: w1-k8s
+

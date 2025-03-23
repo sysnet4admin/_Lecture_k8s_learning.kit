@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deploy-rollingupdate-maxsurge10
+  name: deploy-rollingupdate-maxsurge10
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: deploy-rollingupdate-maxsurge10 
+  strategy:
+    rollingUpdate:
+      maxSurge: 10% 
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: deploy-rollingupdate-maxsurge10 
+    spec:
+      containers:
+      - name: nginx-max10
+        image: quay.io/nginx/nginx-unprivileged:1.26.2 
+        ports:
+        - containerPort: 8080

@@ -1,0 +1,27 @@
+apiVersion: apps/v1                                                                                                                                           
+kind: Deployment
+metadata:
+ labels:
+   app: chk-ip
+ name: chk-ip
+spec:
+ replicas: 3
+ selector:
+   matchLabels:
+     app: chk-ip
+ template:
+   metadata:
+     labels:
+       app: chk-ip
+   spec:
+     containers:
+     - name: nginx
+       image: sysnet4admin/chk-ip
+     topologySpreadConstraints:
+     - maxSkew: 1
+       topologyKey: kubernetes.io/os
+       whenUnsatisfiable: DoNotSchedule
+       labelSelector:
+         matchLabels:
+           app: chk-ip 
+
