@@ -5,7 +5,7 @@
 # max number of worker nodes
 N = 3
 # each of components to install
-k8s_V         = '1.32.2-1.1'                   # Kubernetes
+k8s_V         = '1.33.0-1.1'                   # Kubernetes
 ctrd_V        = '1.7.24-1'                     # Containerd
 controller_IP = '192.168.1.10'                 # if ip have a issue, it changed. 
 ## /configuration variables ##
