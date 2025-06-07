@@ -1,0 +1,19 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: celconstrainttemplatenoreplicasless3
+spec:
+  crd:
+    spec:
+      names:
+        kind: CELConstraintTemplateNoReplicasLess3
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      code:
+        - engine: K8sNativeValidation
+          source:
+            validations:
+            - expression: "!has(object.spec.replicas) || 
+                           object.spec.replicas > 2"
+              message: "Replicas is not allowed less than 3"
+

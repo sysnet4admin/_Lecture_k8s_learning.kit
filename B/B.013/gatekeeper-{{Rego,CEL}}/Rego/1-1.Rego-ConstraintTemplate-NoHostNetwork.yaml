@@ -1,0 +1,19 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: regoconstrainttemplatenohostnetwork
+spec:
+  crd:
+    spec:
+      names:
+        kind: RegoConstraintTemplateNoHostNetwork
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package regoconstrainttemplatenohostnetwork
+
+        violation[{"msg": msg}] {
+          input.review.kind.kind == "Pod"
+          input.review.object.spec.hostNetwork == true
+          msg := "HostNetwork is not allowed for the Pod"
+        }

@@ -1,0 +1,25 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: regoconstrainttemplatenoreplicasless3
+spec:
+  crd:
+    spec:
+      names:
+        kind: RegoConstraintTemplateNoReplicasLess3
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package regoconstrainttemplatenoreplicasless3 
+
+        violation[{"msg": msg}] {
+          input.review.kind.kind == "Deployment"
+          input.review.object.spec.replicas < 2
+          msg := "Replicas is not allowed less than 3"
+        }
+
+ # beauty calculate sample by paramters.min in violatinon
+ #         provided := input.review.object.spec.replicas
+ #         required := input.parameters.min
+ #         missing := required - provided
+ #         missing > 0

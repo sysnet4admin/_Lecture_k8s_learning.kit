@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: no-hostpath
+  labels:
+    app: no-hostpath
+spec:
+  selector:
+    matchLabels:
+      app: no-hostpath 
+  template:
+    metadata:
+      labels:
+        app: no-hostpath 
+    spec:
+      containers:
+      - name: host-mon
+        image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim

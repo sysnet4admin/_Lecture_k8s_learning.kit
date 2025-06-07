@@ -1,0 +1,20 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: regoconstrainttemplatenohostpath 
+spec:
+  crd:
+    spec:
+      names:
+        kind: RegoConstraintTemplateNoHostPath 
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package regoconstrainttemplatenohostpath 
+
+        violation[{"msg": msg}] {
+        # applying all objects 
+        #  input.review.kind.kind == "Pod" 
+          input.review.object.spec.template.spec.volumes[_].hostPath 
+          msg := "HostPath is not allowed for the template of Pod"
+        }

@@ -1,0 +1,18 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: celconstrainttemplatenohostnetwork
+spec:
+  crd:
+    spec:
+      names:
+        kind: CELConstraintTemplateNoHostNetwork
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      code:
+        - engine: K8sNativeValidation
+          source:
+            validations:
+            - expression: "!has(object.spec.hostNetwork) || 
+                           object.spec.hostNetwork != true"
+              message: "HostNetwork is not allowed for the Pod"

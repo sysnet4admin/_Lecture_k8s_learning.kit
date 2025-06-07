@@ -1,0 +1,23 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: celclusterpolicynohostpath 
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: CELClusterPolicyNoHostPath
+    match:
+      any:
+      - resources:
+          kinds:
+          - DaemonSet
+          - Deployment 
+          operations:
+          - CREATE
+          - UPDATE
+    validate:
+      cel:
+        expressions:
+        - expression: "!has(object.spec.template.spec.volumes) || 
+                       object.spec.template.spec.volumes.all(volume, !has(volume.hostPath))"
+          message: "HostPath is not allowed for template of Pod"
