@@ -8,7 +8,7 @@ swapoff -a
 # sed to comment the swap partition in /etc/fstab (Rmv blank)
 sed -i.bak -r 's/(.+swap.+)/#\1/' /etc/fstab
 
-# add kubernetes repo
+# add kubernetes repo 
 curl \
   -fsSL https://pkgs.k8s.io/core:/stable:/v$2/deb/Release.key \
   | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
@@ -35,6 +35,6 @@ modprobe br_netfilter
 
 # local small dns & vagrant cannot parse and delivery shell code.
 echo "127.0.0.1 localhost" > /etc/hosts # localhost name will use by calico-node
-echo "$3 cp-k8s" >> /etc/hosts
+echo "192.168.1.10 cp-k8s" >> /etc/hosts
 for (( i=1; i<=$1; i++  )); do echo "192.168.1.10$i w$i-k8s" >> /etc/hosts; done
 

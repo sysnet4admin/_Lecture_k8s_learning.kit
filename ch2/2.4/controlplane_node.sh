@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-# init kubernetes 
+# init kubernetes (w/ containerd)
 kubeadm init --token 123456.1234567890123456 --token-ttl 0 \
-             --pod-network-cidr=172.16.0.0/16 --apiserver-advertise-address=$1 \
+             --pod-network-cidr=172.16.0.0/16 --apiserver-advertise-address=192.168.1.10 \
              --cri-socket=unix:///run/containerd/containerd.sock
 
-# config for control-plane node only 
+# config for master node only 
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
@@ -24,7 +24,7 @@ echo "alias ka='kubectl apply -f'"   >> ~/.bashrc
 echo "alias kd='kubectl delete -f'"  >> ~/.bashrc
 echo 'complete -F __start_kubectl k' >> ~/.bashrc
 
-# git clone k8s-code
+# git clone k8s-adv-code
 git clone https://github.com/sysnet4admin/_Lecture_k8s_learning.kit.git
 mv /home/vagrant/_Lecture_k8s_learning.kit $HOME
 find $HOME/_Lecture_k8s_learning.kit -regex ".*\.\(sh\)" -exec chmod 700 {} \;
