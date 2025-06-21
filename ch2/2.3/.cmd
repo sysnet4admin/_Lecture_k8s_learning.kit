@@ -10,7 +10,7 @@ winget install -e --id Oracle.VirtualBox -v 7.0.18
 ### brew install --cask virtualbox 
 ### https://github.com/Homebrew/homebrew-cask/blob/master/Casks/v/virtualbox.rb
 ### virtualbox v7.1.10
-brew install --cask ./virtualbox-v7.1.10/virtualbox.rb
+brew install --cask ./virtualbox-v7.0.18/virtualbox.rb
 
 
 # vagrant (2/3)
@@ -25,7 +25,7 @@ winget install -e --id Hashicorp.Vagrant -v 2.4.1
 ### brew install --cask vagrant
 ### https://github.com/Homebrew/homebrew-cask/blob/master/Casks/v/vagrant.rb
 ### vagrant v2.4.7
-brew install --cask ./vagrant-v2.4.7/vagrant.rb
+brew install --cask ./vagrant-v2.4.1/vagrant.rb
 
 
 # tabby (3/3)
