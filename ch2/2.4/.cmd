@@ -13,8 +13,8 @@ brew install --cask ./virtualbox-v7.1.10/virtualbox.rb
 ### https://formulae.brew.sh/cask/vagrant
 ### brew install --cask vagrant
 ### https://github.com/Homebrew/homebrew-cask/blob/master/Casks/v/vagrant.rb
-### vagrant v2.4.1 
-brew install --cask ./vagrant-v2.4.1/vagrant.rb
+### vagrant v2.4.7
+brew install --cask ./vagrant-v2.4.7/vagrant.rb
 
 ### (optional) uninstall vagrant-vmware-desktop 
 vagrant plugin uninstall vagrant-vmware-desktop
