@@ -21,7 +21,8 @@ fi
 export KUBECONFIG=/tmp/kubeconfig-backup:kubeconfig
 kubectl config view --flatten > $HOME/.kube/config
 
-# clear downloaded kubeconfig
-rm kubeconfig
+# clear kubeconfig(s)
+rm kubeconfig             >/dev/null 2>&1 
+rm /tmp/kubeconfig-backup >/dev/null 2>&1  
 
 echo "Successfully flatten kubeconfig"
