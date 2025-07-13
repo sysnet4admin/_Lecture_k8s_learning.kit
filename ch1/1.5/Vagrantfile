@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
       cfg.vm.provider "virtualbox" do |vb|
         vb.name = "cp-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
         vb.cpus = 2
-        vb.memory = 1792
+        vb.memory = 2048
         vb.customize ["modifyvm", :id, "--groups", "/k8s-U#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
       end
       cfg.vm.host_name = "cp-k8s"
