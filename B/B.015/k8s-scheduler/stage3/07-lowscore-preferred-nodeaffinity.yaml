@@ -1,0 +1,39 @@
+# ============================================================
+# Stage 3 Test: Preferred NodeAffinity with no matching preferences (Low Score)
+# ============================================================
+# This pod has preferences that don't match any nodes
+# Result: Pod will be scheduled but gets low score, placed on any available node
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage3-lowscore-preferred-nodeaffinity
+  labels:
+    test: stage3-lowscore
+    component: node-affinity
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100  # Prefer non-existent zone
+        preference:
+          matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - zone-x  # No nodes with zone-x
+      - weight: 80   # Prefer non-existent disktype
+        preference:
+          matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - nvme  # No nodes with disktype=nvme
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+# Expected: Scheduled (soft constraint) but with lower score
+# Compares to stage3-pass-preferred-nodeaffinity which matches real zones/labels

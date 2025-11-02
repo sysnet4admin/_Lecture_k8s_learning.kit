@@ -1,0 +1,24 @@
+# ============================================================
+# Stage 1 Test: nodeName bypasses scheduler taint checks (Success)
+# ============================================================
+# Demonstrates that nodeName bypasses ALL scheduler checks including taints
+# w5-k8s has gpu:nvidia=NoSchedule taint
+# Without nodeName, this Pod would fail scheduling (no toleration)
+# With nodeName, Pod is placed directly on w5-k8s (bypasses scheduler)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage1-nodename-bypass-taint
+  labels:
+    test: stage1-bypass
+spec:
+  nodeName: w5-k8s  # Direct placement on tainted node
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+  # No tolerations - but nodeName bypasses taint check
+  # Result: Pod runs successfully on w5-k8s despite NoSchedule taint

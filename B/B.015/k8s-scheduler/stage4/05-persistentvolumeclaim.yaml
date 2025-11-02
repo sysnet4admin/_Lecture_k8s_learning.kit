@@ -1,0 +1,16 @@
+# ============================================================
+# Stage 4 Test: PersistentVolumeClaim
+# ============================================================
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: demo-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: late-binding-sc
+  resources:
+    requests:
+      storage: 5Gi
+# Expected: PVC remains "Pending" until a Pod using it is scheduled
+# Once Pod is scheduled, PVC binds to PV during Binding Cycle (Reserve/PreBind)

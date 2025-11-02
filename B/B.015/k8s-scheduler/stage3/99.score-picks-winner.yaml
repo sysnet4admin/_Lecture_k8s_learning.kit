@@ -1,0 +1,136 @@
+# ============================================================
+# Stage 3 Interactive Demonstration: 99.score-picks-winner.yaml
+# ============================================================
+# NOTE: This file is used with taint-node.sh for interactive demonstration.
+#       For other Stage 3 tests, see individual files (01-09.yaml).
+#
+# Purpose:
+# - Demonstrate how Stage 3 scoring determines winner selection
+# - Show how taints change the winner dynamically
+# - Used in three scenarios (see stage3/README.md):
+#   1. Baseline: No taints → w1-k8s wins (180 points)
+#   2. Taint w1-k8s → w2-k8s wins (130 points)
+#   3. Taint w2-k8s also → w3-k8s wins (80 points)
+#
+# This demonstrates how Stage 3 (Score) preferences work when
+# Stage 2 (Filter) leaves multiple candidates.
+#
+# Expected behavior:
+# - Stage 2 Filter leaves multiple nodes (w1, w2, w3, w4)
+# - Stage 3 Score evaluates preferences and picks the best match
+# - Pod gets scheduled based on scoring algorithm
+# ============================================================
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: score-picks-winner
+  labels:
+    test: comprehensive
+    scenario: score-picks-winner
+spec:
+  # ====== Stage 2 Filter (Hard Constraints) ======
+
+  # Filter: Only zone-a or zone-b nodes
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - zone-a
+            - zone-b
+      # Result after Stage 2: w1, w2, w3, w4 are all candidates
+
+      # ====== Stage 3 Score (Soft Constraints) - MATTERS! ======
+
+      # Strong preference: zone-a nodes (w1, w2)
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - zone-a  # w1, w2 get 100 points
+
+      # Medium preference: SSD nodes (w1, w3)
+      - weight: 80
+        preference:
+          matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - ssd  # w1, w3 get 80 points
+
+      # Light preference: HDD nodes (w2, w4)
+      - weight: 30
+        preference:
+          matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - hdd  # w2, w4 get 30 points
+
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# ============================================================
+# Interactive Test Scenarios (see stage3/README.md for details)
+# ============================================================
+#
+# Scenario 1: Baseline (No Taints)
+# ---------------------------------
+# Command: kubectl apply -f 99.score-picks-winner.yaml
+# Expected: w1-k8s (180 points)
+# Scoring:
+# - w1-k8s: zone-a (100) + SSD (80) = 180 points ← WINNER!
+# - w2-k8s: zone-a (100) + HDD (30) = 130 points
+# - w3-k8s: zone-b (0) + SSD (80) = 80 points
+# - w4-k8s: zone-b (0) + HDD (30) = 30 points
+#
+# Scenario 2: Taint w1-k8s (Use taint-node.sh)
+# ---------------------------------------------
+# Command: ./taint-node.sh → Select w1-k8s → NoSchedule
+# Then:    kubectl delete pod score-picks-winner
+#          kubectl apply -f 99.score-picks-winner.yaml
+# Expected: w2-k8s (130 points, w1 filtered out)
+# Scoring:
+# - w1-k8s: FILTERED OUT (Stage 2)
+# - w2-k8s: zone-a (100) + HDD (30) = 130 points ← NEW WINNER!
+# - w3-k8s: zone-b (0) + SSD (80) = 80 points
+# - w4-k8s: zone-b (0) + HDD (30) = 30 points
+#
+# Scenario 3: Taint w2-k8s Also (Use taint-node.sh)
+# --------------------------------------------------
+# Command: ./taint-node.sh → Select w2-k8s → NoSchedule
+# Then:    kubectl delete pod score-picks-winner
+#          kubectl apply -f 99.score-picks-winner.yaml
+# Expected: w3-k8s (80 points, w1 and w2 filtered out)
+# Scoring:
+# - w1-k8s: FILTERED OUT (Stage 2)
+# - w2-k8s: FILTERED OUT (Stage 2)
+# - w3-k8s: zone-b (0) + SSD (80) = 80 points ← NEW WINNER!
+# - w4-k8s: zone-b (0) + HDD (30) = 30 points
+#
+# ============================================================
+# Key Learning Points:
+# ============================================================
+# 1. Stage 2 Filter leaves 4 candidates (w1, w2, w3, w4)
+# 2. Stage 3 Score picks the winner based on highest score
+# 3. Taints eliminate nodes in Stage 2, changing the winner
+# 4. Winner progression: w1 (180) → w2 (130) → w3 (80)
+# 5. Stage 3 scoring determines placement when multiple candidates remain
+#
+# Comparison with ../stage2/99.comprehensive-bypass-stage3.yaml:
+# - bypass-stage3: Only 1 candidate after Stage 2 → Stage 3 is meaningless
+# - stage3-winner: 4 candidates after Stage 2 → Stage 3 picks the best
+#
+# For full demonstration guide, see stage3/README.md

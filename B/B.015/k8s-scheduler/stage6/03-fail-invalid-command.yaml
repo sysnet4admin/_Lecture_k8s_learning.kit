@@ -1,0 +1,29 @@
+# ============================================================
+# Stage 6: Container Runtime - Invalid container command
+# ============================================================
+# Stage 6 Test: Container command not found
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage6-fail-invalid-command
+  labels:
+    test: stage6-container-runtime
+    component: command
+spec:
+  containers:
+  - name: app
+    image: busybox:1.36
+    command: ["non-existent-binary"]  # Command does not exist in image
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# Expected Result:
+# Status: CrashLoopBackOff or Error
+# Message: "exec: \"non-existent-binary\": executable file not found in $PATH"
+# From: container runtime
+#
+# Image pull succeeds, container creation succeeds,
+# but container fails to start because the specified command is not found

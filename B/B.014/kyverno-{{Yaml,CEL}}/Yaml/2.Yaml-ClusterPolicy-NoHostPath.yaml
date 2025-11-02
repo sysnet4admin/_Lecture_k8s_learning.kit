@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: yamlclusterpolicynohostpath 
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: YamlClusterPolicyNoHostPath
+    match:
+      any:
+      - resources:
+          kinds:
+          - DaemonSet
+          - Deployment 
+    validate:
+      message: "HostPath is not allowed for the template of Pod"
+      pattern:
+        spec:
+          template:
+            spec:
+              =(volumes):
+                - X(hostPath): "null"

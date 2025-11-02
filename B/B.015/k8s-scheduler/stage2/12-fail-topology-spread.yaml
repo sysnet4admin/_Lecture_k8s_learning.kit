@@ -1,0 +1,32 @@
+# ============================================================
+# Stage 2 Test: TopologySpreadConstraints with conflicting requirements (Expected to Fail)
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage2-fail-topology-spread
+  labels:
+    test: stage2-fail
+    component: topology-spread
+    app: distributed-fail
+spec:
+  nodeSelector:
+    zone: zone-a  # Only zone-a nodes (w1, w2)
+  topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname  # Spread across hostnames
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        app: distributed-fail
+  # Conflict: nodeSelector limits to zone-a (2 nodes)
+  # but we need to spread across more nodes than available
+  # After 2 pods, no more nodes in zone-a to satisfy the constraint
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+# Note: First instance will succeed, but demonstrates strict topology constraint

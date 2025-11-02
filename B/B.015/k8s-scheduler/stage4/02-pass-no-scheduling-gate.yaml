@@ -1,0 +1,21 @@
+# ============================================================
+# Stage 4 Test: Pod without schedulingGates (Normal binding)
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage4-pass-no-scheduling-gate
+  labels:
+    test: stage4-pass
+    component: no-gate
+spec:
+  # No schedulingGates -> Proceeds through entire Binding Cycle immediately
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+# Expected: Pod proceeds through all Binding Cycle phases and reaches Running state
+# Binding Cycle: Reserve → Permit → PreBind → Bind → PostBind

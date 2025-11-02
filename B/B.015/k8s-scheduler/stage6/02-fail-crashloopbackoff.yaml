@@ -1,0 +1,31 @@
+# ============================================================
+# Stage 6: Container Runtime - Container crash
+# ============================================================
+# Stage 6 Test: Container startup failure / crash
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage6-fail-crashloop
+  labels:
+    test: stage6-container-runtime
+    component: crash
+spec:
+  containers:
+  - name: app
+    image: busybox:1.36
+    command: ["sh", "-c", "exit 1"]  # Immediately exits with error code
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+  restartPolicy: Always
+
+# Expected Result:
+# Status: CrashLoopBackOff
+# Message: "Back-off restarting failed container"
+# From: kubelet
+#
+# Container runtime successfully pulled the image and created the container,
+# but the container process exits with non-zero code.
+# Kubelet will retry based on restartPolicy

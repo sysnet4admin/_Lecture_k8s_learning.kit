@@ -1,0 +1,33 @@
+# ============================================================
+# Stage 6: Container Runtime (Pod Execution)
+# ============================================================
+# Stage 6 Test: Image pull failure
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage6-fail-image-pull
+  labels:
+    test: stage6-container-runtime
+    component: image-pull
+spec:
+  containers:
+  - name: app
+    image: non-existent-registry.io/fake-image:v1.0.0  # Invalid image
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# Expected Result:
+# Status: ImagePullBackOff or ErrImagePull
+# Message: "Failed to pull image ... not found"
+# From: kubelet / container runtime
+#
+# Stage 6 encompasses container runtime operations:
+# 1. Image pull from registry
+# 2. Container creation
+# 3. Container startup
+# 4. Health checks (readiness/liveness)
+#
+# This stage occurs AFTER all scheduling and kubelet admission checks pass

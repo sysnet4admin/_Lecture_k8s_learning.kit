@@ -1,0 +1,21 @@
+# ============================================================
+# Stage 2 Test: NodeSelector mismatch (Expected to Fail)
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage2-fail-nodeselector
+  labels:
+    test: stage2-fail
+    component: nodeselector
+spec:
+  nodeSelector:
+    disktype: nvme  # No nodes have disktype=nvme label
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+# Expected: Pending (0/7 nodes match node selector)

@@ -1,0 +1,28 @@
+# ============================================================
+# Stage 2 Test: Filter by Required NodeAffinity
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage2-required-affinity
+  labels:
+    test: stage2-filter
+    component: node-affinity
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - zone-a
+            - zone-b  # Only zone-a or zone-b nodes (w1-w4)
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"

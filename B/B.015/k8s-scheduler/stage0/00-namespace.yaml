@@ -1,0 +1,9 @@
+# ============================================================
+# Stage 0: Admission Control - Namespace
+# ============================================================
+# Create isolated namespace for Stage 0 testing
+# LimitRange and ResourceQuota are namespace-scoped resources
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: stage0-demo

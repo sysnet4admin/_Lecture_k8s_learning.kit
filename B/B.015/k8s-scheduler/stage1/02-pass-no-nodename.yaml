@@ -1,0 +1,20 @@
+# ============================================================
+# Stage 1 Comparison: No nodeName (Use scheduler)
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage1-no-nodename
+  labels:
+    test: stage1-scheduler
+spec:
+  # No nodeName -> Scheduler handles it
+  nodeSelector:
+    disktype: ssd  # Scheduler processes this
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"

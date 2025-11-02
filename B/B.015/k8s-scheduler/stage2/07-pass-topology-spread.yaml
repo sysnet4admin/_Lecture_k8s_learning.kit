@@ -1,0 +1,26 @@
+# ============================================================
+# Stage 2 Test: TopologySpreadConstraints (Hard)
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage2-topology-spread-1
+  labels:
+    test: stage2-filter
+    component: topology-spread
+    app: distributed
+spec:
+  topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: zone
+    whenUnsatisfiable: DoNotSchedule  # Required constraint
+    labelSelector:
+      matchLabels:
+        app: distributed
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"

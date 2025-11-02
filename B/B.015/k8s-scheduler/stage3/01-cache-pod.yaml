@@ -1,0 +1,18 @@
+# ============================================================
+# Stage 3: Scheduler Score (Soft Constraints)
+# ============================================================
+# Deploy cache Pod first (for PodAffinity test)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cache-pod
+  labels:
+    tier: cache
+spec:
+  containers:
+  - name: redis
+    image: redis:7-alpine
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"

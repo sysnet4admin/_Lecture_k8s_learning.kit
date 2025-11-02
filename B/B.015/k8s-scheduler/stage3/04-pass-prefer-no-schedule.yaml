@@ -1,0 +1,25 @@
+# ============================================================
+# Stage 3 Test: PreferNoSchedule Toleration
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage3-prefer-no-schedule
+  labels:
+    test: stage3-score
+    component: prefer-no-schedule
+spec:
+  # Can be placed without toleration but with lower score
+  # With toleration, no score penalty
+  tolerations:
+  - key: maintenance
+    operator: Equal
+    value: "true"
+    effect: PreferNoSchedule  # Handled in Score stage via TaintToleration plugin
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"

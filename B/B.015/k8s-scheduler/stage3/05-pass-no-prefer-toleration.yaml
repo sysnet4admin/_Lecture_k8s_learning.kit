@@ -1,0 +1,19 @@
+# ============================================================
+# Stage 3 Comparison: No PreferNoSchedule Toleration
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage3-no-prefer-toleration
+  labels:
+    test: stage3-score
+    component: no-prefer-toleration
+spec:
+  # No toleration -> Nodes with maintenance taint get lower score
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"

@@ -1,0 +1,46 @@
+# ============================================================
+# Stage 6: Container Runtime - Liveness probe failure
+# ============================================================
+# Stage 6 Test: Container runs but fails liveness probe (gets restarted)
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage6-fail-liveness
+  labels:
+    test: stage6-container-runtime
+    component: liveness-probe
+spec:
+  containers:
+  - name: app
+    image: busybox:1.36
+    command:
+    - sh
+    - -c
+    - |
+      touch /tmp/healthy
+      sleep 30
+      rm -f /tmp/healthy
+      sleep 600  # Container stays alive but unhealthy
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      failureThreshold: 3
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# Expected Result (after ~45 seconds):
+# Status: Running
+# Restarts: 1+ (incrementing)
+# Message: "Liveness probe failed: cat: can't open '/tmp/healthy': No such file or directory"
+# From: kubelet
+#
+# Container starts successfully and is healthy for 30 seconds.
+# After 30 seconds, /tmp/healthy is removed, liveness probe fails.
+# Kubelet kills and restarts the container.

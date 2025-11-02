@@ -1,0 +1,23 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: celvalidatingadmissionpolicynohostpath 
+spec:
+  matchConstraints:
+    resourceRules:
+    - apiGroups: ["*"]
+      apiVersions: ["*"]
+      operations: ["CREATE","UPDATE"]
+      resources: ["daemonsets","deployments"]
+  validations:
+    - expression: "!has(object.spec.template.spec.volumes) || 
+                   object.spec.template.spec.volumes.all(volume, !has(volume.hostPath))"
+      message: "HostPath is not allowed for template of Pod"
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: celvalidatingadmissionpolicynohostpath-binding
+spec:
+  policyName: celvalidatingadmissionpolicynohostpath
+  validationActions: [Deny]

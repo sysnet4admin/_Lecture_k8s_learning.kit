@@ -1,0 +1,26 @@
+# ============================================================
+# Stage 2 Comparison: Second web Pod (should be placed on different node)
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage2-pod-antiaffinity-2
+  labels:
+    test: stage2-filter
+    component: pod-antiaffinity
+    app: web
+spec:
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            app: web
+        topologyKey: kubernetes.io/hostname
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"

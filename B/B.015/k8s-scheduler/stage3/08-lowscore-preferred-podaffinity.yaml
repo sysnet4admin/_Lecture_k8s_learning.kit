@@ -1,0 +1,31 @@
+# ============================================================
+# Stage 3 Test: Preferred PodAffinity with no matching pods (Low Score)
+# ============================================================
+# This pod prefers to be co-located with non-existent pods
+# Result: Pod will be scheduled but gets low score
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage3-lowscore-preferred-podaffinity
+  labels:
+    test: stage3-lowscore
+    component: pod-affinity
+spec:
+  affinity:
+    podAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100  # Prefer same node as non-existent tier
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              tier: nonexistent  # No pods with tier=nonexistent
+          topologyKey: kubernetes.io/hostname
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+# Expected: Scheduled (soft constraint) but with lower score
+# Compares to stage3-pass-preferred-podaffinity which finds cache-pod

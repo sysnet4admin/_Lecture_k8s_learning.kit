@@ -1,0 +1,39 @@
+# ============================================================
+# Stage 5: Kubelet Admission (Node-level validation)
+# ============================================================
+# Stage 5 Test: nodeAffinity validation by kubelet
+# Even with nodeName set, kubelet validates nodeAffinity
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage5-fail-nodeaffinity
+  labels:
+    test: stage5-kubelet-admission
+    component: nodeaffinity
+spec:
+  nodeName: w5-k8s  # w5-k8s has disktype=ssd
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - nvme  # w5-k8s has ssd, not nvme - kubelet will REJECT
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# Expected Result:
+# Status: NodeAffinity (Failed)
+# Message: "Predicate NodeAffinity failed: node(s) didn't match Pod's node affinity/selector"
+# From: kubelet
+#
+# This demonstrates that kubelet performs node affinity validation
+# even when the scheduler is bypassed via nodeName

@@ -1,0 +1,35 @@
+# ============================================================
+# Stage 4 Test: Pod with Late-Bound Volume
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage4-pass-volume-late-binding
+  labels:
+    test: stage4-pass
+    component: volume-binding
+spec:
+  # No special tolerations needed - w1-k8s has no taints
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+    volumeMounts:
+    - name: storage
+      mountPath: /data
+  volumes:
+  - name: storage
+    persistentVolumeClaim:
+      claimName: demo-pvc
+# Expected Binding Cycle behavior:
+# 1. Scheduling Cycle: Scheduler selects w1-k8s (only node with matching PV)
+# 2. Reserve: Volume reservation on w1-k8s
+# 3. Permit: Gate check (passes immediately)
+# 4. PreBind: PVC binds to PV on w1-k8s, volume mounts prepared
+# 5. Bind: Pod bound to w1-k8s
+# 6. PostBind: Cleanup and notifications
+#
+# Result: Pod Running on w1-k8s, PVC Bound to demo-pv-w1

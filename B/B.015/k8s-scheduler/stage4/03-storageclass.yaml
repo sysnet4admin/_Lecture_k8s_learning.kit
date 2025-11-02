@@ -1,0 +1,13 @@
+# ============================================================
+# Stage 4 Test: StorageClass with WaitForFirstConsumer
+# ============================================================
+# volumeBindingMode affects Reserve/PreBind extension points:
+# - Immediate: Bind volume before scheduling
+# - WaitForFirstConsumer: Reserve/bind volume during Binding Cycle (Stage 4)
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: late-binding-sc
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer  # Volume binding happens in Stage 4
+reclaimPolicy: Delete

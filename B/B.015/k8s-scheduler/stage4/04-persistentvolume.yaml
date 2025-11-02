@@ -1,0 +1,27 @@
+# ============================================================
+# Stage 4 Test: PersistentVolume on w1-k8s
+# ============================================================
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: demo-pv-w1
+  labels:
+    node: w1-k8s
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: late-binding-sc
+  hostPath:
+    path: /tmp/stage4-demo-vol  # Use hostPath for testing (works on any node)
+    type: DirectoryOrCreate
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - w1-k8s

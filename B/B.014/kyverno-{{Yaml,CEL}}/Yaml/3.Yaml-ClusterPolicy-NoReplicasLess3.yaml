@@ -1,0 +1,18 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: yamlclusterpolicynoreplicasless3
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: YamlClusterPolicyNoReplicasLess3
+    match:
+      any:
+      - resources:
+          kinds:
+          - Deployment 
+    validate:
+      message: "Replicas is not allowed less than 3"
+      pattern:
+        spec:
+          =(replicas): ">2"

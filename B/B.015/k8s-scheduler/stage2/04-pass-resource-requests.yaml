@@ -1,0 +1,21 @@
+# ============================================================
+# Stage 2 Test: Filter by Resource Requests
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage2-resource-requests
+  labels:
+    test: stage2-filter
+    component: resources
+spec:
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"    # Only nodes with sufficient memory
+        cpu: "10m"        # Only nodes with sufficient CPU
+      limits:
+        memory: "512Mi"
+        cpu: "500m"

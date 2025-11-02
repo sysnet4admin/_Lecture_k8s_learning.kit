@@ -1,0 +1,33 @@
+# ============================================================
+# Stage 5: Kubelet Admission - NoExecute taint validation
+# ============================================================
+# Stage 5 Test: NoExecute taint is checked by kubelet
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage5-pass-noexecute-taint
+  labels:
+    test: stage5-kubelet-admission
+    component: taint-noexecute
+spec:
+  nodeName: w6-k8s  # w6-k8s has maintenance=true:NoExecute taint
+  tolerations:
+  - key: maintenance
+    operator: Equal
+    value: "true"
+    effect: NoExecute  # Kubelet validates NoExecute taints
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# Expected Result:
+# Status: Running
+# Node: w6-k8s
+#
+# Note: Unlike NoSchedule taints (which kubelet ignores when nodeName is set),
+# NoExecute taints are always validated by kubelet for admission and eviction

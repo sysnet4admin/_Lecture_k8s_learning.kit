@@ -1,0 +1,26 @@
+# ============================================================
+# Stage 3 Test: TopologySpreadConstraints (Soft)
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage3-topology-spread-soft-1
+  labels:
+    test: stage3-score
+    component: topology-soft
+    app: flexible-distributed
+spec:
+  topologySpreadConstraints:
+  - maxSkew: 2
+    topologyKey: zone
+    whenUnsatisfiable: ScheduleAnyway  # Preference (schedule even if unsatisfied)
+    labelSelector:
+      matchLabels:
+        app: flexible-distributed
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"

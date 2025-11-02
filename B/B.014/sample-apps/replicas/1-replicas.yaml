@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: 1-replicas
+  name: 1-replicas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 1-replicas
+  template:
+    metadata:
+      labels:
+        app: 1-replicas
+    spec:
+      containers:
+      - name: nginx
+        image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim

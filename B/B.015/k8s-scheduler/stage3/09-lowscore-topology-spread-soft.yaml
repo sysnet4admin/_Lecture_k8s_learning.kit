@@ -1,0 +1,29 @@
+# ============================================================
+# Stage 3 Test: TopologySpreadConstraints (Soft) with large maxSkew
+# ============================================================
+# This demonstrates soft constraint that allows imbalanced distribution
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage3-lowscore-topology-spread-soft
+  labels:
+    test: stage3-lowscore
+    component: topology-soft
+    app: very-flexible-distributed
+spec:
+  topologySpreadConstraints:
+  - maxSkew: 10  # Very large maxSkew - allows very imbalanced distribution
+    topologyKey: zone
+    whenUnsatisfiable: ScheduleAnyway  # Soft - will schedule anywhere
+    labelSelector:
+      matchLabels:
+        app: very-flexible-distributed
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "128Mi"
+        cpu: "100m"
+# Expected: Scheduled successfully with low priority for balancing
+# Compares to stage3-pass-topology-spread-soft with maxSkew: 2

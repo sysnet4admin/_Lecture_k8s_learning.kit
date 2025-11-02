@@ -1,0 +1,35 @@
+# ============================================================
+# Stage 5: Kubelet Admission - Resource availability check
+# ============================================================
+# Stage 5 Test: Kubelet checks node resource availability
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage5-fail-insufficient-resources
+  labels:
+    test: stage5-kubelet-admission
+    component: resources
+spec:
+  nodeName: w1-k8s
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "1000Gi"  # Requesting 1000Gi - exceeds node capacity
+        cpu: "1000"       # Requesting 1000 cores - exceeds node capacity
+
+# Expected Result (if node doesn't have enough resources):
+# Status: Failed or OutOfmemory/OutOfcpu
+# Message: "Insufficient memory/cpu"
+# From: kubelet
+#
+# Note: This test may succeed if the node has sufficient allocatable resources.
+# The exact behavior depends on:
+# 1. Node's allocatable resources
+# 2. Other pods running on the node
+# 3. Kubelet's resource reservation
+#
+# Kubelet validates resource requests against node capacity during admission,
+# even when the scheduler is bypassed via nodeName

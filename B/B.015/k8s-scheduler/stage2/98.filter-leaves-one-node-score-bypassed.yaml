@@ -1,0 +1,96 @@
+# ============================================================
+# Comprehensive Test: Stage 2 Filter Makes Stage 3 Score Meaningless
+# ============================================================
+# This demonstrates how Stage 2 (Filter) constraints can make
+# Stage 3 (Score) preferences irrelevant by reducing candidates to one node.
+#
+# Expected behavior:
+# - Stage 2 Filter narrows down to only w5-k8s
+# - Stage 3 Score preferences (zone-a, HDD) don't match w5-k8s
+# - But w5-k8s is the only option, so Pod gets scheduled there anyway
+# - Stage 3 preferences are effectively bypassed/meaningless
+# ============================================================
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: filter-leaves-one-node-score-bypassed
+  labels:
+    test: comprehensive
+    scenario: bypass-stage3
+spec:
+  # ====== Stage 2 Filter (Hard Constraints) ======
+
+  # Filter 1: Only SSD nodes (w1, w3, w5)
+  nodeSelector:
+    disktype: ssd
+
+  # Filter 2: Must tolerate gpu taint (only w5)
+  tolerations:
+  - key: gpu
+    operator: Equal
+    value: nvidia
+    effect: NoSchedule  # Allows scheduling on w5-k8s
+
+  # Filter 3: REQUIRED - Only zone-c nodes (forces w5)
+  affinity:
+    nodeAffinity:
+      # This is the KEY constraint that forces w5-k8s only!
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - zone-c  # Hard constraint - only w5 and w6 in zone-c
+          - key: disktype
+            operator: In
+            values:
+            - ssd  # Combined with zone-c, only w5 remains!
+
+      # Result after Stage 2: Only w5-k8s remains!
+
+      # ====== Stage 3 Score (Soft Constraints) - MEANINGLESS! ======
+
+      # Prefer zone-a nodes (w1, w2)
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - zone-a  # ← w5 is zone-c, so this gets 0 points
+
+      # Prefer HDD nodes (w2, w4, w6)
+      - weight: 50
+        preference:
+          matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - hdd  # ← w5 is SSD, so this gets 0 points too!
+
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# ============================================================
+# Expected Result:
+# ============================================================
+# Node: w5-k8s (zone-c, SSD, GPU taint)
+#
+# Why Stage 3 is meaningless:
+# 1. Stage 2 Filter left only w5-k8s as a candidate
+# 2. Stage 3 Score preferences wanted zone-a + HDD
+# 3. But w5-k8s is zone-c + SSD (opposite of preferences!)
+# 4. However, w5-k8s is the ONLY option, so it gets scheduled there
+# 5. Stage 3 preferences had ZERO impact on the decision
+#
+# Test command:
+# kubectl get pod filter-leaves-one-node-score-bypassed -o wide
+# kubectl describe pod filter-leaves-one-node-score-bypassed | grep -A10 "Events:"

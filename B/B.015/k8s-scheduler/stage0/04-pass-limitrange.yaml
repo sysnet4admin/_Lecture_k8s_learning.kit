@@ -1,0 +1,21 @@
+# ============================================================
+# Stage 0 Test: LimitRange Pass
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage0-pass-limitrange
+  namespace: stage0-demo
+  labels:
+    test: stage0-pass
+spec:
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"  # Within LimitRange
+        cpu: "10m"
+      limits:
+        memory: "512Mi"  # Within LimitRange max
+        cpu: "500m"

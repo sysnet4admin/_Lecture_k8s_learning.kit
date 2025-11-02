@@ -1,0 +1,28 @@
+# ============================================================
+# Stage 4 Test: Pod with schedulingGates (Blocked at Permit)
+# ============================================================
+# schedulingGates block the Pod at the Permit extension point
+# Scheduler selects a node but doesn't proceed to Bind until gate is removed
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage4-block-scheduling-gate
+  labels:
+    test: stage4-block
+    component: scheduling-gate
+spec:
+  schedulingGates:
+  - name: example.com/approval-required  # Blocks at Permit extension point
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+# Expected: Pod status shows "SchedulingGated" condition
+# Node may be selected but Pod won't bind until gate is removed
+#
+# To unblock and allow binding:
+# kubectl patch pod stage4-block-scheduling-gate \
+#   --type=json -p='[{"op": "remove", "path": "/spec/schedulingGates"}]'

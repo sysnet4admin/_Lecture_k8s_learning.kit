@@ -1,0 +1,31 @@
+# ============================================================
+# Stage 5: Kubelet Admission - nodeSelector validation
+# ============================================================
+# Stage 5 Test: nodeSelector validation by kubelet
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage5-fail-nodeselector
+  labels:
+    test: stage5-kubelet-admission
+    component: nodeselector
+spec:
+  nodeName: w2-k8s  # w2-k8s has disktype=hdd
+  nodeSelector:
+    disktype: ssd  # w2-k8s has hdd, not ssd - kubelet will REJECT
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# Expected Result:
+# Status: NodeAffinity (Failed)
+# Message: "Pod was rejected: node(s) didn't match Pod's node affinity/selector"
+# From: kubelet
+#
+# Note: nodeSelector failures also show as "NodeAffinity" status
+# because nodeSelector is internally converted to nodeAffinity

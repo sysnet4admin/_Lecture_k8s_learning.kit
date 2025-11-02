@@ -1,0 +1,121 @@
+# ============================================================
+# Comprehensive Test: Stage 2 Filter Leaves Zero Nodes
+# ============================================================
+# This demonstrates how Stage 2 (Filter) constraints can be so
+# restrictive that NO nodes pass, making Stage 3 (Score) completely
+# irrelevant because there are no candidates to score.
+#
+# Expected behavior:
+# - Stage 2 Filter narrows down to 0 nodes (all filtered out)
+# - Stage 3 Score preferences are never evaluated
+# - Pod stays in Pending state (Unschedulable)
+# - Stage 3 preferences are completely irrelevant (no nodes to score)
+# ============================================================
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: filter-leaves-zero-nodes-unschedulable
+  labels:
+    test: comprehensive
+    scenario: bypass-stage3-zero
+spec:
+  # ====== Stage 2 Filter (Hard Constraints) ======
+
+  # Filter 1: Only SSD nodes (w1, w3, w5)
+  nodeSelector:
+    disktype: ssd
+
+  # Filter 2: NO toleration for gpu taint
+  # Note: w5-k8s has gpu taint, so it will be filtered out
+  # We intentionally do NOT include the toleration:
+  # tolerations:
+  # - key: gpu
+  #   operator: Equal
+  #   value: nvidia
+  #   effect: NoSchedule
+
+  # Filter 3: REQUIRED - Only zone-c nodes
+  affinity:
+    nodeAffinity:
+      # This constraint requires zone-c + SSD
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - zone-c  # Hard constraint - only w5 and w6 in zone-c
+          - key: disktype
+            operator: In
+            values:
+            - ssd  # Combined with zone-c, only w5 would match
+
+      # But w5 has gpu taint and we don't tolerate it!
+      # Result after Stage 2: 0 nodes remain!
+      # - w5-k8s: zone-c + SSD but has gpu taint (filtered out)
+      # - w6-k8s: zone-c but HDD (filtered out by disktype)
+
+      # ====== Stage 3 Score (Soft Constraints) - NEVER EVALUATED! ======
+
+      # Prefer zone-a nodes (w1, w2)
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - zone-a  # ← Never evaluated (no candidates)
+
+      # Prefer HDD nodes (w2, w4, w6)
+      - weight: 50
+        preference:
+          matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - hdd  # ← Never evaluated (no candidates)
+
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# ============================================================
+# Expected Result:
+# ============================================================
+# Status: Pending (Unschedulable)
+#
+# Why Stage 3 is never evaluated:
+# 1. Stage 2 Filter left 0 candidates
+#    - nodeSelector: disktype=ssd → w1, w3, w5
+#    - requiredNodeAffinity: zone=zone-c + disktype=ssd → w5 only
+#    - But w5 has gpu:nvidia=NoSchedule taint
+#    - No toleration provided → w5 filtered out
+#    - Final candidates: NONE
+# 2. Stage 3 Score preferences (zone-a, HDD) are never evaluated
+# 3. Pod cannot be scheduled (remains Pending)
+# 4. Stage 3 preferences are completely irrelevant (no nodes to score)
+#
+# Comparison with other scenarios:
+# - 97: 0 nodes left → Stage 3 never evaluated (Unschedulable)
+# - 98: 1 node left → Stage 3 bypassed (Scheduled to only option)
+# - 99: 2 nodes left → Stage 3 evaluated but meaningless (both 0 points)
+#
+# Test commands:
+# kubectl apply -f 97.filter-leaves-zero-nodes-unschedulable.yaml
+# kubectl get pod filter-leaves-zero-nodes-unschedulable -o wide
+# # Expected: STATUS = Pending
+#
+# kubectl describe pod filter-leaves-zero-nodes-unschedulable | grep -A10 "Events:"
+# # Expected: "0/N nodes are available" message
+# # Reason: Insufficient gpu toleration, node(s) didn't match selector
+#
+# Expected FailedScheduling event:
+# 0/6 nodes are available: 1 node(s) had untolerated taint {gpu: nvidia},
+# 2 node(s) didn't match Pod's node affinity/selector, 3 node(s) didn't match
+# Pod's node affinity/selector.

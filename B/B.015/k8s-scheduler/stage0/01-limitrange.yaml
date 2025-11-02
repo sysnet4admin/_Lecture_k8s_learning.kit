@@ -1,0 +1,24 @@
+# ============================================================
+# Stage 0: Admission Control - LimitRange
+# ============================================================
+# LimitRange: Per-container resource limits
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: demo-limits
+  namespace: stage0-demo
+spec:
+  limits:
+  - max:
+      memory: "2Gi"
+      cpu: "2000m"
+    min:
+      memory: "4Mi"
+      cpu: "5m"
+    default:
+      memory: "128Mi"
+      cpu: "100m"
+    defaultRequest:
+      memory: "16Mi"
+      cpu: "10m"
+    type: Container

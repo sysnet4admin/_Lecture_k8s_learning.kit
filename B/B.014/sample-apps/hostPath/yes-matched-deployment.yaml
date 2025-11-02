@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: yes-matched-deployment
+  name: yes-matched-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: yes-matched-deployment
+  template:
+    metadata:
+      labels:
+        app: yes-matched-deployment
+    spec:
+      containers:
+      - name: nginx
+        image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+        volumeMounts:
+        - mountPath: /host-log
+          name: hostpath-directory
+      volumes:
+      - name: hostpath-directory
+        hostPath:
+          path: /var/log

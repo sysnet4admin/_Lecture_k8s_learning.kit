@@ -1,0 +1,39 @@
+# ============================================================
+# Stage 6: Container Runtime - Readiness probe failure
+# ============================================================
+# Stage 6 Test: Container runs but fails readiness probe
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage6-fail-readiness
+  labels:
+    test: stage6-container-runtime
+    component: readiness-probe
+spec:
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    ports:
+    - containerPort: 8080
+    readinessProbe:
+      httpGet:
+        path: /non-existent-path  # This path does not exist
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      failureThreshold: 3
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# Expected Result:
+# Status: Running (but NOT Ready 0/1)
+# Conditions: Ready=False
+# Message: "Readiness probe failed: HTTP probe failed with statuscode: 404"
+# From: kubelet
+#
+# Container is running successfully, but kubelet's health check
+# (readiness probe) fails, so the Pod is not marked as Ready.
+# This prevents the Pod from receiving traffic from Services.

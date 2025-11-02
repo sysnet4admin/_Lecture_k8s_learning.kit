@@ -1,0 +1,16 @@
+# ============================================================
+# Stage 0: Admission Control - ResourceQuota
+# ============================================================
+# ResourceQuota: Namespace-wide resource limits
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: demo-quota
+  namespace: stage0-demo
+spec:
+  hard:
+    requests.cpu: "10"
+    requests.memory: "20Gi"
+    limits.cpu: "20"
+    limits.memory: "40Gi"
+    pods: "20"

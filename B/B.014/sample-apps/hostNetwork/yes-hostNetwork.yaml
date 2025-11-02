@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: yes-hostnetwork
+spec:
+  hostNetwork: true
+  containers:
+    - name: nginx
+      image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim

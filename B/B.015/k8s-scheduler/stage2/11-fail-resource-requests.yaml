@@ -1,0 +1,22 @@
+# ============================================================
+# Stage 2 Test: Insufficient resources (Expected to Fail)
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage2-fail-resource-requests
+  labels:
+    test: stage2-fail
+    component: resources
+spec:
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "100Gi"   # Requesting more memory than any node has
+        cpu: "50000m"     # Requesting more CPU than any node has
+      limits:
+        memory: "200Gi"
+        cpu: "100000m"
+# Expected: Pending (Insufficient memory/cpu on all nodes)

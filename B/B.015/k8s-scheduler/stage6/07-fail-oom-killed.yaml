@@ -1,0 +1,41 @@
+# ============================================================
+# Stage 6: Container Runtime - OOMKilled
+# ============================================================
+# Stage 6 Test: Container exceeds memory limit and gets killed
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage6-fail-oom
+  labels:
+    test: stage6-container-runtime
+    component: oom
+spec:
+  containers:
+  - name: app
+    image: busybox:1.36
+    command:
+    - sh
+    - -c
+    - |
+      # Allocate memory continuously until OOM
+      tail /dev/zero
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+      limits:
+        memory: "32Mi"  # Container will be killed when exceeding this
+        cpu: "50m"
+
+# Expected Result (after a few seconds):
+# Status: OOMKilled or CrashLoopBackOff
+# Last State: Terminated
+# Reason: OOMKilled
+# Exit Code: 137 (128 + 9, SIGKILL)
+# From: container runtime / kernel OOM killer
+#
+# Container starts successfully but consumes memory rapidly.
+# When memory usage exceeds the limit (32Mi), the kernel OOM killer
+# terminates the container with SIGKILL.
+# This is a Stage 6 runtime enforcement, not a scheduling decision.

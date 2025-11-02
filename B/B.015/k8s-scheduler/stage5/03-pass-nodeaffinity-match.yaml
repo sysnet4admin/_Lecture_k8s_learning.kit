@@ -1,0 +1,41 @@
+# ============================================================
+# Stage 5: Kubelet Admission - Successful validation
+# ============================================================
+# Stage 5 Test: nodeAffinity matches the target node
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage5-pass-nodeaffinity
+  labels:
+    test: stage5-kubelet-admission
+    component: nodeaffinity-pass
+spec:
+  nodeName: w5-k8s  # w5-k8s has disktype=ssd, zone=zone-c
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - ssd  # Matches w5-k8s
+          - key: zone
+            operator: In
+            values:
+            - zone-c  # Matches w5-k8s
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# Expected Result:
+# Status: Running
+# Node: w5-k8s
+#
+# Kubelet admission passes because nodeAffinity requirements
+# match the actual labels on w5-k8s

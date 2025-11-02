@@ -1,0 +1,50 @@
+# ============================================================
+# Stage 6: Container Runtime - Successful execution
+# ============================================================
+# Stage 6 Test: Container runs successfully with health checks
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage6-pass-successful
+  labels:
+    test: stage6-container-runtime
+    component: success
+spec:
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    ports:
+    - containerPort: 8080
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 5
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8080
+      initialDelaySeconds: 10
+      periodSeconds: 10
+    resources:
+      requests:
+        memory: "32Mi"
+        cpu: "10m"
+      limits:
+        memory: "64Mi"
+        cpu: "50m"
+
+# Expected Result:
+# Status: Running (1/1 Ready)
+# Conditions: Ready=True, ContainersReady=True
+# Restarts: 0
+#
+# Stage 6 successful flow:
+# 1. Image pull: SUCCESS (pulls nginx image from quay.io)
+# 2. Container creation: SUCCESS (container runtime creates container)
+# 3. Container start: SUCCESS (nginx starts and listens on port 8080)
+# 4. Readiness probe: SUCCESS (HTTP GET / returns 200 OK)
+# 5. Liveness probe: SUCCESS (HTTP GET / returns 200 OK)
+# 6. Pod marked as Ready and healthy

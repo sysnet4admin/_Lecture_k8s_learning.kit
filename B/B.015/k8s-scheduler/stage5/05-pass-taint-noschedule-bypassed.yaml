@@ -1,0 +1,30 @@
+# ============================================================
+# Stage 5: Kubelet Admission - NoSchedule taint bypassed
+# ============================================================
+# Stage 5 Test: NoSchedule taint is NOT validated by kubelet
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage5-pass-noschedule-bypassed
+  labels:
+    test: stage5-kubelet-admission
+    component: taint-noschedule
+spec:
+  nodeName: w5-k8s  # w5-k8s has gpu=nvidia:NoSchedule taint
+  # NO tolerations for gpu taint
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+
+# Expected Result:
+# Status: Running
+# Node: w5-k8s
+#
+# This demonstrates that NoSchedule taints are ONLY enforced by the scheduler.
+# When nodeName bypasses the scheduler, kubelet does NOT validate NoSchedule taints.
+# Only NoExecute taints are validated by kubelet.

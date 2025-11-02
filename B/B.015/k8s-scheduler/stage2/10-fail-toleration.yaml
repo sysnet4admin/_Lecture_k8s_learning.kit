@@ -1,0 +1,22 @@
+# ============================================================
+# Stage 2 Test: Taint not tolerated (Expected to Fail)
+# ============================================================
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage2-fail-toleration
+  labels:
+    test: stage2-fail
+    component: toleration
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: w5-k8s  # w5-k8s has gpu:nvidia=NoSchedule taint
+  # No tolerations - scheduler will reject this node
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+# Expected: Pending (1 node had untolerated taint)

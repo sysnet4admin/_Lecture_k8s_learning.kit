@@ -1,0 +1,29 @@
+# ============================================================
+# Stage 1 Comparison: Scheduler rejects tainted node without toleration (Fail)
+# ============================================================
+# Without nodeName, scheduler enforces taint checks
+# This Pod will remain Pending because:
+# - w5-k8s (only node matching hostname) has gpu:nvidia=NoSchedule taint
+# - Pod has no toleration for this taint
+# - Scheduler filters out w5-k8s during Stage 2 filtering
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stage1-no-nodename-taint-fail
+  labels:
+    test: stage1-fail
+spec:
+  # No nodeName - scheduler must handle placement
+  nodeSelector:
+    # This forces scheduler to consider only w5-k8s which has taint
+    # Simulating a scenario where only tainted node matches requirements
+    kubernetes.io/hostname: w5-k8s
+  containers:
+  - name: app
+    image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "10m"
+  # No tolerations - scheduler will reject w5-k8s
+  # Result: Pod stays Pending (FailedScheduling: taint not tolerated)
