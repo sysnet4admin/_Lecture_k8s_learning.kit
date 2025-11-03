@@ -158,7 +158,7 @@ kubectl apply -f stage1/02-pass-no-nodename.yaml
 # Test: Non-existent node (stays Pending)
 kubectl apply -f stage1/03-fail-nodename-notfound.yaml
 
-# Test: Bypass taint check (succeeds despite no toleration)
+# Test: Bypass taint check (succeeds WITHOUT toleration - nodeName bypasses ALL checks)
 kubectl apply -f stage1/04-pass-nodename-bypass-taint.yaml
 
 # Test: Scheduler enforces taint (fails without toleration)
@@ -461,7 +461,8 @@ spec:
 - **Bypasses scheduler logic** (Filter and Score stages)
 - Directly assigns pod to specified node
 - **Does NOT bypass kubelet admission** (see Stage 5)
-- Scheduler ignores: nodeSelector, affinity, tolerations, taints
+- Scheduler ignores: nodeSelector, affinity, tolerations
+- **Important**: nodeName bypasses taint checks - pod can be scheduled on tainted nodes WITHOUT tolerations
 - Use case: Manual placement, testing
 
 #### Stage 2: Filter (Hard Constraints)

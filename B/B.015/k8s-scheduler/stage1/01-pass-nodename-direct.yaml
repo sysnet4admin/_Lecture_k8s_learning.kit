@@ -10,14 +10,11 @@ metadata:
     test: stage1-nodename
 spec:
   nodeName: w5-k8s  # Direct placement on w5-k8s node (has ssd and gpu taint)
-  # Note: The following conditions are ignored by nodeName
+  # Note: nodeName bypasses ALL scheduler checks including taints
+  # Even though w5-k8s has gpu=nvidia:NoSchedule taint, this pod will be scheduled
+  # because nodeName skips the scheduler entirely
   nodeSelector:
     disktype: ssd  # Ignored by scheduler, but w5-k8s has ssd so kubelet admission passes
-  tolerations:
-  - key: gpu
-    operator: Equal
-    value: nvidia
-    effect: NoSchedule  # Ignored
   containers:
   - name: app
     image: quay.io/nginx/nginx-unprivileged:1.27.5-alpine-slim
