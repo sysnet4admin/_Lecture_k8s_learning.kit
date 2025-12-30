@@ -1,0 +1,149 @@
+# Kubernetes Cluster with 10-Year Certificates for OVA Export
+
+## Objective
+Modify Vagrant Kubernetes cluster to use 10-year certificates via kubeadm configuration, then export 4 VMs as OVA files.
+
+---
+
+## Step 1: Modify `controlplane_node.sh`
+
+Add certificate renewal after kubeadm init (update-kube-cert for control plane + openssl for kubelet):
+
+```bash
+#!/usr/bin/env bash
+
+# init kubernetes
+kubeadm init --token 123456.1234567890123456 --token-ttl 0 \
+             --pod-network-cidr=172.16.0.0/16 --apiserver-advertise-address=192.168.1.10 \
+             --cri-socket=unix:///run/containerd/containerd.sock
+
+# renew control plane certificates to 10 years using update-kube-cert
+git clone https://github.com/yuyicai/update-kube-cert.git /tmp/update-kube-cert
+/tmp/update-kube-cert/update-kubeadm-cert.sh --cri containerd --days 3650
+rm -rf /tmp/update-kube-cert
+
+# renew kubelet certificate to 10 years using openssl
+KUBELET_CERT="/var/lib/kubelet/pki/kubelet-client-current.pem"
+if [[ -f "${KUBELET_CERT}" ]]; then
+  openssl pkey -in ${KUBELET_CERT} -out /tmp/kubelet.key 2>/dev/null
+  openssl x509 -in ${KUBELET_CERT} -out /tmp/kubelet.crt 2>/dev/null
+  SUBJ=$(openssl x509 -noout -subject -in /tmp/kubelet.crt | sed 's/subject=//')
+  openssl req -new -key /tmp/kubelet.key -subj "${SUBJ}" -out /tmp/kubelet.csr 2>/dev/null
+  openssl x509 -req -in /tmp/kubelet.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out /tmp/kubelet.crt -days 3650 2>/dev/null
+  cat /tmp/kubelet.crt /tmp/kubelet.key > ${KUBELET_CERT}
+  rm -f /tmp/kubelet.{key,crt,csr}
+  systemctl restart kubelet
+fi
+echo "Wait 30 seconds for restarting the Control-Plane Node..." ; sleep 30
+```
+
+---
+
+## Step 2: Modify `worker_nodes.sh`
+
+Add kubelet certificate renewal after kubeadm join:
+
+```bash
+#!/usr/bin/env bash
+
+# config for worker nodes only
+kubeadm join --token 123456.1234567890123456 \
+             --discovery-token-unsafe-skip-ca-verification 192.168.1.10:6443
+
+# renew kubelet certificate to 10 years using openssl
+sleep 10
+KUBELET_CERT="/var/lib/kubelet/pki/kubelet-client-current.pem"
+if [[ -f "${KUBELET_CERT}" ]]; then
+  openssl pkey -in ${KUBELET_CERT} -out /tmp/kubelet.key 2>/dev/null
+  openssl x509 -in ${KUBELET_CERT} -out /tmp/kubelet.crt 2>/dev/null
+  SUBJ=$(openssl x509 -noout -subject -in /tmp/kubelet.crt | sed 's/subject=//')
+  openssl req -new -key /tmp/kubelet.key -subj "${SUBJ}" -out /tmp/kubelet.csr 2>/dev/null
+  openssl x509 -req -in /tmp/kubelet.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out /tmp/kubelet.crt -days 3650 2>/dev/null
+  cat /tmp/kubelet.crt /tmp/kubelet.key > ${KUBELET_CERT}
+  rm -f /tmp/kubelet.{key,crt,csr}
+  systemctl restart kubelet
+fi
+```
+
+---
+
+## Step 3: Deploy Cluster
+
+```bash
+vagrant up
+```
+
+---
+
+## Step 4: Verify Certificates
+
+```bash
+# Control plane certificates
+vagrant ssh cp-k8s-1.30.0 -c "sudo kubeadm certs check-expiration"
+
+# Control plane kubelet certificate
+vagrant ssh cp-k8s-1.30.0 -c "sudo openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -text | grep -A 2 Validity"
+
+# Worker kubelet certificate
+vagrant ssh w1-k8s-1.30.0 -c "sudo openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -text | grep -A 2 Validity"
+```
+
+**Result**: All certificates (control plane + kubelet) expire in ~10 years (2035)
+
+---
+
+## Step 5: Export to OVA
+
+```bash
+vagrant halt
+
+VBoxManage export "cp-k8s-1.30.0(github_SysNet4Admin)" -o "cp-k8s-1.30.0(github_SysNet4Admin).ova"
+VBoxManage export "w1-k8s-1.30.0(github_SysNet4Admin)" -o "w1-k8s-1.30.0(github_SysNet4Admin).ova"
+VBoxManage export "w2-k8s-1.30.0(github_SysNet4Admin)" -o "w2-k8s-1.30.0(github_SysNet4Admin).ova"
+VBoxManage export "w3-k8s-1.30.0(github_SysNet4Admin)" -o "w3-k8s-1.30.0(github_SysNet4Admin).ova"
+```
+
+---
+
+## Step 6: Restore Original Files
+
+Restore modified files to original GitHub repository state:
+
+```bash
+git restore controlplane_node.sh worker_nodes.sh
+```
+
+---
+
+## Note
+- **Kubernetes 1.30.x**: Uses update-kube-cert (control plane) + openssl (kubelet)
+- **Kubernetes 1.31+**: Can use kubeadm v1beta4 API with certificateValidityPeriod config
+- Control plane kubelet: Certificate automatically renewed to 10 years ✓
+- Worker kubelet: Requires manual CA key copy and certificate renewal ✓
+- All certificates verified: 10 years (2025-2035)
+
+## Alternative for Kubernetes 1.31+ (v1beta4 supported)
+
+For Kubernetes 1.31 or later, you can use the kubeadm config method instead:
+
+```bash
+cat <<EOF > /tmp/kubeadm-config.yaml
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: InitConfiguration
+bootstrapTokens:
+- token: "123456.1234567890123456"
+  ttl: "0s"
+nodeRegistration:
+  criSocket: unix:///run/containerd/containerd.sock
+---
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: ClusterConfiguration
+networking:
+  podSubnet: 172.16.0.0/16
+controlPlaneEndpoint: "192.168.1.10:6443"
+certificateValidityPeriod: 87600h
+caCertificateValidityPeriod: 87600h
+EOF
+
+kubeadm init --config /tmp/kubeadm-config.yaml
+```
