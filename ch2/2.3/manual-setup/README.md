@@ -37,6 +37,18 @@ manual-setup/
 
 **VirtualBox 그룹**: `/k8s-adv-U1.30.1-ctrd-1.6(manual)`
 
+## 네트워크 구성
+
+각 VM은 2개의 네트워크 인터페이스를 가집니다:
+
+| 인터페이스 | VirtualBox 어댑터 | 네트워크 타입 | 용도 |
+|------------|-------------------|---------------|------|
+| eth0 | Adapter 1 | NAT | Vagrant SSH 접속 및 인터넷 (포트 포워딩) |
+| eth1 | Adapter 2 | Host-only | 클러스터 내부 통신 (192.168.1.x) |
+
+- **NAT (eth0)**: Vagrant가 기본으로 생성하며, 호스트의 포트 포워딩(60010, 60101 등)을 통해 SSH 접속
+- **Host-only (eth1)**: `private_network` 설정으로 생성되며, 노드 간 통신에 사용되는 고정 IP
+
 ---
 
 ## 1단계: VM 생성
