@@ -6,7 +6,7 @@ kustomize_installer.sh
 
 cd res/metallb-native 
 kustomize create --autodetect
-# kustomize create --namespace=metallb-system --resources res/metallb-native/namespace.yaml,res/metallb-native/metallb-native-v0.14.4.yaml
+# kustomize create --namespace=metallb-system --resources res/metallb-native/namespace.yaml,res/metallb-native/metallb-native-v0.15.3.yaml
 
 kustomize edit set image quay.io/metallb/speaker:v0.14.5
 kustomize edit set image quay.io/metallb/controller:v0.14.5

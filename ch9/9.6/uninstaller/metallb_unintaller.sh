@@ -4,7 +4,7 @@
 EXTRA_PKGS_ADDR="https://raw.githubusercontent.com/sysnet4admin/IaC/main/k8s/extra-pkgs/v1.35"
 
 # uninstall metallb v0.14.4
-kubectl delete -f $EXTRA_PKGS_ADDR/metallb-native-v0.14.4.yaml
+kubectl delete -f $EXTRA_PKGS_ADDR/metallb-native-v0.15.3.yaml
 
 echo "MetalLB uninstalled successfully"
 
