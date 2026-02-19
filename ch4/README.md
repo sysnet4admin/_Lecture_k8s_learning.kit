@@ -6,3 +6,4 @@
 - 4.6: 클러스터주소(ClusterIP), 헤드리스(Headless)
 - 4.7: 엔드포인트(Endpoints)
 - 4.8: 인그레스(Ingress)
+- 4.9: 게이트웨이(Gateway)
