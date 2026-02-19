@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-hn
+  labels:
+    app: deploy-hn
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: deploy-hn
+  template:
+    metadata:
+      labels:
+        app: deploy-hn
+    spec:
+      containers:
+      - name: chk-hn
+        image: sysnet4admin/chk-hn
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ing-hn 
+spec:
+  selector:
+    app: deploy-hn  
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  type: ClusterIP
