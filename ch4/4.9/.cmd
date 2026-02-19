@@ -12,25 +12,15 @@ ingress2gateway print --providers=ingress-nginx --input-file=ingress.yaml -A > g
 # 클러스터에서 직접 변환 (대안)
 # ingress2gateway print --providers=ingress-nginx --all-namespaces > gateway.yaml
 
-### Step 3. Gateway API CRD 설치 (standard channel)
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml
-kubectl get crd | grep gateway
+### Step 3. NGINX Gateway Fabric 설치 (CRD + 배포 일괄)
+bash nginx_gw_fabric_installer.sh
 
-### Step 4. NGINX Gateway Fabric CRD 설치
-kubectl apply --server-side -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.2.1/deploy/crds.yaml
-kubectl get crd | grep nginx
-
-### Step 5. NGINX Gateway Fabric 배포
-kubectl apply -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.2.1/deploy/default/deploy.yaml
-kubectl get all -n nginx-gateway
-kubectl get gatewayclasses
-
-### Step 6. 변환된 gateway.yaml 적용
+### Step 4. 변환된 gateway.yaml 적용
 kubectl apply -f gateway.yaml
 # gateway.gateway.networking.k8s.io/nginx created
 # httproute.gateway.networking.k8s.io/nginx-ingress-all-hosts created
 
-### Step 7. 리소스 상태 확인
+### Step 5. 리소스 상태 확인
 kubectl get gateway
 # NAME    CLASS   ADDRESS        PROGRAMMED   AGE
 # nginx   nginx   192.168.1.11   True         32s
@@ -39,7 +29,7 @@ kubectl get httproute
 # NAME                      HOSTNAMES   AGE
 # nginx-ingress-all-hosts               55s
 
-### Step 8. 접속 테스트
+### Step 6. 접속 테스트
 GATEWAY_IP=$(kubectl get gateway nginx -o jsonpath='{.status.addresses[0].value}')
 echo ${GATEWAY_IP}
 # 192.168.1.11
@@ -51,6 +41,4 @@ curl -s http://${GATEWAY_IP}/ip
 ### Cleanup (실습 정리)
 kubectl delete -f gateway.yaml
 kubectl delete -f deploy-nginx.yaml -f deploy-hn.yaml -f deploy-ip.yaml
-kubectl delete -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.2.1/deploy/default/deploy.yaml
-kubectl delete -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.2.1/deploy/crds.yaml
-kubectl delete -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml
+bash nginx_gw_fabric_uninstaller.sh
