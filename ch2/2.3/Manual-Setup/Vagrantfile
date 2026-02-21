@@ -4,7 +4,7 @@
 ## configuration variables ##
 N = 3                     # worker node count
 k8s_V = '1.35.1-1.1'      # Kubernetes version
-ctrd_V = '1.6.31-1'       # Containerd version
+ctrd_V = '2.2.1-1~ubuntu.22.04~jammy'       # Containerd version
 ## /configuration variables ##
 
 Vagrant.configure("2") do |config|

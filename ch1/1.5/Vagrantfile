@@ -6,7 +6,7 @@
 N = 3
 # each of components to install
 k8s_V = '1.35.0-1.1'  # Kubernetes
-ctrd_V = '1.6.31-1'   # Containerd 
+ctrd_V = '2.2.1-1~ubuntu.22.04~jammy'   # Containerd 
 ## /configuration variables ##
 
 Vagrant.configure("2") do |config|
