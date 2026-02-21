@@ -1,6 +1,6 @@
 
 # install metallb for the LoadBalancer svc 
-k apply -f metallb-native-v0.14.4.yaml
+k apply -f metallb-native-v0.15.3.yaml
 k get crd | grep -i metallb 
 
 # create CRD's configurations 

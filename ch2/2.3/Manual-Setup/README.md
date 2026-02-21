@@ -30,12 +30,12 @@ manual-setup/
 
 | 노드 | VM 이름 | 호스트명 | IP | SSH 포트 | CPU | Memory |
 |------|---------|----------|-----|----------|-----|--------|
-| Control Plane | cp-k8s-1.30.1 | cp-k8s | 192.168.1.10 | 60010 | 2 | 2048MB |
-| Worker 1 | w1-k8s-1.30.1 | w1-k8s | 192.168.1.101 | 60101 | 1 | 1536MB |
-| Worker 2 | w2-k8s-1.30.1 | w2-k8s | 192.168.1.102 | 60102 | 1 | 1536MB |
-| Worker 3 | w3-k8s-1.30.1 | w3-k8s | 192.168.1.103 | 60103 | 1 | 1536MB |
+| Control Plane | cp-k8s-1.35.1 | cp-k8s | 192.168.1.10 | 60010 | 2 | 2048MB |
+| Worker 1 | w1-k8s-1.35.1 | w1-k8s | 192.168.1.101 | 60101 | 1 | 1536MB |
+| Worker 2 | w2-k8s-1.35.1 | w2-k8s | 192.168.1.102 | 60102 | 1 | 1536MB |
+| Worker 3 | w3-k8s-1.35.1 | w3-k8s | 192.168.1.103 | 60103 | 1 | 1536MB |
 
-**VirtualBox 그룹**: `/k8s-adv-U1.30.1-ctrd-1.6(manual)`
+**VirtualBox 그룹**: `/k8s-adv-U1.35.1-ctrd-1.6(manual)`
 
 ## 네트워크 구성
 
@@ -59,10 +59,10 @@ manual-setup/
 cd manual-setup
 
 :: VM을 하나씩 순차적으로 올립니다 (에러 발생 시 개별 대응 가능)
-vagrant up cp-k8s-1.30.1
-vagrant up w1-k8s-1.30.1
-vagrant up w2-k8s-1.30.1
-vagrant up w3-k8s-1.30.1
+vagrant up cp-k8s-1.35.1
+vagrant up w1-k8s-1.35.1
+vagrant up w2-k8s-1.35.1
+vagrant up w3-k8s-1.35.1
 
 :: 또는 한 번에
 vagrant up
@@ -76,25 +76,25 @@ vagrant up
 
 ```cmd
 :: Control Plane
-vagrant upload k8s_env_build.sh /home/vagrant/k8s_env_build.sh cp-k8s-1.30.1
-vagrant upload k8s_pkg_cfg.sh /home/vagrant/k8s_pkg_cfg.sh cp-k8s-1.30.1
-vagrant upload controlplane_node.sh /home/vagrant/controlplane_node.sh cp-k8s-1.30.1
-vagrant upload extra_k8s_pkgs.sh /home/vagrant/extra_k8s_pkgs.sh cp-k8s-1.30.1
+vagrant upload k8s_env_build.sh /home/vagrant/k8s_env_build.sh cp-k8s-1.35.1
+vagrant upload k8s_pkg_cfg.sh /home/vagrant/k8s_pkg_cfg.sh cp-k8s-1.35.1
+vagrant upload controlplane_node.sh /home/vagrant/controlplane_node.sh cp-k8s-1.35.1
+vagrant upload extra_k8s_pkgs.sh /home/vagrant/extra_k8s_pkgs.sh cp-k8s-1.35.1
 
 :: Worker 1
-vagrant upload k8s_env_build.sh /home/vagrant/k8s_env_build.sh w1-k8s-1.30.1
-vagrant upload k8s_pkg_cfg.sh /home/vagrant/k8s_pkg_cfg.sh w1-k8s-1.30.1
-vagrant upload worker_nodes.sh /home/vagrant/worker_nodes.sh w1-k8s-1.30.1
+vagrant upload k8s_env_build.sh /home/vagrant/k8s_env_build.sh w1-k8s-1.35.1
+vagrant upload k8s_pkg_cfg.sh /home/vagrant/k8s_pkg_cfg.sh w1-k8s-1.35.1
+vagrant upload worker_nodes.sh /home/vagrant/worker_nodes.sh w1-k8s-1.35.1
 
 :: Worker 2
-vagrant upload k8s_env_build.sh /home/vagrant/k8s_env_build.sh w2-k8s-1.30.1
-vagrant upload k8s_pkg_cfg.sh /home/vagrant/k8s_pkg_cfg.sh w2-k8s-1.30.1
-vagrant upload worker_nodes.sh /home/vagrant/worker_nodes.sh w2-k8s-1.30.1
+vagrant upload k8s_env_build.sh /home/vagrant/k8s_env_build.sh w2-k8s-1.35.1
+vagrant upload k8s_pkg_cfg.sh /home/vagrant/k8s_pkg_cfg.sh w2-k8s-1.35.1
+vagrant upload worker_nodes.sh /home/vagrant/worker_nodes.sh w2-k8s-1.35.1
 
 :: Worker 3
-vagrant upload k8s_env_build.sh /home/vagrant/k8s_env_build.sh w3-k8s-1.30.1
-vagrant upload k8s_pkg_cfg.sh /home/vagrant/k8s_pkg_cfg.sh w3-k8s-1.30.1
-vagrant upload worker_nodes.sh /home/vagrant/worker_nodes.sh w3-k8s-1.30.1
+vagrant upload k8s_env_build.sh /home/vagrant/k8s_env_build.sh w3-k8s-1.35.1
+vagrant upload k8s_pkg_cfg.sh /home/vagrant/k8s_pkg_cfg.sh w3-k8s-1.35.1
+vagrant upload worker_nodes.sh /home/vagrant/worker_nodes.sh w3-k8s-1.35.1
 ```
 
 ---
@@ -102,14 +102,14 @@ vagrant upload worker_nodes.sh /home/vagrant/worker_nodes.sh w3-k8s-1.30.1
 ## 3단계: Control Plane 노드 설정
 
 ```cmd
-vagrant ssh cp-k8s-1.30.1
+vagrant ssh cp-k8s-1.35.1
 ```
 
 VM 내부에서:
 ```bash
 chmod +x *.sh
-sudo ./k8s_env_build.sh 3 1.30
-sudo ./k8s_pkg_cfg.sh 1.30.1-1.1 1.6.31-1 CP
+sudo ./k8s_env_build.sh 3 1.35
+sudo ./k8s_pkg_cfg.sh 1.35.1-1.1 1.6.31-1 CP
 sudo ./controlplane_node.sh
 ```
 
@@ -142,14 +142,14 @@ kubectl get pods -A
 ### Worker 1
 
 ```cmd
-vagrant ssh w1-k8s-1.30.1
+vagrant ssh w1-k8s-1.35.1
 ```
 
 VM 내부에서:
 ```bash
 chmod +x *.sh
-sudo ./k8s_env_build.sh 3 1.30
-sudo ./k8s_pkg_cfg.sh 1.30.1-1.1 1.6.31-1 W
+sudo ./k8s_env_build.sh 3 1.35
+sudo ./k8s_pkg_cfg.sh 1.35.1-1.1 1.6.31-1 W
 sudo ./worker_nodes.sh
 ```
 
@@ -158,26 +158,26 @@ sudo ./worker_nodes.sh
 ### Worker 2
 
 ```cmd
-vagrant ssh w2-k8s-1.30.1
+vagrant ssh w2-k8s-1.35.1
 ```
 
 ```bash
 chmod +x *.sh
-sudo ./k8s_env_build.sh 3 1.30
-sudo ./k8s_pkg_cfg.sh 1.30.1-1.1 1.6.31-1 W
+sudo ./k8s_env_build.sh 3 1.35
+sudo ./k8s_pkg_cfg.sh 1.35.1-1.1 1.6.31-1 W
 sudo ./worker_nodes.sh
 ```
 
 ### Worker 3
 
 ```cmd
-vagrant ssh w3-k8s-1.30.1
+vagrant ssh w3-k8s-1.35.1
 ```
 
 ```bash
 chmod +x *.sh
-sudo ./k8s_env_build.sh 3 1.30
-sudo ./k8s_pkg_cfg.sh 1.30.1-1.1 1.6.31-1 W
+sudo ./k8s_env_build.sh 3 1.35
+sudo ./k8s_pkg_cfg.sh 1.35.1-1.1 1.6.31-1 W
 sudo ./worker_nodes.sh
 ```
 
@@ -186,7 +186,7 @@ sudo ./worker_nodes.sh
 ## 5단계: 클러스터 확인
 
 ```cmd
-vagrant ssh cp-k8s-1.30.1
+vagrant ssh cp-k8s-1.35.1
 ```
 
 ```bash
@@ -196,10 +196,10 @@ kubectl get nodes
 예상 출력:
 ```
 NAME     STATUS   ROLES           AGE   VERSION
-cp-k8s   Ready    control-plane   10m   v1.30.1
-w1-k8s   Ready    <none>          5m    v1.30.1
-w2-k8s   Ready    <none>          3m    v1.30.1
-w3-k8s   Ready    <none>          1m    v1.30.1
+cp-k8s   Ready    control-plane   10m   v1.35.1
+w1-k8s   Ready    <none>          5m    v1.35.1
+w2-k8s   Ready    <none>          3m    v1.35.1
+w3-k8s   Ready    <none>          1m    v1.35.1
 ```
 
 시스템 파드 확인:
@@ -214,15 +214,15 @@ kubectl get pods -A
 ### VM 재시작이 필요한 경우
 
 ```cmd
-vagrant reload cp-k8s-1.30.1
-vagrant reload w1-k8s-1.30.1 w2-k8s-1.30.1 w3-k8s-1.30.1
+vagrant reload cp-k8s-1.35.1
+vagrant reload w1-k8s-1.35.1 w2-k8s-1.35.1 w3-k8s-1.35.1
 ```
 
 ### 특정 VM만 다시 생성
 
 ```cmd
-vagrant destroy w1-k8s-1.30.1 -f
-vagrant up w1-k8s-1.30.1
+vagrant destroy w1-k8s-1.35.1 -f
+vagrant up w1-k8s-1.35.1
 :: 이후 스크립트 업로드 및 설정 다시 진행
 ```
 
@@ -230,7 +230,7 @@ vagrant up w1-k8s-1.30.1
 
 ```cmd
 :: 포트 포워딩 확인
-vagrant port cp-k8s-1.30.1
+vagrant port cp-k8s-1.35.1
 
 :: 직접 SSH 접속
 ssh -p 60010 vagrant@127.0.0.1
