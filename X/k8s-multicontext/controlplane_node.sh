@@ -34,7 +34,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 # CNI raw address & config for kubernetes's network
 CNI_ADDR="https://raw.githubusercontent.com/sysnet4admin/IaC/main/k8s/CNI"
-kubectl apply -f $CNI_ADDR/calico-quay-v3.29.2.yaml
+kubectl apply -f $CNI_ADDR/calico-quay-v3.31.2.yaml
 
 # install etctctl 
 curl -L  https://github.com/sysnet4admin/BB/raw/main/etcdctl/v3.4.15/etcdctl -o /usr/local/bin/etcdctl
