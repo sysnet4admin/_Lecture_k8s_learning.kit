@@ -9,7 +9,7 @@ cl_val = [["bk8s", 110, 11,2],
 # each of components to install 
 k8s_V = '1.27.1-00'            # Kubernetes 
 ctrd_V   = '1.6.21-1'                    # Containerd
-docker_V = '5:24.0.4-1~ubuntu.22.04~jammy' # Docker
+docker_V = '5:29.3.1-1~ubuntu.24.04~noble' # Docker
 ## /configuration variables ###
 
 Vagrant.configure("2") do |config|

@@ -3,7 +3,7 @@
 
 # each of components to install 
 k8s_V = '1.26.00-00'           # Kubernetes (applying TBD)
-docker_V = '5:23.0.1-1~ubuntu.22.04~jammy' # Docker  
+docker_V = '5:29.3.1-1~ubuntu.24.04~noble' # Docker
 ctrd_V = '1.6.18-1'   # Containerd 
 ## /configuration variables ##
 
