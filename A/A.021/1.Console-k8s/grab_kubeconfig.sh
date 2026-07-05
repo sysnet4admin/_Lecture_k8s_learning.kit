@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# create .kube_config dir
+# create .kube dir
 mkdir ~/.kube
 
 # copy kubeconfig by sshpass

@@ -26,8 +26,8 @@ Vagrant.configure("2") do |config|
     cfg.vm.network "forwarded_port", guest: 22, host: 60241, auto_correct: true, id: "ssh"
     cfg.vm.synced_folder "../data", "/vagrant", disabled: true
     cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, docker_V, ctrd_V ]
-    cfg.vm.provision "file", source: "grap_kubeconfig.sh", destination: "/tmp/grap_kubeconfig.sh"
-    cfg.vm.provision "shell", inline: "chmod 744 /tmp/grap_kubeconfig.sh ; mv /tmp/grap_kubeconfig.sh /root/grap_kubeconfig.sh" 
+    cfg.vm.provision "file", source: "grab_kubeconfig.sh", destination: "/tmp/grab_kubeconfig.sh"
+    cfg.vm.provision "shell", inline: "chmod 744 /tmp/grab_kubeconfig.sh ; mv /tmp/grab_kubeconfig.sh /root/grab_kubeconfig.sh" 
   end
 
 end
