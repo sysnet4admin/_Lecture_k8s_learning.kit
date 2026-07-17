@@ -110,7 +110,7 @@ VM 내부에서:
 chmod +x *.sh
 sudo ./k8s_env_build.sh 3 1.35
 sudo ./k8s_pkg_cfg.sh 1.35.1-1.1 1.6.31-1 CP
-sudo ./controlplane_node.sh
+sudo ./controlplane_node.sh 1.35.1
 ```
 
 vagrant 유저용 kubeconfig 설정:

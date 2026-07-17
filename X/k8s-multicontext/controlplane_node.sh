@@ -15,6 +15,7 @@ localAPIEndpoint:
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration
 clusterName: cluster-$2
+kubernetesVersion: v$3
 networking:
   podSubnet: 172.16.0.0/16
 EOF
