@@ -1,3 +1,6 @@
 .vagrant/
 .DS_Store
 *.ova
+
+# ch4/4.9 실습 중 ingress2gateway가 만드는 변환 결과
+gateway-converted.yaml
