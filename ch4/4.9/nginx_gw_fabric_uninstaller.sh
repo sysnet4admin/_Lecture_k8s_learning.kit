@@ -5,8 +5,8 @@
 
 set -e
 
-GATEWAY_API_VERSION="v1.2.0"
-NGF_VERSION="v2.2.1"
+GATEWAY_API_VERSION="v1.5.1"
+NGF_VERSION="v2.6.7"
 
 echo "=== Step 1/3: NGINX Gateway Fabric 배포 삭제 ==="
 kubectl delete -f nginx_gw_fabric_deploy.yaml --ignore-not-found
