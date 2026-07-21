@@ -1,0 +1,61 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+#
+# KubeCon Japan 2026 데모 클러스터 — PoC test-cluster 복제·축소본.
+# 차이: 워커 3→1 (총 2노드), VM 그룹/이름/IP/SSH포트를 PoC와 분리.
+# ⚠️ PoC 클러스터와 MetalLB pool(.11-17)이 같으므로 두 클러스터를 동시에 띄우지 말 것.
+
+## configuration variables ##
+N = 1                                      # 워커 수 (데모: 1개면 충분)
+k8s_V    = '1.36.1-1.1'                     # Kubernetes
+ctrd_V   = '2.2.3-1~ubuntu.24.04~noble'    # Containerd
+## /configuration variables ##
+
+Vagrant.configure("2") do |config|
+
+  #====================#
+  # Control-Plane Node #
+  #====================#
+
+    config.vm.define "cp-k8s-#{k8s_V[0..5]}" do |cfg|
+      cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+      cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "cp-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
+        vb.cpus = 2
+        vb.memory = 4096
+        vb.customize ["modifyvm", :id, "--groups", "/KubeConJapan2026-U#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
+      end
+      cfg.vm.host_name = "cp-k8s"
+      cfg.vm.network "private_network", ip: "192.168.1.160"      # PoC(.150)와 분리
+      cfg.vm.network "forwarded_port", guest: 22, host: 60160, auto_correct: true, id: "ssh"  # IP 끝(.160) = 포트(60160)
+      cfg.vm.synced_folder "../data", "/vagrant", disabled: true
+      cfg.vm.provision "shell", path: "k8s_env_build.sh", args: [ N, k8s_V[0..3] ]
+      cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, ctrd_V, "CP"]
+      cfg.vm.provision "shell", path: "controlplane_node.sh"
+      cfg.vm.provision "shell", path: "extra_k8s_pkgs.sh"
+    end
+
+  #==============#
+  # Worker Nodes #
+  #==============#
+
+  (1..N).each do |i|
+    config.vm.define "w#{i}-k8s-#{k8s_V[0..5]}" do |cfg|
+      cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+      cfg.vm.provider "virtualbox" do |vb|
+        vb.name = "w#{i}-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
+        vb.cpus = 2
+        vb.memory = 4096
+        vb.customize ["modifyvm", :id, "--groups", "/KubeConJapan2026-U#{k8s_V[0..5]}-ctrd-#{ctrd_V[0..2]}(github_SysNet4Admin)"]
+      end
+      cfg.vm.host_name = "w#{i}-k8s"
+      cfg.vm.network "private_network", ip: "192.168.1.16#{i}"   # w1 = .161
+      cfg.vm.network "forwarded_port", guest: 22, host: "6016#{i}", auto_correct: true, id: "ssh"  # IP 끝(.16i) = 포트(6016i)
+      cfg.vm.synced_folder "../data", "/vagrant", disabled: true
+      cfg.vm.provision "shell", path: "k8s_env_build.sh", args: [ N, k8s_V[0..3] ]
+      cfg.vm.provision "shell", path: "k8s_pkg_cfg.sh", args: [ k8s_V, ctrd_V, "W" ]
+      cfg.vm.provision "shell", path: "worker_nodes.sh"
+    end
+  end
+
+end

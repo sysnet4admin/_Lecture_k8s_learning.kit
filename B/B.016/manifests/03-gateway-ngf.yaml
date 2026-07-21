@@ -1,0 +1,50 @@
+# AFTER — the demo-final manifest: based on the ingress2gateway output, with just the IP
+# annotation added for the "same IP".
+#
+# The i2gw print output (Gateway + HTTPRoute) carries no IP info (the Ingress has none).
+# For the heart of the demo ("recover on the same IP"), the Gateway's spec.infrastructure.annotations
+# pins the MetalLB IP (192.168.1.12 — the same IP ingress-nginx was using).
+#
+# Applied AHEAD OF TIME by 0.setup_before.sh (not live): the NGF data-plane pod needs ~15s to
+# provision + receive its config, so we warm it up before the demo. While ingress-nginx holds .12
+# this Gateway's LB Service sits <pending>; retiring ingress-nginx then hands .12 over in ~1.6s.
+# Talking point: "The converted Gateway is already deployed and waiting on the same IP; we just
+#                 retire the old controller and traffic flows over."
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: jp-gateway
+  namespace: nginx-gateway   # Gateway = infrastructure → lives in the NGF namespace (like ingress-nginx
+spec:                        # has its own ns). NGF puts the data-plane there too, so the LB Service
+  gatewayClassName: nginx    # appears as nginx-gateway/jp-gateway-nginx: a clean ns-to-ns handover.
+  infrastructure:
+    annotations:
+      metallb.io/loadBalancerIPs: "192.168.1.12"   # the same IP ingress-nginx was using
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      hostname: demo.kubecon.jp
+      allowedRoutes:
+        namespaces:
+          from: All           # the app's HTTPRoute lives in another ns (default), so allow it
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: jp-front          # the Route + backend belong to the app (jp-front), in the app ns (default)
+spec:
+  parentRefs:
+    - name: jp-gateway          # ...attached to the Gateway...
+      namespace: nginx-gateway  # ...which lives in the infra ns (cross-namespace attach)
+  hostnames:
+    - demo.kubecon.jp
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: jp-front
+          port: 80

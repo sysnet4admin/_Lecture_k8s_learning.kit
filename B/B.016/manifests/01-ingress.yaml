@@ -1,0 +1,21 @@
+# BEFORE — a simple Ingress (host/path routing only)
+# In our measurements, native host/path converts at full fidelity (no annotation-loss warnings;
+# only informational notes), which is ideal for a Beginner demo.
+# Annotations like rewrite/mTLS/header are partial or unsupported, so the demo avoids them.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jp-front
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: demo.kubecon.jp
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jp-front
+                port:
+                  number: 80

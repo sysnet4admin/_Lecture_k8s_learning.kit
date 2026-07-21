@@ -1,0 +1,45 @@
+# Demo backend — the jp-front app (the L7 edge endpoint that receives external traffic;
+# target of the working/broken/recovered responses).
+# Image: sysnet4admin/http-echo (our own vendor-neutral nginx-based echo, multi-arch amd64/arm64).
+# The response text is set via the ECHO_TEXT env var.
+# Deployed in the default namespace to keep the beginner demo simple (no extra namespace).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jp-front
+  labels: { app: jp-front }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: jp-front }
+  template:
+    metadata:
+      labels: { app: jp-front }
+    spec:
+      # Disable service-link env injection. Kubernetes injects <SVC>_PORT=tcp://<clusterIP>:80
+      # for every Service, and the image's nginx envsubst can pick that up and break its listen
+      # directive when the pod starts after the Service exists. Turning links off keeps the
+      # data-plane deterministic regardless of the Service name.
+      enableServiceLinks: false
+      containers:
+        - name: jp-front
+          image: sysnet4admin/http-echo:1.0
+          env:
+            - name: ECHO_TEXT
+              value: "hello from KubeCon Japan 2026"
+          ports:
+            - containerPort: 80
+          resources:
+            requests: { cpu: 10m, memory: 16Mi }
+            limits:   { cpu: 100m, memory: 64Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jp-front
+spec:
+  selector: { app: jp-front }
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
