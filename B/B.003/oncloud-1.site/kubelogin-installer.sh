@@ -16,7 +16,7 @@ function kubelogin() {
     local vendor="$(cat ~/.kube/config | grep current-context | cut -d ':' -f2 | grep gke)"
 
     if [ "$vendor" != "" ]; then
-        kubectl oidc login --cluster="hj-keycloak-${DOMAIN_NAME}-gke" --login-config="/Users/mz01-hj/.keycloak/config"
+        kubectl oidc login --cluster="hj-keycloak-${DOMAIN_NAME}-gke" --login-config="$HOME/.keycloak/config"
     else
         kubectl oidc-login get-token \
           --oidc-issuer-url=https://${DOMAIN_NAME}.site/realms/kubernetes \
