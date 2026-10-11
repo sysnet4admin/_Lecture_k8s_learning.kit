@@ -28,9 +28,9 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
   | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# packets traversing the bridge are processed by iptables for filtering
+# enable IPv4 packet forwarding between interfaces
 echo 1 > /proc/sys/net/ipv4/ip_forward
-# enable br_filter for iptables 
+# pass bridged packets through iptables (br_netfilter)
 modprobe br_netfilter
 
 # local small dns & vagrant cannot parse and delivery shell code.
