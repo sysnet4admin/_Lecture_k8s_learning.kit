@@ -10,6 +10,7 @@ ctrd_V = '1.6.18-1'   # Containerd
 Vagrant.configure("2") do |config|
   config.vm.define "kwok-cluster" do |cfg|
     cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+    cfg.vm.box_url = "https://box.kuberneteslab.dev/sysnet4admin/Ubuntu-k8s"
     cfg.vm.provider "virtualbox" do |vb|
       vb.name = "kwok-cluster"
       vb.cpus = 1

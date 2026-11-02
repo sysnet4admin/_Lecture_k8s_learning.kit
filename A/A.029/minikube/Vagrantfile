@@ -10,6 +10,7 @@ ctrd_V = '1.6.7-3.1.el7'   # Containerd
 Vagrant.configure("2") do |config|
   config.vm.define "minikube-cluster" do |cfg|
     cfg.vm.box = "sysnet4admin/CentOS-k8s"
+    cfg.vm.box_url = "https://box.kuberneteslab.dev/sysnet4admin/CentOS-k8s"
     cfg.vm.provider "virtualbox" do |vb|
       vb.name = "minikube-cluster"
       vb.cpus = 2
