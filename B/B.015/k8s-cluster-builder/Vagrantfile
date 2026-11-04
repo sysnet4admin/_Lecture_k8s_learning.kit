@@ -17,6 +17,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "cp-k8s-#{k8s_V[0..5]}" do |cfg|
       cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+      cfg.vm.box_url = "https://box.kuberneteslab.dev/sysnet4admin/Ubuntu-k8s"
       cfg.vm.provider "virtualbox" do |vb|
         vb.name = "cp-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
         vb.cpus = 2
@@ -40,6 +41,7 @@ Vagrant.configure("2") do |config|
   (1..N).each do |i|
     config.vm.define "w#{i}-k8s-#{k8s_V[0..5]}" do |cfg|
       cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+      cfg.vm.box_url = "https://box.kuberneteslab.dev/sysnet4admin/Ubuntu-k8s"
       cfg.vm.provider "virtualbox" do |vb|
         vb.name = "w#{i}-k8s-#{k8s_V[0..5]}(github_SysNet4Admin)"
         vb.cpus = 1

@@ -15,6 +15,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "k8s-console" do |cfg|
     cfg.vm.box = "sysnet4admin/Ubuntu-k8s"
+    cfg.vm.box_url = "https://box.kuberneteslab.dev/sysnet4admin/Ubuntu-k8s"
     cfg.vm.provider "virtualbox" do |vb|
       vb.name = "k8s-console(github_SysNet4Admin)"
       vb.cpus = 1
